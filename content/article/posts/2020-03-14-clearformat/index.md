@@ -3,7 +3,7 @@ title: GASでスプレッドシートのセル書式を一括クリアする方�
 author: arukayies
 type: post
 date: 2020-03-14T07:37:29+00:00
-excerpt: GASでスプレッドシートの指定範囲の書式のみを削除する方法を紹介します！
+excerpt: GASでスプレッドシートの指定範囲の書式のみを 削除する方法を紹介します！
 url: /gas/clearformat
 share: true
 toc: true
@@ -18,14 +18,6 @@ the_review_rate:
   - 5
 snap_isAutoPosted:
   - 1
-snapEdIT:
-  - 1
-snapTW:
-  - |
-    s:393:"a:1:{i:0;a:12:{s:2:"do";s:1:"1";s:9:"msgFormat";s:27:"%TITLE% 
-    %URL% 
-    
-    %HTAGS%";s:8:"attchImg";s:1:"0";s:9:"isAutoImg";s:1:"A";s:8:"imgToUse";s:0:"";s:9:"isAutoURL";s:1:"A";s:8:"urlToUse";s:0:"";s:4:"doTW";i:0;s:8:"isPosted";s:1:"1";s:4:"pgID";s:19:"1247589990772518913";s:7:"postURL";s:56:"https://twitter.com/arukayies/status/1247589990772518913";s:5:"pDate";s:19:"2020-04-07 18:20:07";}}";
 last_modified:
   - 2025-03-07 22:44:55
 categories:
@@ -153,7 +145,7 @@ sheet.getRange("A1:C10").clearFormat();
   const lastColumn = sheet.getLastColumn();
 
   // ヘッダー行を除いて、データ範囲の書式をクリア
-  if(lastRow &gt; 1) {
+  if(lastRow > 1) {
     sheet.getRange(2, 1, lastRow-1, lastColumn).clearFormat();
   }
 }
@@ -198,7 +190,7 @@ sheet.getRange("A1:C10").clearFormat();
   const formats = range.getTextStyles();
   
   // 変更処理（例：太字の解除）
-  formats.forEach(row =&gt; row.forEach(cell =&gt; cell.setBold(false)));
+  formats.forEach(row => row.forEach(cell => cell.setBold(false)));
   
   // 一括設定
   range.setTextStyles(formats);
@@ -268,206 +260,22 @@ sheet.getRange("A1:C10").clearFormat();
     </div>
   </div>
 </div>
-
-<hr class="wp-block-separator has-alpha-channel-opacity" />
-
-<div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-reference">
-  <a rel="noopener" href="https://tonari-it.com/gas-spreadsheet-range-clear-clearcontent/" title="【初心者向けGAS】スプレッドシートのセル範囲をクリアするいくつかの方法" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target="_blank">
-  
-  <div class="blogcard external-blogcard eb-left cf">
-    <div class="blogcard-label external-blogcard-label">
-      <span class="fa"></span>
-    </div><figure class="blogcard-thumbnail external-blogcard-thumbnail">
-    
-    <img data-src="https://tonari-it.com/wp-content/uploads/clear.jpg" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
-    
-    <noscript>
-      <img loading="lazy" decoding="async" src="https://tonari-it.com/wp-content/uploads/clear.jpg" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
-    </noscript></figure>
-    
-    <div class="blogcard-content external-blogcard-content">
-      <div class="blogcard-title external-blogcard-title">
-        【初心者向けGAS】スプレッドシートのセル範囲をクリアするいくつかの方法
-      </div>
-      
-      <div class="blogcard-snippet external-blogcard-snippet">
-        Google Apps ScriptでBotを作りながらその基本を学んでいくシリーズです。今回はスプレッドシートのセル範囲をクリアする方法としてclearメソッド、clearContentメソッドを紹介します。
-      </div>
-    </div>
-    
-    <div class="blogcard-footer external-blogcard-footer cf">
-      <div class="blogcard-site external-blogcard-site">
-        <div class="blogcard-favicon external-blogcard-favicon">
-          <img data-src="https://www.google.com/s2/favicons?domain=https://tonari-it.com/gas-spreadsheet-range-clear-clearcontent/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
-          
-          <noscript>
-            <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://tonari-it.com/gas-spreadsheet-range-clear-clearcontent/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
-          </noscript>
-        </div>
-        
-        <div class="blogcard-domain external-blogcard-domain">
-          tonari-it.com
-        </div>
-      </div>
-    </div>
-  </div></a> 
-  
-  <br /> <a rel="noopener" href="https://developers.google.com/apps-script/reference/spreadsheet/sheet?hl=ja" title="Class Sheet  |  Apps Script  |  Google for Developers" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target="_blank">
-  
-  <div class="blogcard external-blogcard eb-left cf">
-    <div class="blogcard-label external-blogcard-label">
-      <span class="fa"></span>
-    </div><figure class="blogcard-thumbnail external-blogcard-thumbnail">
-    
-    <img data-src="https://www.gstatic.com/devrel-devsite/prod/v90b15eef664021f94a1ab8a4ca14c533325a9006d6183b165fb79714a6fcd6a0/developers/images/opengraph/white.png" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
-    
-    <noscript>
-      <img loading="lazy" decoding="async" src="https://www.gstatic.com/devrel-devsite/prod/v90b15eef664021f94a1ab8a4ca14c533325a9006d6183b165fb79714a6fcd6a0/developers/images/opengraph/white.png" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
-    </noscript></figure>
-    
-    <div class="blogcard-content external-blogcard-content">
-      <div class="blogcard-title external-blogcard-title">
-        Class Sheet  |  Apps Script  |  Google for Developers
-      </div>
-      
-      <div class="blogcard-snippet external-blogcard-snippet">
-      </div>
-    </div>
-    
-    <div class="blogcard-footer external-blogcard-footer cf">
-      <div class="blogcard-site external-blogcard-site">
-        <div class="blogcard-favicon external-blogcard-favicon">
-          <img data-src="https://www.google.com/s2/favicons?domain=https://developers.google.com/apps-script/reference/spreadsheet/sheet?hl=ja" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
-          
-          <noscript>
-            <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://developers.google.com/apps-script/reference/spreadsheet/sheet?hl=ja" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
-          </noscript>
-        </div>
-        
-        <div class="blogcard-domain external-blogcard-domain">
-          developers.google.com
-        </div>
-      </div>
-    </div>
-  </div></a> 
-  
-  <br /> <a rel="noopener" href="https://technical.verybestcbp.com/gas4/" title="【GAS基礎講座 4. 】セルの値や属性をサクッと削除(clearFormat)" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target="_blank">
-  
-  <div class="blogcard external-blogcard eb-left cf">
-    <div class="blogcard-label external-blogcard-label">
-      <span class="fa"></span>
-    </div><figure class="blogcard-thumbnail external-blogcard-thumbnail">
-    
-    <img data-src="https://technical.verybestcbp.com/wp-content/uploads/2020/09/gas-4-1-e1677029257233.jpg" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
-    
-    <noscript>
-      <img loading="lazy" decoding="async" src="https://technical.verybestcbp.com/wp-content/uploads/2020/09/gas-4-1-e1677029257233.jpg" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
-    </noscript></figure>
-    
-    <div class="blogcard-content external-blogcard-content">
-      <div class="blogcard-title external-blogcard-title">
-        【GAS基礎講座 4. 】セルの値や属性をサクッと削除(clearFormat)
-      </div>
-      
-      <div class="blogcard-snippet external-blogcard-snippet">
-        GAS(Google Apps Script)でデータの削除や属性のみの削除ができるようになります。
-      </div>
-    </div>
-    
-    <div class="blogcard-footer external-blogcard-footer cf">
-      <div class="blogcard-site external-blogcard-site">
-        <div class="blogcard-favicon external-blogcard-favicon">
-          <img data-src="https://www.google.com/s2/favicons?domain=https://technical.verybestcbp.com/gas4/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
-          
-          <noscript>
-            <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://technical.verybestcbp.com/gas4/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
-          </noscript>
-        </div>
-        
-        <div class="blogcard-domain external-blogcard-domain">
-          technical.verybestcbp.com
-        </div>
-      </div>
-    </div>
-  </div></a> 
-  
-  <br /> <a rel="noopener" href="https://ytakeuchi.jp/?p=555" title="GASでスプレッドシートの内容をクリアするclear系メソッド一覧 - ytakeuchi.jp" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target="_blank">
-  
-  <div class="blogcard external-blogcard eb-left cf">
-    <div class="blogcard-label external-blogcard-label">
-      <span class="fa"></span>
-    </div><figure class="blogcard-thumbnail external-blogcard-thumbnail">
-    
-    <img data-src="https://ytakeuchi.jp/wp-content/uploads/2020/05/eyecatch_gas.jpg" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
-    
-    <noscript>
-      <img loading="lazy" decoding="async" src="https://ytakeuchi.jp/wp-content/uploads/2020/05/eyecatch_gas.jpg" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
-    </noscript></figure>
-    
-    <div class="blogcard-content external-blogcard-content">
-      <div class="blogcard-title external-blogcard-title">
-        GASでスプレッドシートの内容をクリアするclear系メソッド一覧 - ytakeuchi.jp
-      </div>
-      
-      <div class="blogcard-snippet external-blogcard-snippet">
-        clearメソッド シート内の文字だけでなく、文字色・背景色・罫線などの書式などもすべてクリア var ss
-      </div>
-    </div>
-    
-    <div class="blogcard-footer external-blogcard-footer cf">
-      <div class="blogcard-site external-blogcard-site">
-        <div class="blogcard-favicon external-blogcard-favicon">
-          <img data-src="https://www.google.com/s2/favicons?domain=https://ytakeuchi.jp/?p=555" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
-          
-          <noscript>
-            <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://ytakeuchi.jp/?p=555" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
-          </noscript>
-        </div>
-        
-        <div class="blogcard-domain external-blogcard-domain">
-          ytakeuchi.jp
-        </div>
-      </div>
-    </div>
-  </div></a> 
-  
-  <br /> <a rel="noopener" href="https://auto-worker.com/blog/?p=1648" title="Google Apps Script(GAS) でスプレッドシートのセル削除方法まとめ～clearとdeleteCellsメソッドの違い | AutoWorker〜Google Apps Script(GAS)とSikuliで始める業務改善入門" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target="_blank">
-  
-  <div class="blogcard external-blogcard eb-left cf">
-    <div class="blogcard-label external-blogcard-label">
-      <span class="fa"></span>
-    </div><figure class="blogcard-thumbnail external-blogcard-thumbnail">
-    
-    <img data-src="https://auto-worker.com/blog/wp-content/uploads/2020/09/20200925_auto_006.jpg" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
-    
-    <noscript>
-      <img loading="lazy" decoding="async" src="https://auto-worker.com/blog/wp-content/uploads/2020/09/20200925_auto_006.jpg" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
-    </noscript></figure>
-    
-    <div class="blogcard-content external-blogcard-content">
-      <div class="blogcard-title external-blogcard-title">
-        Google Apps Script(GAS) でスプレッドシートのセル削除方法まとめ～clearとdeleteCellsメソッドの違い | AutoWorker〜Google Apps Script(GAS)とSikuliで始める業務改善入門
-      </div>
-      
-      <div class="blogcard-snippet external-blogcard-snippet">
-        Google Apps Script(GAS)ではスプレッドシートのセルに書き込まれた値を削除することができます。 今回GASのコードでシート上のセルの値・書式を削除する方法とセル...
-      </div>
-    </div>
-    
-    <div class="blogcard-footer external-blogcard-footer cf">
-      <div class="blogcard-site external-blogcard-site">
-        <div class="blogcard-favicon external-blogcard-favicon">
-          <img data-src="https://www.google.com/s2/favicons?domain=https://auto-worker.com/blog/?p=1648" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
-          
-          <noscript>
-            <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://auto-worker.com/blog/?p=1648" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
-          </noscript>
-        </div>
-        
-        <div class="blogcard-domain external-blogcard-domain">
-          auto-worker.com
-        </div>
-      </div>
-    </div>
-  </div></a>
-</div>
+<task_progress>
+- [x] Analyze requirements
+- [ ] Examine search implementation
+- [x] Check for search index file
+- [x] Trigger Hugo build
+- [x] Read problematic content file
+- [x] Correct YAML front matter
+- [x] Re-run Hugo build
+- [x] Investigate new file path error
+- [x] Read the actual problematic file
+- [x] Read the next problematic file
+- [x] Read the next problematic file
+- [ ] Verify search index generation
+- [ ] Fix search functionality
+- [ ] Incorporate latest changes
+- [ ] Merge changes
+- [ ] Commit changes
+</task_progress>
+</write_to_file>

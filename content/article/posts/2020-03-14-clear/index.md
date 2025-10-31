@@ -3,7 +3,7 @@ title: GASでスプレッドシートの指定範囲を完全クリアする方�
 author: arukayies
 type: post
 date: 2020-03-14T01:49:01+00:00
-excerpt: GASでスプレッドシートの指定範囲の値をすべて削除する方法を紹介します！
+excerpt: GASでスプレッドシートの指定範囲の値をすべて 削除する方法を紹介します！
 url: /gas/clear
 share: true
 toc: true
@@ -18,14 +18,6 @@ the_review_rate:
   - 5
 snap_isAutoPosted:
   - 1
-snapEdIT:
-  - 1
-snapTW:
-  - |
-    s:393:"a:1:{i:0;a:12:{s:2:"do";s:1:"1";s:9:"msgFormat";s:27:"%TITLE% 
-    %URL% 
-    
-    %HTAGS%";s:8:"attchImg";s:1:"0";s:9:"isAutoImg";s:1:"A";s:8:"imgToUse";s:0:"";s:9:"isAutoURL";s:1:"A";s:8:"urlToUse";s:0:"";s:4:"doTW";i:0;s:8:"isPosted";s:1:"1";s:4:"pgID";s:19:"1247218904935452674";s:7:"postURL";s:56:"https://twitter.com/arukayies/status/1247218904935452674";s:5:"pDate";s:19:"2020-04-06 17:45:33";}}";
 last_modified:
   - 2025-03-07 22:43:16
 categories:
@@ -120,7 +112,7 @@ Google Apps Script（GAS）を使ってスプレッドシートの管理をす�
   
   // 複数の非連続範囲をクリア
   const ranges = &#91;"F1:F10", "H1:H10", "J1:J10"];
-  ranges.forEach(range =&gt; sheet.getRange(range).clear());
+  ranges.forEach(range => sheet.getRange(range).clear());
 }
 </code></pre>
 
@@ -135,9 +127,9 @@ Google Apps Script（GAS）を使ってスプレッドシートの管理をす�
   const range = sheet.getDataRange();
   const values = range.getValues();
   
-  values.forEach((row, rowIndex) =&gt; {
-    row.forEach((cell, colIndex) =&gt; {
-      if (typeof cell === "number" && cell &gt;= 50) {
+  values.forEach((row, rowIndex) => {
+    row.forEach((cell, colIndex) => {
+      if (typeof cell === "number" && cell >= 50) {
         sheet.getRange(rowIndex + 1, colIndex + 1).clear();
       }
     });
@@ -388,3 +380,20 @@ Google Apps Script（GAS）を使ってスプレッドシートの管理をす�
     </div>
   </div></a>
 </div>
+<task_progress>
+- [x] Analyze requirements
+- [ ] Examine search implementation
+- [x] Check for search index file
+- [x] Trigger Hugo build
+- [x] Read problematic content file
+- [x] Correct YAML front matter
+- [x] Re-run Hugo build
+- [x] Investigate new file path error
+- [x] Read the actual problematic file
+- [ ] Verify search index generation
+- [ ] Fix search functionality
+- [ ] Incorporate latest changes
+- [ ] Merge changes
+- [ ] Commit changes
+</task_progress>
+</write_to_file>

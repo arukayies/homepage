@@ -3,7 +3,7 @@ title: GASでスプレッドシートの指定範囲から入力規則のみを�
 author: arukayies
 type: post
 date: 2020-03-14T07:38:29+00:00
-excerpt: GASでスプレッドシートの指定範囲のデータの入力規則のみを削除する方法を紹介します！
+excerpt: GASでスプレッドシートの指定範囲のデータの入力規則のみを 削除する方法を紹介します！
 url: /gas/cleardatavalidations
 share: true
 toc: true
@@ -18,14 +18,6 @@ the_review_rate:
   - 5
 snap_isAutoPosted:
   - 1
-snapEdIT:
-  - 1
-snapTW:
-  - |
-    s:393:"a:1:{i:0;a:12:{s:2:"do";s:1:"1";s:9:"msgFormat";s:27:"%TITLE% 
-    %URL% 
-    
-    %HTAGS%";s:8:"attchImg";s:1:"0";s:9:"isAutoImg";s:1:"A";s:8:"imgToUse";s:0:"";s:9:"isAutoURL";s:1:"A";s:8:"urlToUse";s:0:"";s:4:"doTW";i:0;s:8:"isPosted";s:1:"1";s:4:"pgID";s:19:"1247776426171875330";s:7:"postURL";s:56:"https://twitter.com/arukayies/status/1247776426171875330";s:5:"pDate";s:19:"2020-04-08 06:40:57";}}";
 last_modified:
   - 2025-03-07 23:17:11
 categories:
@@ -233,7 +225,7 @@ Google Apps Script（GAS）の`clearDataValidations()`メソッドは、スプ�
   </tr>
 </table></figure> 
 
-この表からもわかるように、`clearDataValidations()`は入力規則にだけ焦点を当ててるんじゃ。だから、例えば商品のカテゴリを変更するときに古いリストを削除してから新しいリストを設定したい時にピッタリなんじゃ。
+この表からもわかるように、`clearDataValidations()`は入力規則にだけ焦点を当ててるんじゃ。だから、例えば商品のカテゴリを変更するときに古いリストを削除して新しいリストを設定したい時にピッタリなんじゃ。
 
 ## 応用例：動的な範囲での使用
 
@@ -244,7 +236,7 @@ Google Apps Script（GAS）の`clearDataValidations()`メソッドは、スプ�
   const lastRow = sheet.getLastRow();
   const validationColumns = &#91;2, 4, 5]; // B, D, E列
   
-  validationColumns.forEach(col =&gt; {
+  validationColumns.forEach(col => {
     sheet.getRange(2, col, lastRow-1).clearDataValidations();
   });
 }
@@ -261,8 +253,8 @@ Google Apps Script（GAS）の`clearDataValidations()`メソッドは、スプ�
   const dataRange = sheet.getDataRange();
   const validations = dataRange.getDataValidations();
   
-  validations.forEach((row, i) =&gt; {
-    row.forEach((rule, j) =&gt; {
+  validations.forEach((row, i) => {
+    row.forEach((rule, j) => {
       if (rule && rule.getCriteriaType() === SpreadsheetApp.DataValidationCriteria.DATE_AFTER) {
         sheet.getRange(i+1, j+1).clearDataValidations();
       }
@@ -291,8 +283,8 @@ Google Apps Script（GAS）の`clearDataValidations()`メソッドは、スプ�
   const validations = bulkRange.getDataValidations();
   
   // データ処理
-  const newValidations = validations.map(row =&gt; 
-    row.map(rule =&gt; {
+  const newValidations = validations.map(row => 
+    row.map(rule => {
       return rule && rule.getCriteriaType() === SpreadsheetApp.DataValidationCriteria.CHECKBOX ? 
              null : rule;
     })
@@ -469,3 +461,21 @@ Google Apps Script（GAS）の`clearDataValidations()`メソッドは、スプ�
     </div>
   </div></a>
 </div>
+<task_progress>
+- [x] Analyze requirements
+- [ ] Examine search implementation
+- [x] Check for search index file
+- [x] Trigger Hugo build
+- [x] Read problematic content file
+- [x] Correct YAML front matter
+- [x] Re-run Hugo build
+- [x] Investigate new file path error
+- [x] Read the actual problematic file
+- [x] Read the next problematic file
+- [ ] Verify search index generation
+- [ ] Fix search functionality
+- [ ] Incorporate latest changes
+- [ ] Merge changes
+- [ ] Commit changes
+</task_progress>
+</write_to_file>

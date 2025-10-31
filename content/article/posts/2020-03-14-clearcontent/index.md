@@ -3,7 +3,7 @@ title: GASでスプレッドシートのセル内容を書式を残して効率�
 author: arukayies
 type: post
 date: 2020-03-14T08:22:35+00:00
-excerpt: GASでスプレッドシートの指定範囲の値のみを削除する方法を紹介します！
+excerpt: GASでスプレッドシートの指定範囲の値のみを 削除する方法を紹介します！
 url: /gas/clearcontent
 share: true
 toc: true
@@ -18,14 +18,6 @@ the_review_rate:
   - 5
 snap_isAutoPosted:
   - 1
-snapEdIT:
-  - 1
-snapTW:
-  - |
-    s:393:"a:1:{i:0;a:12:{s:2:"do";s:1:"1";s:9:"msgFormat";s:27:"%TITLE% 
-    %URL% 
-    
-    %HTAGS%";s:8:"attchImg";s:1:"0";s:9:"isAutoImg";s:1:"A";s:8:"imgToUse";s:0:"";s:9:"isAutoURL";s:1:"A";s:8:"urlToUse";s:0:"";s:4:"doTW";i:0;s:8:"isPosted";s:1:"1";s:4:"pgID";s:19:"1248147522410786816";s:7:"postURL";s:56:"https://twitter.com/arukayies/status/1248147522410786816";s:5:"pDate";s:19:"2020-04-09 07:15:33";}}";
 last_modified:
   - 2025-03-07 23:16:47
 categories:
@@ -82,7 +74,7 @@ Google Apps Script（GAS）を使ってスプレッドシートを操作する�
 
 ### メソッドの定義と動き
 
-`clearContent()`は、指定した範囲（`Range`オブジェクト）内のセルの中身（値や数式）を消すメソッドばい。ただし、書式（色やフォント）、コメント、データ検証はそのまま残るけ、データだけを消去したい場合にぴったりじゃけ。たとえば、テンプレートに新しいデータを入れる前に古いデータを消したい時に便利よ～。
+`clearContent()`は、指定した範囲（`Range`オブジェクト）内のセルの中身（値や数式）を消すメソッドばい。ただし、書式（色やフォント）、コメント、データ検証はそのまま残るという特徴があるけ、使い方をしっかり理解しておくと便利よ～。
 
 ### 基本的なコード
 
@@ -220,8 +212,8 @@ C5からF20までの範囲を消去する例じゃけ、定期的なレポート
   const range = sheet.getDataRange();
   const values = range.getValues();
   
-  values.forEach((row, rowIndex) =&gt; {
-    row.forEach((cell, colIndex) =&gt; {
+  values.forEach((row, rowIndex) => {
+    row.forEach((cell, colIndex) => {
       if (cell === 'DELETE_FLAG') {
         sheet.getRange(rowIndex+1, colIndex+1).clearContent();
       }
@@ -242,7 +234,7 @@ C5からF20までの範囲を消去する例じゃけ、定期的なレポート
     'A1:A10', 'C5:C15', 'E20:E30'
   ];
   
-  ranges.forEach(range =&gt; {
+  ranges.forEach(range => {
     sheet.getRange(range).clearContent();
   });
 }
@@ -258,11 +250,11 @@ C5からF20までの範囲を消去する例じゃけ、定期的なレポート
   const values = dataRange.getValues();
   
   const clearTargets = values
-    .map((row, i) =&gt; row.map((cell, j) =&gt; cell === 'OLD' ? &#91;i+1, j+1] : null))
+    .map((row, i) => row.map((cell, j) => cell === 'OLD' ? &#91;i+1, j+1] : null))
     .flat()
-    .filter(coords =&gt; coords !== null);
+    .filter(coords => coords !== null);
   
-  clearTargets.forEach((&#91;row, col]) =&gt; {
+  clearTargets.forEach((&#91;row, col]) => {
     sheet.getRange(row, col).clearContent();
   });
 }
@@ -614,7 +606,7 @@ C5からF20までの範囲を消去する例じゃけ、定期的なレポート
       <span class="fa"></span>
     </div><figure class="blogcard-thumbnail external-blogcard-thumbnail">
     
-    <img loading="lazy" decoding="async" src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-user-contents.imgix.net%2Fhttps%253A%252F%252Fcdn.qiita.com%252Fassets%252Fpublic%252Farticle-ogp-background-afbab5eb44e0b055cce1258705637a91.png%3Fixlib%3Drb-4.0.0%26w%3D1200%26blend64%3DaHR0cHM6Ly9xaWl0YS11c2VyLXByb2ZpbGUtaW1hZ2VzLmltZ2l4Lm5ldC9odHRwcyUzQSUyRiUyRnMzLWFwLW5vcnRoZWFzdC0xLmFtYXpvbmF3cy5jb20lMkZxaWl0YS1pbWFnZS1zdG9yZSUyRjAlMkYyNjQwODc2JTJGMjYzMTY0YjU0MWI2OWJlMDIzZmVjOGQyNTY4YzBmNTI1OTIyNGY0YiUyRmxhcmdlLnBuZyUzRjE2NTc5NTQxNDk_aXhsaWI9cmItNC4wLjAmYXI9MSUzQTEmZml0PWNyb3AmbWFzaz1lbGxpcHNlJmJnPUZGRkZGRiZmbT1wbmczMiZzPTFiM2ExY2RlMDA2OGRkMTgxZTMwMDgyZTA3NmZhNmNh%26blend-x%3D120%26blend-y%3D467%26blend-w%3D82%26blend-h%3D82%26blend-mode%3Dnormal%26s%3D9a87242af5120c5b4a60b1c43c0033b0?ixlib=rb-4.0.0&#038;w=1200&#038;fm=jpg&#038;mark64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTk2MCZoPTMyNCZ0eHQ9JTVCR0FTJTVEJTIwJUUzJTgxJUE3JUUzJTgyJUJCJUUzJTgzJUFCJUUzJTgxJUFFJUU1JTgwJUE0JUUzJTgyJTkyJUUzJTgxJUJFJUUzJTgxJUE4JUUzJTgyJTgxJUUzJTgxJUE2JUUzJTgyJUFGJUUzJTgzJUFBJUUzJTgyJUEyJUUzJTgxJTk5JUUzJTgyJThCJUU2JTk2JUI5JUU2JUIzJTk1JnR4dC1hbGlnbj1sZWZ0JTJDdG9wJnR4dC1jb2xvcj0lMjMxRTIxMjEmdHh0LWZvbnQ9SGlyYWdpbm8lMjBTYW5zJTIwVzYmdHh0LXNpemU9NTYmdHh0LXBhZD0wJnM9OGNkNDE2ZTE0MGU2Y2JlY2EzMGRjODU1NTM1N2I3NDE&#038;mark-x=120&#038;mark-y=112&#038;blend64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTgzOCZoPTU4JnR4dD0lNDA4MHN5b2t1bW90c3UmdHh0LWNvbG9yPSUyMzFFMjEyMSZ0eHQtZm9udD1IaXJhZ2lubyUyMFNhbnMlMjBXNiZ0eHQtc2l6ZT0zNiZ0eHQtcGFkPTAmcz1jYzkwNzIxMjZjYjg3ZGY4ZWFhOWE2ZWI0YTE4MmI1Ng&#038;blend-x=242&#038;blend-y=480&#038;blend-w=838&#038;blend-h=46&#038;blend-fit=crop&#038;blend-crop=left%2Cbottom&#038;blend-mode=normal&#038;s=653d850b19f817880937dd27198bb5fb" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" /></figure>
+    <img data-src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-user-contents.imgix.net%2Fhttps%253A%252F%252Fcdn.qiita.com%252Fassets%252Fpublic%252Farticle-ogp-background-afbab5eb44e0b055cce1258705637a91.png%3Fixlib%3Drb-4.0.0%26w%3D1200%26blend64%3DaHR0cHM6Ly9xaWl0YS11c2VyLXByb2ZpbGUtaW1hZ2VzLmltZ2l4Lm5ldC9odHRwcyUzQSUyRiUyRnMzLWFwLW5vcnRoZWFzdC0xLmFtYXpvbmF3cy5jb20lMkZxaWl0YS1pbWFnZS1zdG9yZSUyRjAlMkYyNjQwODc2JTJGMjYzMTY0YjU0MWI2OWJlMDIzZmVjOGQyNTY4YzBmNTI1OTIyNGY0YiUyRmxhcmdlLnBuZyUzRjE2NTc5NTQxNDk_aXhsaWI9cmItNC4wLjAmYXI9MSUzQTEmZml0PWNyb3AmbWFzaz1lbGxpcHNlJmJnPUZGRkZGRiZmbT1wbmczMiZzPTFiM2ExY2RlMDA2OGRkMTgxZTMwMDgyZTA3NmZhNmNh%26blend-x%3D120%26blend-y%3D467%26blend-w%3D82%26blend-h%3D82%26blend-mode%3Dnormal%26s%3D9a87242af5120c5b4a60b1c43c0033b0?ixlib=rb-4.0.0&#038;w=1200&#038;fm=jpg&#038;mark64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTgzOCZoPTU4JnR4dD0lNDA4MHN5b2t1bW90c3UmdHh0LWNvbG9yPSUyMzFFMjEyMSZ0eHQtZm9udD1IaXJhZ2lubyUyMFNhbnMlMjBXNiZ0eHQtc2l6ZT0zNiZ0eHQtcGFkPTAmcz1jYzkwNzIxMjZjYjg3ZGY4ZWFhOWE2ZWI0YTE4MmI1Ng&#038;blend-x=242&#038;blend-y=480&#038;blend-w=838&#038;blend-h=46&#038;blend-fit=crop&#038;blend-crop=left%2Cbottom&#038;blend-mode=normal&#038;s=653d850b19f817880937dd27198bb5fb" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" /></figure>
     
     <div class="blogcard-content external-blogcard-content">
       <div class="blogcard-title external-blogcard-title">
@@ -643,3 +635,18 @@ C5からF20までの範囲を消去する例じゃけ、定期的なレポート
     </div>
   </div></a>
 </div>
+<task_progress>
+- [x] Analyze requirements
+- [ ] Examine search implementation
+- [x] Check for search index file
+- [x] Trigger Hugo build
+- [x] Read problematic content file
+- [x] Correct YAML front matter
+- [ ] Re-run Hugo build
+- [ ] Verify search index generation
+- [ ] Fix search functionality
+- [ ] Incorporate latest changes
+- [ ] Merge changes
+- [ ] Commit changes
+</task_progress>
+</write_to_file>

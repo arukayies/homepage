@@ -10,15 +10,15 @@
         "categories" .Params.categories
         "href" .Permalink
     -}}
-    {{- $thumbnail := or
-        (.Resources.GetMatch "thumbnail.*")
-        (resources.Get .Params.thumbnail)
-        (resources.Get .Site.Params.defaultNoimage)
-    -}}
-    {{- if $thumbnail -}}
-        {{- $thumbnail = $thumbnail.Fill (printf "640x360 center q%d webp" .Site.Params.imageQuality) -}}
-        {{- $data = merge $data (dict "thumbnail" $thumbnail.Permalink) -}}
+    {{- $thumbnail := "" -}}
+    {{- with resources.Get .Params.thumbnail -}}
+        {{- $thumbnail = .Fill (printf "640x360 center q%d webp" $.Site.Params.imageQuality) -}}
+    {{- else -}}
+        {{- with resources.Get .Site.Params.defaultNoimage -}}
+            {{- $thumbnail = .Fill (printf "640x360 center q%d webp" $.Site.Params.imageQuality) -}}
+        {{- end -}}
     {{- end -}}
+    {{- $data = merge $data (dict "thumbnail" $thumbnail) -}}
     {{- $.Scratch.Add "index" $data -}}
 {{- end -}}
 {{- $.Scratch.Get "index" | jsonify -}}
