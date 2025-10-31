@@ -1,7 +1,6 @@
 baseURL: https://arukayies.com/
 languageCode: ja
 title: くらぶろぐ
-theme = "ananke"
 copyright: © 2019-2025 @arukayies
 googleAnalytics:
 disqusShortname:
