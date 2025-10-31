@@ -7,8 +7,8 @@ function initLunr() {
     tinySegmenter = new lunr.TinySegmenter();
 
     return new Promise((resolve, reject) => {
-        var request = new XMLHttpRequest();
-        request.open("GET", "index.json", true);
+    var request = new XMLHttpRequest();
+    request.open("GET", "search/list.json", true);
 
         request.onload = function () {
             if (request.status >= 200 && request.status < 400) {
