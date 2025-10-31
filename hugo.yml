@@ -1,4 +1,4 @@
-baseURL: https://arukayies.com/
+baseURL: https://arukayies.github.io/homepage/
 languageCode: ja
 title: くらぶろぐ
 copyright: © 2019-2025 @arukayies
@@ -55,7 +55,7 @@ module:
 params:
   author:
     name: arukayies
-    url: https://arukayies.com/
+    url: https://arukayies.github.io/homepage/
   description: DIYネタについてまとめてます。
   icon: image/icon.png
   images:
@@ -75,7 +75,7 @@ params:
       instagram: arukayies
       youtube: https://www.youtube.com/channel/UCoO5ZwX9e7jToe7eo-h62HQ
       github: arukayies
-      other: https://arukayies.com/
+      other: https://arukayies.github.io/homepage/
 
 menu:
   footer:
