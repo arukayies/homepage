@@ -1,0 +1,28 @@
+<article class="partials__relatedArticle">
+    <div class="partials__relatedArticle__inner">
+        <a href="{{ .Permalink }}" class="partials__relatedArticle__link"></a>
+        {{ $thumbnail := or
+            (.Resources.GetMatch "thumbnail.*")
+            (resources.Get .Params.thumbnail)
+            (resources.Get .Site.Params.defaultNoimage)
+        }}
+        {{ if $thumbnail }}
+            {{ $thumbnail = $thumbnail.Fill (printf "576x324 center q%d webp" .Site.Params.imageQuality) }}
+            <img src='{{ $thumbnail.Permalink  }}' alt="{{ .Title }}" loading="lazy" class="partials__relatedArticle__thumbnail">
+        {{ end }}
+        <div class="partials__relatedArticle__content">
+            <h4 class="partials__relatedArticle__title">
+                {{ .Title }}
+            </h4>
+    
+            {{ $tags := .GetTerms "tags" }}
+            {{ if $tags }}
+                {{ partial "tag-list.html" (dict "tags" $tags) }}
+            {{ end }}
+    
+            <div class="partials__relatedArticle__description">
+                {{ .Summary }}
+            </div>
+        </div>
+    </div>
+</article>

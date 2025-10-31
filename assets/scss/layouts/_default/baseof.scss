@@ -1,0 +1,98 @@
+.body {
+    color: $base-font-color;
+    font-family: $base-font;
+    background: $content-background;
+}
+.container {
+    min-width: 1260px;
+    min-height: 100vh;
+}
+.header {
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 0 4px #666;
+    border-right: 1px solid $base-background;
+    background: $header-background;
+    &__inner {
+        width: 980px;
+        margin: auto;
+        padding: 0;
+    }
+}
+.content {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.main {
+    &__inner {
+        width: 760px;
+        margin: auto;
+        padding: 10px 0;
+    }
+}
+.sidebar {
+    &__inner {
+        width: 320px;
+        margin: auto;
+        padding: 10px;
+    }
+}
+.footer {
+    background: $footer-background;
+    &__inner {
+        width: 980px;
+        margin: auto;
+        padding: 10px;
+    }
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100vh;
+    height: 100vh;
+    background: #000;
+    opacity: 0.2;
+    &.open {
+        display: block;
+    }
+}
+@media only screen and (max-width: $sp-width) {
+    .container {
+        min-width: 100%;
+        min-height: 100vh;
+    }
+    .header {
+        position: fixed;
+        z-index: 9999;
+        width: 100%;
+        &__inner {
+            width: 100%;
+            padding: 15px;
+        }
+    }
+    .content {
+        flex-direction: column;
+    }
+    .main {
+        &__inner {
+            width: 100%;
+            padding: 12.5px;
+        }
+    }
+    .sidebar {
+        &__inner {
+            width: 100%;
+            padding: 12.5px;
+        }
+    }
+    .footer {
+        &__inner {
+            width: 100%;
+            padding: 15px;
+        }
+    }
+}

@@ -1,0 +1,74 @@
+{{ define "main" }}
+    <section class="single">
+        <article class="single__article">
+            <div class="single__article__header">
+                {{ partial "breadcrumb.html" . }}
+                <div class="pcShow single__article__date">
+                    <i class="far fa-clock"></i>{{ .Date.Format "2006-01-02" }}
+                    &#032;&#047;&#032;<i class="fas fa-history"></i>{{ .Lastmod.Format "2006-01-02" }}
+                </div>
+            </div>
+            <h1 class="single__article__title">{{ .Title }}</h1>
+            <div class="spShow single__article__date">
+                <i class="far fa-clock"></i>{{ .Date.Format "2006-01-02" }}
+                &#032;&#047;&#032;<i class="fas fa-history"></i>{{ .Lastmod.Format "2006-01-02" }}
+            </div>
+            {{ if .Params.share }}
+                <section class="single__article__shareLinks">
+                    {{ partial "share-links.html" . }}
+                </section>
+            {{ end }}
+
+            {{ $tags := .GetTerms "tags" }}
+            {{ if $tags }}
+                {{ partial "tag-list.html" (dict "tags" $tags) }}
+            {{ end }}
+
+            {{ $thumbnail := or
+                (.Resources.GetMatch "thumbnail.*")
+                (resources.Get .Params.thumbnail)
+            }}
+            {{ if $thumbnail }}
+                {{ $thumbnail = $thumbnail.Fit (printf "1280x1280 q%d webp" .Site.Params.imageQuality) }}
+                <img src="{{ $thumbnail.RelPermalink  }}" alt="{{ .Title }}" class="single__article__thumbnail">
+            {{ end }}
+
+            {{ if .Params.toc }}
+                <aside class="single__article__toc">
+                    <h3 class="single__article__toc__title"><i class="fas fa-list-ul"></i>目次</h3>
+                    {{ .TableOfContents }}
+                </aside>
+            {{ end }}
+            
+            <div class="single__article__content markdown-body">
+                {{ .Content }}
+            </div>
+
+            {{ if .Params.comment }}
+                <div class="single__article__comment">
+                    {{ template "_internal/disqus.html" . }}
+                </div>
+            {{ end }}
+        </article>
+
+        {{ $related := .Site.RegularPages.Related . | first .Site.Params.relatedArticleLimit }}
+        {{ with $related }}
+            <div class="single__relatedArticleList">
+                <h3 class="single__relatedArticleList__title">関連記事</h3>
+                {{ range . }}
+                    {{ partial "related-article" . }}
+                {{ end }}
+            </div>
+        {{ end }}
+
+        <div class="single__navigation">
+            {{ with .PrevInSection }}
+                <a href="{{ .Permalink }}" class="single__navigation__prev">{{ .LinkTitle }}</a>
+            {{ end }}
+            <div class="single__navigation__center"></div>
+            {{ with .NextInSection }}
+                <a href="{{ .Permalink }}" class="single__navigation__next">{{ .LinkTitle }}</a>
+            {{ end }}
+        </div>
+    </section>
+{{ end }}

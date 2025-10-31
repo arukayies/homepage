@@ -1,0 +1,34 @@
+{
+  "name": "hugo-theme-salt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "create-ranking": "node scripts/create-ranking.js",
+    "build": "hugo --gc --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/okdyy75/hugo-theme-salt.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/okdyy75/hugo-theme-salt/issues"
+  },
+  "homepage": "https://github.com/okdyy75/hugo-theme-salt#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.5.2",
+    "@google-analytics/data": "^4.7.0",
+    "dayjs": "^1.11.11",
+    "github-markdown-css": "^5.5.1",
+    "hugo-bin": "^0.144.6",
+    "lunr": "^2.3.9",
+    "lunr-languages": "^1.14.0"
+  },
+  "hugo-bin": {
+    "buildTags": "extended",
+    "version": "0.147.5"
+  }
+}

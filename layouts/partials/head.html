@@ -1,0 +1,119 @@
+{{ define "head" }}
+    {{ $title := "" }}
+    {{ $description := "" }}
+    {{ $og_image_url := "" }}
+
+    {{- if .Description -}}
+        {{- $description = .Description -}}
+    {{- else if .IsPage -}}
+        {{- $description = .Summary -}}
+    {{- else -}}
+        {{- $description = .Site.Params.description -}}
+    {{- end -}}
+
+    {{- if .IsHome -}}
+        {{- $title = .Site.Title -}}
+    {{- else -}}
+        {{- $title = printf "%s | %s" .Title .Site.Title -}}
+    {{- end -}}
+
+    {{- if .IsHome -}}
+        {{- $image := resources.Get (index .Site.Params.images 0) -}}
+        {{- if $image -}}
+            {{- $og_image_url = ($image.Fill (printf "1200x630 center q%d webp" .Site.Params.imageQuality)).Permalink -}}
+        {{- end -}}
+    {{- else if .IsPage -}}
+        {{- $thumbnail := or
+            (.Resources.GetMatch "thumbnail.*")
+            (resources.Get .Params.thumbnail)
+        -}}
+        {{- if $thumbnail -}}
+            {{- $og_image_url = ($thumbnail.Fill (printf "1200x630 center q%d webp" .Site.Params.imageQuality)).Permalink -}}
+        {{- end -}}
+    {{- end -}}
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title }}</title>
+    <meta name='description' content='{{ $description }}'>
+    {{- if $og_image_url -}}
+        <meta name="thumbnail" content="{{ $og_image_url }}">
+    {{- end -}}
+    <meta property="og:locale" content="ja_JP">
+    <meta property='og:title' content='{{ $title }}'>
+    <meta property='og:description' content='{{ $description }}'>
+    {{- if $og_image_url -}}
+        <meta property='og:image' content="{{ $og_image_url }}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+    {{- end -}}
+    <meta property='og:url' content='{{ .Permalink }}'>
+    <meta property='og:site_name' content='{{ .Site.Title }}'>
+    <meta property='og:type' content='{{- if .IsHome -}}website{{- else -}}article{{- end -}}'>
+    {{- if .IsPage -}}
+        {{- with .Date -}}
+            <meta property="article:published_time" content="{{- .Format "2006-01-02T15:04:05-07:00" -}}">
+        {{- end -}}
+        {{- with .Lastmod -}}
+            <meta property="article:modified_time" content="{{- .Format "2006-01-02T15:04:05-07:00" -}}">
+        {{- end -}}
+        {{- with .ExpiryDate -}}
+            <meta property="article:expiration_time" content="{{- .Format "2006-01-02T15:04:05-07:00" -}}">
+        {{- end -}}
+        {{- with .Site.Params.Author.name -}}
+            <meta property="article:author" content="{{- . -}}">
+        {{- end -}}
+        {{- with .Params.categories -}}
+            <meta property="article:section" content="{{- . -}}">
+        {{- end -}}
+        {{- range .Params.tags -}}
+            <meta property="article:tag" content="{{- . -}}">
+        {{- end -}}
+    {{- end -}}
+    <meta name="twitter:title" content="{{ $title }}">
+    <meta name="twitter:description" content="{{ $description }}">
+    {{- if $og_image_url -}}
+        <meta name="twitter:image" content="{{ $og_image_url }}">
+        <meta name="twitter:card" content="summary_large_image">
+    {{- end -}}
+    {{- partial "head.html" . -}}
+    {{- block "robots" . -}}
+        <meta name="robots" content="index,follow">
+    {{- end -}}
+    {{- block "googlebot" . -}}
+        <meta name="googlebot" content="index,follow">
+    {{- end -}}
+    {{ hugo.Generator }}
+    <link rel="icon" href="{{ "favicon.ico" | absURL }}">
+    {{ if .Site.Params.icon }}
+        {{- with resources.Get .Site.Params.icon -}}
+            <link rel="apple-touch-icon" href="{{- .Permalink -}}">
+            <link rel="apple-touch-icon" sizes="180x180" href="{{- (.Fit "180x180 png").Permalink -}}">
+            <meta name="msapplication-TileImage" content="{{- (.Fit "144x144 center png").Permalink -}}">
+        {{- end -}}
+    {{ end }}
+    <link rel='canonical' href='{{ .Permalink }}'>
+    {{ with .OutputFormats.Get "rss" -}}
+        {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end -}}
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    {{ $style := resources.Get "scss/style.scss" | toCSS | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}">
+    <link rel="preload" href="{{ "css/vendor/@fortawesome/fontawesome-free/css/all.min.css" | absURL }}" as="style">
+    <link rel="stylesheet" href="{{ "css/vendor/@fortawesome/fontawesome-free/css/all.min.css" | absURL }}" media="print" onload="this.media='all'">
+    {{ if .IsPage }}
+        <link rel="preload" href="{{ "css/vendor/github-markdown-css/github-markdown.css" | absURL }}" as="style">
+        <link rel="stylesheet" href="{{ "css/vendor/github-markdown-css/github-markdown.css" | absURL }}" media="print" onload="this.media='all'">
+    {{ end }}
+    {{ if eq .Section "search" }}
+        <script type="text/javascript" src="{{ "js/vendor/lunr/lunr.min.js" | absURL }}"></script>
+        <script type="text/javascript" src="{{ "js/vendor/lunr-languages/lunr.stemmer.support.js" | absURL }}"></script>
+        <script type="text/javascript" src="{{ "js/vendor/lunr-languages/tinyseg.js" | absURL }}"></script>
+        <script type="text/javascript" src="{{ "js/vendor/lunr-languages/lunr.ja.js" | absURL  }}"></script>
+        <script type="text/javascript" src="{{ with  resources.Get "js/search.js" | minify }}{{ .RelPermalink }}{{ end }}"></script>
+    {{ end }}
+    {{ partial "jsonld.html" . }}
+    {{ template "_internal/google_analytics.html" . }}
+{{ end }}

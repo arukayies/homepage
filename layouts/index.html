@@ -1,0 +1,42 @@
+
+{{ define "main" }}
+    <section class="index">
+        <div class="index__inner">
+            {{ $pages := slice }}
+            {{ range .Site.RegularPages.ByLastmod.Reverse }}
+                {{ $add := true }}
+                {{ range $term := .Params.pickups }}
+                    {{ if eq $term "top" }}
+                        {{ $add = false }}
+                    {{ end }}
+                {{ end }}
+                {{ if and $add .IsPage (eq .Section "article") }}
+                    {{ $pages = $pages | append . }}
+                {{ end }}
+            {{ end }}
+            {{ $paginator := .Paginate $pages }}
+            {{ if not $paginator.HasPrev  }}
+                {{ with .Site.Taxonomies.pickups.top  }}
+                    <div class="index__titleWrapper">
+                        <h1 class="index__title--pickup">Pick up</h1>
+                    </div>
+                    <div class="index__articleCardList">
+                        {{ range .Pages }}
+                            {{ partial "article-card" . }}
+                        {{ end }}
+                    </div>
+                {{ end }}
+            {{ end }}
+
+            <div class="index__titleWrapper">
+                <h1 class="index__title">新着記事</h1>
+            </div>
+            <div class="index__articleCardList">
+                {{ range $paginator.Pages }}
+                    {{ partial "article-card" . }}
+                {{ end }}
+            </div>
+            {{ template "_internal/pagination.html" . }}
+        </div>
+    </section>
+{{ end }}

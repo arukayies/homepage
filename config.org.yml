@@ -1,0 +1,91 @@
+baseURL: https://arukayies.com/
+languageCode: ja
+title: くらぶろぐ
+copyright: © 2019-2025 @arukayies
+googleAnalytics:
+disqusShortname:
+
+taxonomies:
+  category: categories
+  archives: archives
+
+disablePathToLower: true
+hasCJKLanguage: true
+summaryLength: 200
+pagination:
+  pagerSize: 10
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+related:
+  includeNewer: true
+  indices:
+    - name: keywords
+      weight: 100
+    - name: tags
+      weight: 90
+    - name: date
+      weight: 10
+  threshold: 80
+  toLower: false
+
+module:
+  mounts:
+    - source: static
+      target: static
+    - source: node_modules/@fortawesome/fontawesome-free/css/all.min.css
+      target: static/css/vendor/@fortawesome/fontawesome-free/css/all.min.css
+    - source: node_modules/@fortawesome/fontawesome-free/webfonts
+      target: static/css/vendor/@fortawesome/fontawesome-free/webfonts
+    - source: node_modules/github-markdown-css/github-markdown.css
+      target: static/css/vendor/github-markdown-css/github-markdown.css
+    # 検索に必要
+    - source: node_modules/lunr/lunr.min.js
+      target: static/js/vendor/lunr/lunr.min.js
+    - source: node_modules/lunr-languages/lunr.stemmer.support.js
+      target: static/js/vendor/lunr-languages/lunr.stemmer.support.js
+    - source: node_modules/lunr-languages/tinyseg.js
+      target: static/js/vendor/lunr-languages/tinyseg.js
+    - source: node_modules/lunr-languages/lunr.ja.js
+      target: static/js/vendor/lunr-languages/lunr.ja.js
+
+params:
+  author:
+    name: arukayies
+    url: https://arukayies.com/
+  description: DIYネタについてまとめてます。
+  icon: image/icon.png
+  images:
+    - image/og_large.png
+  notFoundImage: image/404.png
+  defaultNoimage: image/default_noimage.png
+  newArticleLimit: 5
+  rankingArticleLimit: 5
+  relatedArticleLimit: 2
+  imageQuality: 75
+  profile:
+    name: arukayies
+    description: 
+    icon: image/profile_icon.png
+    link:
+      twitter: arukayies
+      instagram: arukayies
+      youtube: https://www.youtube.com/channel/UCoO5ZwX9e7jToe7eo-h62HQ
+      github: arukayies
+      other: https://arukayies.com/
+
+menu:
+  footer:
+    - name: プライバシーポリシー
+      url: /privacy-policy
+      weight: -100
+      params:
+        position: left
+    - name: お問い合わせ
+      url: https://x.com/arukayies
+      weight: -90
+      params:
+        position: right

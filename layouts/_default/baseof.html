@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+    {{- partial "head.html" . -}}
+    {{- block "head" . -}}{{ end }}
+    {{- partial "head-add.html" . -}}
+</head>
+<body class="body">
+    <div class="container">
+        <header class="header">
+            <div class="header__inner">
+                {{- partial "header.html" . -}}
+                {{- block "header" . -}}{{ end }}
+            </div>
+        </header>
+        <div id="headerBlock" class="spShow"></div>
+        <div class="content">
+            <main class="main">
+                <div class="main__inner">
+                    {{- block "main" . }}{{- end }}
+                </div>
+            </main>
+            <aside class="sidebar">
+                <div class="sidebar__inner">
+                    {{- partial "sidebar.html" . -}}
+                    {{- block "sidebar" . -}}{{ end }}
+                </div>
+            </aside>
+        </div>
+        <footer class="footer">
+            <div class="footer__inner">
+                {{- partial "footer.html" . -}}
+                {{- block "footer" . -}}{{ end }}
+            </div>
+        </footer>
+    </div>
+    <div id="overlay" class="close overlay"></div>
+    <script>
+        window.addEventListener('DOMContentLoaded', (ev) => {
+            document.querySelector('#headerBlock').style.height = document.querySelector('.header').offsetHeight + 'px'
+        })
+    </script>
+    {{- block "header-script" . -}}{{ end }}
+    {{- partial "body-add.html" . -}}
+</body>
+</html>

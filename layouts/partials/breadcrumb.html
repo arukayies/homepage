@@ -1,0 +1,19 @@
+<ol class="partials__breadcrumb">
+    <li>
+        <a href="{{ .Site.BaseURL }}">
+            <i class="fas fa-home"></i>Home
+        </a>
+    </li>
+    {{ with .Params.categories }}
+        <li>/</li>
+        <li>
+            <a href="{{ "categories" | relURL }}/{{ . }}">
+                <i class="fas fa-folder"></i>{{ . }}
+            </a>
+        </li>
+    {{ end }}
+    <li>/</li>
+    <li>
+        {{ .Title }}
+    </li>
+</ol>

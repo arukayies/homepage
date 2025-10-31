@@ -1,0 +1,59 @@
+
+.partials {
+    &__snsLinks {
+        width: 240px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
+        %__link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 10px;
+            color: #fff;
+        }
+        &__link {
+            &--twitter {
+                @extend %__link;
+                background:#000000;
+            }
+            &--instagram {
+                @extend %__link;
+                background: linear-gradient(135deg, #4C64D3, #CF2E92, #F26939, #FFDD83);
+            }
+            &--facebook {
+                @extend %__link;
+                background: #3b5998;
+            }
+            &--youtube {
+                @extend %__link;
+                background: #ff0000;
+            }
+            &--github {
+                @extend %__link;
+                background: #24292e;
+            }
+            &--qiita {
+                @extend %__link;
+                background: #55c500;
+                font-size: 22px;
+            }
+            &--zenn {
+                @extend %__link;
+                background: #3EA8FF;
+                font-size: 22px;
+            }
+            &--email {
+                @extend %__link;
+                background: #16a184;
+            }
+            &--other {
+                @extend %__link;
+                background: #555555;
+            }
+        }
+    }
+}
