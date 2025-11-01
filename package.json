@@ -30,5 +30,8 @@
   "hugo-bin": {
     "buildTags": "extended",
     "version": "0.147.5"
+  },
+  "devDependencies": {
+    "terser": "^5.44.0"
   }
 }
