@@ -170,22 +170,22 @@ function renderResults(results) {
 }
 
 // Let's get started
-initLunr().then(function () {
+document.addEventListener("DOMContentLoaded", function () {
     initUI(); // Initialize UI here to ensure $results is set before renderResults
-    var query = getQuery()["query"] || "";
-    query = decodeURI(query);
-    var results = search(query);
-    renderResults(results);
-    if (query.length) {
-        document.getElementById("list-title").innerText = `「${query}」を検索`;
-    }
-});
 
-// Keep the DOMContentLoaded listener for other potential initializations if needed,
-// but initUI is now called within the lunr promise to ensure $results is ready.
-// document.addEventListener("DOMContentLoaded", function () {
-//     initUI();
-// });
+    // Now that UI is initialized and DOM is ready, proceed with Lunr and search
+    initLunr().then(function () {
+        var query = getQuery()["query"] || "";
+        query = decodeURI(query);
+        var results = search(query);
+        renderResults(results);
+        if (query.length) {
+            document.getElementById("list-title").innerText = `「${query}」を検索`;
+        }
+    }).catch(function(error) {
+        console.error("Failed to initialize Lunr or search:", error);
+    });
+});
 
 function getQuery() {
     var queryString = window.location.search;
