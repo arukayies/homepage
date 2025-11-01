@@ -3,7 +3,7 @@ title: GASでスプレッドシートの値や書式を柔軟に削除する方�
 author: arukayies
 type: post
 date: 2020-03-14T05:09:10+00:00
-excerpt: GASでスプレッドシートの値を指定されたオプションで削除する方法を紹介します！
+excerpt: GASでスプレッドシートの値を指定されたオプションで 削除する方法を紹介します！
 url: /gas/clearoptions
 share: true
 toc: true
@@ -20,12 +20,6 @@ snap_isAutoPosted:
   - 1
 snapEdIT:
   - 1
-snapTW:
-  - |
-    s:393:"a:1:{i:0;a:12:{s:2:"do";s:1:"1";s:9:"msgFormat";s:27:"%TITLE% 
-    %URL% 
-    
-    %HTAGS%";s:8:"attchImg";s:1:"0";s:9:"isAutoImg";s:1:"A";s:8:"imgToUse";s:0:"";s:9:"isAutoURL";s:1:"A";s:8:"urlToUse";s:0:"";s:4:"doTW";i:0;s:8:"isPosted";s:1:"1";s:4:"pgID";s:19:"1247401746869043205";s:7:"postURL";s:56:"https://twitter.com/arukayies/status/1247401746869043205";s:5:"pDate";s:19:"2020-04-07 05:52:06";}}";
 last_modified:
   - 2025-03-07 22:44:00
 categories:

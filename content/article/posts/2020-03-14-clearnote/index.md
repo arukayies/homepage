@@ -3,7 +3,7 @@ title: GASでスプレッドシートの指定範囲からメモのみを削除�
 author: arukayies
 type: post
 date: 2020-03-14T07:55:46+00:00
-excerpt: GASでスプレッドシートの指定範囲のメモのみを削除する方法を紹介します！
+excerpt: GASでスプレッドシートの指定範囲のメモのみを 削除する方法を紹介します！
 url: /gas/clearnote
 share: true
 toc: true
@@ -20,12 +20,6 @@ snap_isAutoPosted:
   - 1
 snapEdIT:
   - 1
-snapTW:
-  - |
-    s:393:"a:1:{i:0;a:12:{s:2:"do";s:1:"1";s:9:"msgFormat";s:27:"%TITLE% 
-    %URL% 
-    
-    %HTAGS%";s:8:"attchImg";s:1:"0";s:9:"isAutoImg";s:1:"A";s:8:"imgToUse";s:0:"";s:9:"isAutoURL";s:1:"A";s:8:"urlToUse";s:0:"";s:4:"doTW";i:0;s:8:"isPosted";s:1:"1";s:4:"pgID";s:19:"1247959704329801728";s:7:"postURL";s:56:"https://twitter.com/arukayies/status/1247959704329801728";s:5:"pDate";s:19:"2020-04-08 18:49:14";}}";
 last_modified:
   - 2025-03-07 22:46:42
 categories:
