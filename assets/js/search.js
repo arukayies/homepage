@@ -160,12 +160,18 @@ function renderResults(results) {
                 </div>
             </article>
         `;
-        $results.appendChild(div);
+        // Add a check to ensure $results is not null before appending
+        if ($results) {
+            $results.appendChild(div);
+        } else {
+            console.error("Element with ID 'results' not found. Cannot render search results.");
+        }
     });
 }
 
 // Let's get started
 initLunr().then(function () {
+    initUI(); // Initialize UI here to ensure $results is set before renderResults
     var query = getQuery()["query"] || "";
     query = decodeURI(query);
     var results = search(query);
@@ -175,9 +181,11 @@ initLunr().then(function () {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    initUI();
-});
+// Keep the DOMContentLoaded listener for other potential initializations if needed,
+// but initUI is now called within the lunr promise to ensure $results is ready.
+// document.addEventListener("DOMContentLoaded", function () {
+//     initUI();
+// });
 
 function getQuery() {
     var queryString = window.location.search;
