@@ -110,7 +110,6 @@ function renderResults(results) {
     }
 
     // Only show the ten first results
-    $results = document.getElementById("results");
     results.slice(0, 10).forEach(function (result) {
         var div = document.createElement("div");
         var category = "";
