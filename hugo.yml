@@ -77,6 +77,13 @@ params:
       github: arukayies
       other: https://arukayies.github.io/homepage/
 
+outputs:
+  home:
+    - HTML
+    - JSON
+  page:
+    - HTML
+
 menu:
   footer:
     - name: プライバシーポリシー
