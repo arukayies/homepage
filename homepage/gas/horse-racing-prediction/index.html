@@ -1,0 +1,273 @@
+<!doctype html><html lang=ja><head><meta charset=UTF-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>【GAS】JRAのレース成績データをスクレイピングして天皇賞秋2019の着順を予想してみた | くらぶろぐ</title><meta name=description content='見出しにそれっぽく書いていますが、
+私は競馬の知識・データ分析の知識もありません。
+もしこのデータを参考にする場合は自己責任でお願いします。
+明日１０月２７日(日)に東京競馬場で天皇賞を見に行くので、
+思い付きでやってみたものです。
+予想する方法
+JRAのサイトから過去のレース結果が閲覧出来ます。
+
+  
+    
+<div class="blogcard external-blogcard eb-left cf">
+  <div class="blogcard-label external-blogcard-label">
+    <span class="fa"></span>
+  </div><figure class="blogcard-thumbnail external-blogcard-thumbnail">
+  
+  <img data-src="https://s.wordpress.com/mshots/v1/http%3A%2F%2Fwww.jra.go.jp%2Fdatafile%2Fseiseki%2F?w=160&amp;#038;h=90" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
+  
+  <noscript>
+    <img loading="lazy" decoding="async" src="https://s.wordpress.com/mshots/v1/http%3A%2F%2Fwww.jra.go.jp%2Fdatafile%2Fseiseki%2F?w=160&amp;#038;h=90" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
+  </noscript></figure>
+  
+  <div class="blogcard-content external-blogcard-content">
+    <div class="blogcard-title external-blogcard-title">
+      &amp;#12524;&amp;#12540;&amp;#12473;&amp;#25104;&amp;#32318;&amp;#12487;&amp;#12540;&amp;#12479;&amp;#12288;JRA
+    </div>
+    
+    <div class="blogcard-snippet external-blogcard-snippet">
+    </div>
+  </div>
+  
+  <div class="blogcard-footer external-blogcard-footer cf">
+    <div class="blogcard-site external-blogcard-site">
+      <div class="blogcard-favicon external-blogcard-favicon">
+        <img data-src="https://www.google.com/s2/favicons?domain=http://www.jra.go.jp/datafile/seiseki/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
+        
+        <noscript>
+          <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=http://www.jra.go.jp/datafile/seiseki/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
+        </noscript>
+      </div>
+      
+      <div class="blogcard-domain external-blogcard-domain">
+        www.jra.go.jp
+      </div>
+    </div>
+  </div>
+</div></a>
+
+  
+
+ここから以下のデータを取得してきます。'><meta name=thumbnail content="https://arukayies.github.io/gas/horse-racing-prediction/thumbnail_hu_1caad1c977e76603.webp"><meta property="og:locale" content="ja_JP"><meta property='og:title' content='【GAS】JRAのレース成績データをスクレイピングして天皇賞秋2019の着順を予想してみた | くらぶろぐ'><meta property='og:description' content='見出しにそれっぽく書いていますが、
+私は競馬の知識・データ分析の知識もありません。
+もしこのデータを参考にする場合は自己責任でお願いします。
+明日１０月２７日(日)に東京競馬場で天皇賞を見に行くので、
+思い付きでやってみたものです。
+予想する方法
+JRAのサイトから過去のレース結果が閲覧出来ます。
+
+  
+    
+<div class="blogcard external-blogcard eb-left cf">
+  <div class="blogcard-label external-blogcard-label">
+    <span class="fa"></span>
+  </div><figure class="blogcard-thumbnail external-blogcard-thumbnail">
+  
+  <img data-src="https://s.wordpress.com/mshots/v1/http%3A%2F%2Fwww.jra.go.jp%2Fdatafile%2Fseiseki%2F?w=160&amp;#038;h=90" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
+  
+  <noscript>
+    <img loading="lazy" decoding="async" src="https://s.wordpress.com/mshots/v1/http%3A%2F%2Fwww.jra.go.jp%2Fdatafile%2Fseiseki%2F?w=160&amp;#038;h=90" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
+  </noscript></figure>
+  
+  <div class="blogcard-content external-blogcard-content">
+    <div class="blogcard-title external-blogcard-title">
+      &amp;#12524;&amp;#12540;&amp;#12473;&amp;#25104;&amp;#32318;&amp;#12487;&amp;#12540;&amp;#12479;&amp;#12288;JRA
+    </div>
+    
+    <div class="blogcard-snippet external-blogcard-snippet">
+    </div>
+  </div>
+  
+  <div class="blogcard-footer external-blogcard-footer cf">
+    <div class="blogcard-site external-blogcard-site">
+      <div class="blogcard-favicon external-blogcard-favicon">
+        <img data-src="https://www.google.com/s2/favicons?domain=http://www.jra.go.jp/datafile/seiseki/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
+        
+        <noscript>
+          <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=http://www.jra.go.jp/datafile/seiseki/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
+        </noscript>
+      </div>
+      
+      <div class="blogcard-domain external-blogcard-domain">
+        www.jra.go.jp
+      </div>
+    </div>
+  </div>
+</div></a>
+
+  
+
+ここから以下のデータを取得してきます。'><meta property='og:image' content="https://arukayies.github.io/gas/horse-racing-prediction/thumbnail_hu_1caad1c977e76603.webp"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property='og:url' content='https://arukayies.github.io/gas/horse-racing-prediction/'><meta property='og:site_name' content='くらぶろぐ'><meta property='og:type' content='article'><meta property="article:published_time" content="2019-10-26T12:36:19+00:00"><meta property="article:modified_time" content="2019-10-26T12:36:19+00:00"><meta property="article:author" content="arukayies"><meta property="article:section" content="[GAS]"><meta property="article:tag" content="Google Apps Script"><meta property="article:tag" content="スプレッドシート"><meta name=twitter:title content="【GAS】JRAのレース成績データをスクレイピングして天皇賞秋2019の着順を予想してみた | くらぶろぐ"><meta name=twitter:description content='見出しにそれっぽく書いていますが、
+私は競馬の知識・データ分析の知識もありません。
+もしこのデータを参考にする場合は自己責任でお願いします。
+明日１０月２７日(日)に東京競馬場で天皇賞を見に行くので、
+思い付きでやってみたものです。
+予想する方法
+JRAのサイトから過去のレース結果が閲覧出来ます。
+
+  
+    
+<div class="blogcard external-blogcard eb-left cf">
+  <div class="blogcard-label external-blogcard-label">
+    <span class="fa"></span>
+  </div><figure class="blogcard-thumbnail external-blogcard-thumbnail">
+  
+  <img data-src="https://s.wordpress.com/mshots/v1/http%3A%2F%2Fwww.jra.go.jp%2Fdatafile%2Fseiseki%2F?w=160&amp;#038;h=90" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
+  
+  <noscript>
+    <img loading="lazy" decoding="async" src="https://s.wordpress.com/mshots/v1/http%3A%2F%2Fwww.jra.go.jp%2Fdatafile%2Fseiseki%2F?w=160&amp;#038;h=90" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
+  </noscript></figure>
+  
+  <div class="blogcard-content external-blogcard-content">
+    <div class="blogcard-title external-blogcard-title">
+      &amp;#12524;&amp;#12540;&amp;#12473;&amp;#25104;&amp;#32318;&amp;#12487;&amp;#12540;&amp;#12479;&amp;#12288;JRA
+    </div>
+    
+    <div class="blogcard-snippet external-blogcard-snippet">
+    </div>
+  </div>
+  
+  <div class="blogcard-footer external-blogcard-footer cf">
+    <div class="blogcard-site external-blogcard-site">
+      <div class="blogcard-favicon external-blogcard-favicon">
+        <img data-src="https://www.google.com/s2/favicons?domain=http://www.jra.go.jp/datafile/seiseki/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
+        
+        <noscript>
+          <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=http://www.jra.go.jp/datafile/seiseki/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
+        </noscript>
+      </div>
+      
+      <div class="blogcard-domain external-blogcard-domain">
+        www.jra.go.jp
+      </div>
+    </div>
+  </div>
+</div></a>
+
+  
+
+ここから以下のデータを取得してきます。'><meta name=twitter:image content="https://arukayies.github.io/gas/horse-racing-prediction/thumbnail_hu_1caad1c977e76603.webp"><meta name=twitter:card content="summary_large_image"><meta name=robots content="index,follow"><meta name=googlebot content="index,follow"><meta name=generator content="Hugo 0.147.5"><link rel=icon href=https://arukayies.github.io/favicon.ico><link rel=apple-touch-icon href=https://arukayies.github.io/image/icon.png><link rel=apple-touch-icon sizes=180x180 href=https://arukayies.github.io/image/icon_hu_bc3a3d10bb972f2d.png><meta name=msapplication-TileImage content="https://arukayies.github.io/image/icon_hu_89f2d4f9250944e3.png"><link rel=canonical href=https://arukayies.github.io/gas/horse-racing-prediction/><link rel=preload href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as=style><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" media=print onload='this.media="all"'><link rel=stylesheet href=https://arukayies.github.io/scss/style.min.f6e3827402c49df761979d470dc7e943a2cb144de4606f4b855708bf67c293ff.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css as=style><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css media=print onload='this.media="all"'><link rel=preload href=https://arukayies.github.io/css/vendor/github-markdown-css/github-markdown.css as=style><link rel=stylesheet href=https://arukayies.github.io/css/vendor/github-markdown-css/github-markdown.css media=print onload='this.media="all"'><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr/lunr.min.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/lunr.stemmer.support.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/tinyseg.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/lunr.ja.js></script><script type=text/javascript src=/js/search.min.js></script><script type=application/ld+json>{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://arukayies.github.io/#website","name":"くらぶろぐ","url":"https://arukayies.github.io/","potentialAction":{"@type":"SearchAction","target":"https://arukayies.github.io/search/?query={search_term_string}","query-input":"required name=search_term_string"},"publisher":{"@id":"https://arukayies.github.io/#publisher"}},{"@type":"Article","headline":"【GAS】JRAのレース成績データをスクレイピングして天皇賞秋2019の着順を予想してみた","description":"見出しにそれっぽく書いていますが、\n私は競馬の知識・データ分析の知識もありません。\nもしこのデータを参考にする場合は自己責任でお願いします。\n明日１０月２７日(日)に東京競馬場で天皇賞を見に行くので、\n思い付きでやってみたものです。\n予想する方法 JRAのサイトから過去のレース結果が閲覧出来ます。\n\u0026lt;div class=\u0026quot;blogcard external-blogcard eb-left cf\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-label external-blogcard-label\u0026quot;\u0026gt; \u0026lt;span class=\u0026quot;fa\u0026quot;\u0026gt;\u0026lt;/span\u0026gt; \u0026lt;/div\u0026gt;\u0026lt;figure class=\u0026quot;blogcard-thumbnail external-blogcard-thumbnail\u0026quot;\u0026gt; \u0026lt;img data-src=\u0026quot;https://s.wordpress.com/mshots/v1/http%3A%2F%2Fwww.jra.go.jp%2Fdatafile%2Fseiseki%2F?w=160\u0026amp;#038;h=90\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img\u0026quot; loading=\u0026quot;lazy\u0026quot; width=\u0026quot;160\u0026quot; height=\u0026quot;90\u0026quot; /\u0026gt; \u0026lt;noscript\u0026gt; \u0026lt;img loading=\u0026quot;lazy\u0026quot; decoding=\u0026quot;async\u0026quot; src=\u0026quot;https://s.wordpress.com/mshots/v1/http%3A%2F%2Fwww.jra.go.jp%2Fdatafile%2Fseiseki%2F?w=160\u0026amp;#038;h=90\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-thumb-image external-blogcard-thumb-image\u0026quot; width=\u0026quot;160\u0026quot; height=\u0026quot;90\u0026quot; /\u0026gt; \u0026lt;/noscript\u0026gt;\u0026lt;/figure\u0026gt; \u0026lt;div class=\u0026quot;blogcard-content external-blogcard-content\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-title external-blogcard-title\u0026quot;\u0026gt; \u0026amp;#12524;\u0026amp;#12540;\u0026amp;#12473;\u0026amp;#25104;\u0026amp;#32318;\u0026amp;#12487;\u0026amp;#12540;\u0026amp;#12479;\u0026amp;#12288;JRA \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;blogcard-snippet external-blogcard-snippet\u0026quot;\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;blogcard-footer external-blogcard-footer cf\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-site external-blogcard-site\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-favicon external-blogcard-favicon\u0026quot;\u0026gt; \u0026lt;img data-src=\u0026quot;https://www.google.com/s2/favicons?domain=http://www.jra.go.jp/datafile/seiseki/\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img\u0026quot; loading=\u0026quot;lazy\u0026quot; width=\u0026quot;16\u0026quot; height=\u0026quot;16\u0026quot; /\u0026gt; \u0026lt;noscript\u0026gt; \u0026lt;img loading=\u0026quot;lazy\u0026quot; decoding=\u0026quot;async\u0026quot; src=\u0026quot;https://www.google.com/s2/favicons?domain=http://www.jra.go.jp/datafile/seiseki/\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-favicon-image external-blogcard-favicon-image\u0026quot; width=\u0026quot;16\u0026quot; height=\u0026quot;16\u0026quot; /\u0026gt; \u0026lt;/noscript\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;blogcard-domain external-blogcard-domain\u0026quot;\u0026gt; www.jra.go.jp \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt;\u0026lt;/a\u0026gt; ここから以下のデータを取得してきます。\n","image":"https://arukayies.github.io/gas/horse-racing-prediction/thumbnail_hu_85c580c5339db43.webp","keywords":["Google Apps Script","スプレッドシート"],"author":{"@type":"Person","url":"https://arukayies.github.io/homepage/","name":"arukayies"},"datePublished":"2019-10-26T12:36:19+00:00","dateModified":"2019-10-26T12:36:19+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://arukayies.github.io/gas/horse-racing-prediction/"},"isPartOf":{"@id":"https://arukayies.github.io/#website"},"breadcrumb":{"@id":"https://arukayies.github.io/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://arukayies.github.io/#breadcrumb","name":"パンくずリスト","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://arukayies.github.io/"},{"@type":"ListItem","position":2,"name":["GAS"],"item":"https://arukayies.github.io/categories/%5BGAS%5D"}]}]}</script></head><body class=body><div class=container><header class=header><div class=header__inner><div class=partials__header><div class=partials__header__title><a href=https://arukayies.github.io/>くらぶろぐ</a><div id=hamburger class="spShow close partials__header__hamburger"><div class=partials__header__hamburger__line></div></div></div><div id=hamburgerMenu class="close partials__header__menu"><nav class="spShow partials__header__menu__search"><form action=/search/ class=partials__header__menu__search__form><input type=text name=query id=search class=partials__header__menu__search__query>
+<button type=submit class=partials__header__menu__search__button>
+<i class="fas fa-search"></i></button></form></nav><nav class=partials__header__menu__topMenu><ul class=partials__header__menu__topMenu__items></ul></nav><nav class="spShow partials__header__menu__sideMenu"><h3 class=partials__header__menu__sideMenu__title>メニュー</h3><ul class=partials__header__menu__sideMenu__items></ul></nav></div></div></div></header><div id=headerBlock class=spShow></div><div class=content><main class=main><div class=main__inner><section class=single><article class=single__article><div class=single__article__header><ol class=partials__breadcrumb><li><a href=https://arukayies.github.io/><i class="fas fa-home"></i>Home</a></li><li>/</li><li><a href=/categories/[GAS]><i class="fas fa-folder"></i>[GAS]</a></li><li>/</li><li>【GAS】JRAのレース成績データをスクレイピングして天皇賞秋2019の着順を予想してみた</li></ol><div class="pcShow single__article__date"><i class="far fa-clock"></i>2019-10-26
+ / <i class="fas fa-history"></i>2019-10-26</div></div><h1 class=single__article__title>【GAS】JRAのレース成績データをスクレイピングして天皇賞秋2019の着順を予想してみた</h1><div class="spShow single__article__date"><i class="far fa-clock"></i>2019-10-26
+ / <i class="fas fa-history"></i>2019-10-26</div><section class=single__article__shareLinks><ul class=partials__shareLinks><li class=partials__shareLinks__item><a href="http://x.com/intent/tweet?url=https%3a%2f%2farukayies.github.io%2fgas%2fhorse-racing-prediction%2f&text=%e3%80%90GAS%e3%80%91JRA%e3%81%ae%e3%83%ac%e3%83%bc%e3%82%b9%e6%88%90%e7%b8%be%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92%e3%82%b9%e3%82%af%e3%83%ac%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e3%81%97%e3%81%a6%e5%a4%a9%e7%9a%87%e8%b3%9e%e7%a7%8b2019%e3%81%ae%e7%9d%80%e9%a0%86%e3%82%92%e4%ba%88%e6%83%b3%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f" target=_blank title=Tweet class=partials__shareLinks__itemLink--twitter><i class="fab fa-x-twitter"></i>Twitter</a></li><li class=partials__shareLinks__item><a href="http://www.facebook.com/sharer.php?u=https%3a%2f%2farukayies.github.io%2fgas%2fhorse-racing-prediction%2f&t=%e3%80%90GAS%e3%80%91JRA%e3%81%ae%e3%83%ac%e3%83%bc%e3%82%b9%e6%88%90%e7%b8%be%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92%e3%82%b9%e3%82%af%e3%83%ac%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e3%81%97%e3%81%a6%e5%a4%a9%e7%9a%87%e8%b3%9e%e7%a7%8b2019%e3%81%ae%e7%9d%80%e9%a0%86%e3%82%92%e4%ba%88%e6%83%b3%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f" target=_blank title=Facebook class=partials__shareLinks__itemLink--facebook><i class="fab fa-facebook"></i>Facebook</a></li><li class=partials__shareLinks__item><a href="http://b.hatena.ne.jp/add?mode=confirm&url=https%3a%2f%2farukayies.github.io%2fgas%2fhorse-racing-prediction%2f&title=%e3%80%90GAS%e3%80%91JRA%e3%81%ae%e3%83%ac%e3%83%bc%e3%82%b9%e6%88%90%e7%b8%be%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92%e3%82%b9%e3%82%af%e3%83%ac%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e3%81%97%e3%81%a6%e5%a4%a9%e7%9a%87%e8%b3%9e%e7%a7%8b2019%e3%81%ae%e7%9d%80%e9%a0%86%e3%82%92%e4%ba%88%e6%83%b3%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f" target=_blank title=hatena class=partials__shareLinks__itemLink--hatena>はてブ</a></li><li class=partials__shareLinks__item><a href="http://getpocket.com/edit?url=https%3a%2f%2farukayies.github.io%2fgas%2fhorse-racing-prediction%2f&title=%e3%80%90GAS%e3%80%91JRA%e3%81%ae%e3%83%ac%e3%83%bc%e3%82%b9%e6%88%90%e7%b8%be%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92%e3%82%b9%e3%82%af%e3%83%ac%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e3%81%97%e3%81%a6%e5%a4%a9%e7%9a%87%e8%b3%9e%e7%a7%8b2019%e3%81%ae%e7%9d%80%e9%a0%86%e3%82%92%e4%ba%88%e6%83%b3%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f" target=_blank title=pocket class=partials__shareLinks__itemLink--pocket><i class="fab fa-get-pocket"></i>Pocket</a></li><li class=partials__shareLinks__item><a href=https://line.me/R/msg/text/?%e3%80%90GAS%e3%80%91JRA%e3%81%ae%e3%83%ac%e3%83%bc%e3%82%b9%e6%88%90%e7%b8%be%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92%e3%82%b9%e3%82%af%e3%83%ac%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e3%81%97%e3%81%a6%e5%a4%a9%e7%9a%87%e8%b3%9e%e7%a7%8b2019%e3%81%ae%e7%9d%80%e9%a0%86%e3%82%92%e4%ba%88%e6%83%b3%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f%0D%0Ahttps%3a%2f%2farukayies.github.io%2fgas%2fhorse-racing-prediction%2f target=_blank title=line class=partials__shareLinks__itemLink--line><i class="fab fa-line"></i>Line</a></li><li class=partials__shareLinks__item><a href=javascript:void(0) onclick='navigator.clipboard.writeText("https://arukayies.github.io/gas/horse-racing-prediction/"),alert("URLをコピーしました")' title=line class=partials__shareLinks__itemLink--copy><i class="far fa-copy"></i>URL</a></li></ul></section><img src=/gas/horse-racing-prediction/thumbnail_hu_aef578b88e3b2414.webp alt=【GAS】JRAのレース成績データをスクレイピングして天皇賞秋2019の着順を予想してみた class=single__article__thumbnail><aside class=single__article__toc><h3 class=single__article__toc__title><i class="fas fa-list-ul"></i>目次</h3><nav id=TableOfContents><ul><li><a href=#予想する方法>予想する方法</a></li><li><a href=#urlfetchappfetchで年毎のレース情報を取得します>UrlFetchApp.fetch()で年毎のレース情報を取得します。</a></li><li><a href=#それぞれのレース結果から詳細情報を取得します>それぞれのレース結果から詳細情報を取得します。</a></li><li><a href=#スプレッドシートに書き込みます>スプレッドシートに書き込みます。</a></li><li><a href=#取得した結果はおよそ９０００件のデータが集まりました>取得した結果はおよそ９０００件のデータが集まりました！！！</a></li><li><a href=#スコアの算出方法は>スコアの算出方法は？</a></li><li><a href=#スコアを算出します>スコアを算出します。</a></li><li><a href=#スコアの算出結果です>スコアの算出結果です！！！</a></li><li><a href=#果たして結果は>果たして結果は・・・？</a></li><li><a href=#天皇賞行ってきました>天皇賞行ってきました！</a></li><li><a href=#結果は>結果は・・・？？？</a></li><li><a href=#予想してみて>予想してみて</a></li></ul></nav></aside><div class="single__article__content markdown-body"><p>見出しにそれっぽく書いていますが、<br>私は<span class=marker><strong>競馬の知識・データ分析の知識もありません。</strong></span></p><p>もしこのデータを参考にする場合は<span style=color:red><strong>自己責任</strong></span>でお願いします。</p><p>明日１０月２７日(日)に東京競馬場で天皇賞を見に行くので、<br>思い付きでやってみたものです。</p><h2 id=予想する方法>予想する方法</h2><p>JRAのサイトから過去のレース結果が閲覧出来ます。</p><div class="blogcard-type bct-reference"><div class="blogcard-shortcode-wrap paragraph"><a rel=noopener href=http://www.jra.go.jp/datafile/seiseki/ title=&#12524;&#12540;&#12473;&#25104;&#32318;&#12487;&#12540;&#12479;&#12288;JRA class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank><pre><code>&lt;div class=&quot;blogcard external-blogcard eb-left cf&quot;&gt;
+  &lt;div class=&quot;blogcard-label external-blogcard-label&quot;&gt;
+    &lt;span class=&quot;fa&quot;&gt;&lt;/span&gt;
+  &lt;/div&gt;&lt;figure class=&quot;blogcard-thumbnail external-blogcard-thumbnail&quot;&gt;
+  
+  &lt;img data-src=&quot;https://s.wordpress.com/mshots/v1/http%3A%2F%2Fwww.jra.go.jp%2Fdatafile%2Fseiseki%2F?w=160&amp;#038;h=90&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+  
+  &lt;noscript&gt;
+    &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://s.wordpress.com/mshots/v1/http%3A%2F%2Fwww.jra.go.jp%2Fdatafile%2Fseiseki%2F?w=160&amp;#038;h=90&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+  &lt;/noscript&gt;&lt;/figure&gt;
+  
+  &lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+    &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+      &amp;#12524;&amp;#12540;&amp;#12473;&amp;#25104;&amp;#32318;&amp;#12487;&amp;#12540;&amp;#12479;&amp;#12288;JRA
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+    &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+      &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+        &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=http://www.jra.go.jp/datafile/seiseki/&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+        
+        &lt;noscript&gt;
+          &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=http://www.jra.go.jp/datafile/seiseki/&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+        &lt;/noscript&gt;
+      &lt;/div&gt;
+      
+      &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+        www.jra.go.jp
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;&lt;/a&gt;
+</code></pre></div></div><p>ここから以下のデータを取得してきます。</p><ul><li>レース場所</li><li>コース種類</li><li>天気</li><li>着順</li><li>馬名</li><li>騎手名</li></ul><p>取得したデータから、</p><p>この馬は東京で走った時は、12匹中1位だったから<strong>スコア100</strong><br>この騎手は芝コースで走った時は、12人中3位だったから<strong>スコア25</strong></p><p>こんな感じで馬・騎手のスコアを算出し、明日の買う馬券を選びます。</p><h2 id=urlfetchappfetchで年毎のレース情報を取得します>UrlFetchApp.fetch()で年毎のレース情報を取得します。</h2><h2 id=それぞれのレース結果から詳細情報を取得します>それぞれのレース結果から詳細情報を取得します。</h2><h2 id=スプレッドシートに書き込みます>スプレッドシートに書き込みます。</h2><h2 id=取得した結果はおよそ９０００件のデータが集まりました>取得した結果はおよそ９０００件のデータが集まりました！！！</h2><p>データは２００２年から閲覧可能でしたが、今の画面表示は２０１６年からのようだったので、</p><ul><li>２０１６年からの重賞レース</li><li>２０１６年からのG1レース</li></ul><p>を取得してきました。</p><img loading=lazy decoding=async class="alignnone size-medium" src=https://arukayies.com/wp-content/uploads/2019/12/img_5dfa27abaa37b.png width=680 height=420>
+<span style=color:gray><strong>アレ・・・カタカナ名の人がうまく取得できてない</strong></span><h2 id=スコアの算出方法は>スコアの算出方法は？</h2><p>難しいことは考えず、<span class=marker><strong>順位</strong></span>が１番の指標だと思うので、<br>こんな計算方法で算出します。</p><ul><li>東京開催の場合<ul><li>ある馬は12匹中４位だったら、100×(12匹中÷4位)= <strong>300</strong></li></ul></li><li>芝コースの場合<ul><li>ある騎手は12人中12位だったら、100×(12人中÷12位)= <strong>100</strong></li></ul></li><li>曇りの場合<ul><li>ある馬は12匹中1位だったら、100×(12匹中÷1位)= <strong>1200</strong></li></ul></li></ul><p>このような感じで<br>明日の天皇賞は<strong>誰が一番スコアが高い</strong>か計算します。</p><h2 id=スコアを算出します>スコアを算出します。</h2><h2 id=スコアの算出結果です>スコアの算出結果です！！！</h2><p>オッズの人気順では・・・<br><span style=color:red><strong>１位</strong></span>　アーモンドアイ<br><span style=color:blue><strong>２位</strong></span>　サートゥルナーリア<br><span style=color:orange><strong>３位</strong></span>　ダノンプレミアム</p><p><strong>東京</strong>競馬場、<strong>芝</strong>コース、<strong>曇</strong>でスコアを算出した結果です↓<br><img loading=lazy decoding=async class="alignnone size-medium" src=https://arukayies.com/wp-content/uploads/2019/12/img_5dfa27ac1e238.png width=680 height=420><br><span style=color:gray><strong>カタカナ名の人だけ「Mデムーロ」→「デムーロ」のように算出</strong></span></p><p><span style=color:red><strong>１位</strong></span>　アーモンドアイ<br><span style=color:blue><strong>２位</strong></span>　ランフォザローゼス<br><span style=color:orange><strong>３位</strong></span>　アエロリット</p><p><span style=color:red><strong>１位</strong></span>のみオッズと一致し、2位、3位は別馬となりました。<br>オッズでは3位人気となっていたスミヨン騎手は海外レースが多いため<br>スコア上は15位人気となりました。</p><h2 id=果たして結果は>果たして結果は・・・？</h2><p>明日このスコア結果を元に<strong>馬券を買います！！！</strong></p><h2 id=天皇賞行ってきました>天皇賞行ってきました！</h2><img loading=lazy decoding=async class="alignnone size-medium" src=https://arukayies.com/wp-content/uploads/2019/12/img_5dfa27ac9f3d7.jpg width=680 height=420>
+<img loading=lazy decoding=async class="alignnone size-medium" src=https://arukayies.com/wp-content/uploads/2019/12/img_5dfa27ad3ca88.jpg width=680 height=420>
+事前に予想した馬番は <span style=color:red><strong>2-13-5</strong></span>
+3連単と3連複で500円ずつ購入しました！<h2 id=結果は>結果は・・・？？？</h2><img loading=lazy decoding=async class="alignnone size-medium" src=https://arukayies.com/wp-content/uploads/2019/12/img_5dfa27adc8e09.jpg width=680 height=420>
+結果は <span style=color:red><strong>2-9-5</strong></span><p>**2位だけ、2位だけが・・・・！！！！**惜しくも外れてしまいました。。。</p><h2 id=予想してみて>予想してみて</h2><p>外れてしまいましたが、<br>競馬のことを全く知らないで、2位だけ外れたと考えると</p><p><strong>この予想は結構いい線行っていたのかな？</strong> と思います。</p></div><div class=single__article__comment></div></article><div class=single__relatedArticleList><h3 class=single__relatedArticleList__title>関連記事</h3><article class=partials__relatedArticle><div class=partials__relatedArticle__inner><a href=https://arukayies.github.io/gas/wixlinkage-gas/ class=partials__relatedArticle__link></a><img src=https://arukayies.github.io/gas/wixlinkage-gas/thumbnail_hu_8ff8b687d86a58e9.webp alt="Wix CodeとGASを使ってホームページの更新を自動化する方法" loading=lazy class=partials__relatedArticle__thumbnail><div class=partials__relatedArticle__content><h4 class=partials__relatedArticle__title>Wix CodeとGASを使ってホームページの更新を自動化する方法</h4><div class=partials__relatedArticle__description><p>この記事は<a href=https://qiita.com/advent-calendar/2019/gas>Apps Script Advent Calendar 2019</a>の7日目の記事です。</p><p>今年からRaspberryPiでサーバーを構築し、ブログを書き始めた「くら(<a rel=noopener href=http://www.twitter.com/arukayies target=_blank><i class="fa fa-twitter" aria-hidden=true style=color:#55acee;font-size:1.2em></i>@arukayies</a>)」です。</p><p>仕事で資料を作るってことはありますが、アドベントカレンダー等は今年が初投稿です。</p><p>よろしくおねがいします！</p><h2 id=概要>概要</h2><p>私はツーリングクラブに所属しており、そこのホームページを管理しています。</p><div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-detail"><a rel=noopener href=https://touringclubmilkyway.wixsite.com/touringclubmilkyway title="ツーリングクラブ | Touringclubmilkyway" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img data-src=&quot;https://static.wixstatic.com/media/9e694e_38c2a6624908446d9d36a42b5408cad7%7Emv2.jpg/v1/fit/w_2500,h_1330,al_c/9e694e_38c2a6624908446d9d36a42b5408cad7%7Emv2.jpg&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+
+&lt;noscript&gt;
+  &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://static.wixstatic.com/media/9e694e_38c2a6624908446d9d36a42b5408cad7%7Emv2.jpg/v1/fit/w_2500,h_1330,al_c/9e694e_38c2a6624908446d9d36a42b5408cad7%7Emv2.jpg&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+&lt;/noscript&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    ツーリングクラブ | Touringclubmilkyway
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+    ツーリングクラブ | Touringclubmilkywayに訪問ありがとうございます。 関東を拠点に活動するツーリングクラブのMilky wayです バイクをきっかけに知り合った個性豊かな仲間と旨い飯、きれいな景色、そして行ったことがない...
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://touringclubmilkyway.wixsite.com/touringclubmilkyway&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://touringclubmilkyway.wixsite.com/touringclubmilkyway&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      touringclubmilkyway.wixsite.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a></div><p>ホームページTOPには今後のツーリング予定が書かれており、頻繁に更新が必要でした。</p></div></div></div></article><article class=partials__relatedArticle><div class=partials__relatedArticle__inner><a href=https://arukayies.github.io/gas/getwraps/ class=partials__relatedArticle__link></a><img src=https://arukayies.github.io/gas/getwraps/thumbnail_hu_d073a708842806bd.webp alt=GASでスプレッドシートの折り返し設定を一括取得！制御する方法 loading=lazy class=partials__relatedArticle__thumbnail><div class=partials__relatedArticle__content><h4 class=partials__relatedArticle__title>GASでスプレッドシートの折り返し設定を一括取得！制御する方法</h4><div class=partials__relatedArticle__description><p>Google Apps Script（GAS）を使ってスプレッドシートを操作する際、<code>getWraps()</code>メソッドはテキストの折り返し設定を取得するために非常に便利なツールばい。このメソッドは、特に大量のデータを扱うときに、折り返し設定の状態を一括で取得できるので、効率的な作業ができるんだよね。今回は、この<code>getWraps()</code>メソッドの使い方を、初心者向けに解説するけん、最後まで読んでみてね。</p><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div><h2 id=getwrapsとは基本の使い方>getWraps()とは？基本の使い方</h2><p>まずは、<code>getWraps()</code>メソッドがどういうものかを簡単に説明するよ。スプレッドシートでセル内のテキストが自動的に折り返されるかどうかは、データの可読性に大きく影響するんだ。<code>getWraps()</code>は、その折り返しの状態を確認するために使うメソッドばい。</p></div></div></div></article></div><div class=single__navigation><a href=https://arukayies.github.io/hydroponic_culture/komatsuna/diary5-5/ class=single__navigation__prev>【水耕栽培】コマツナの観察日記(64日目)</a><div class=single__navigation__center></div><a href=https://arukayies.github.io/gas/line_bot/pushmessage-text/ class=single__navigation__next>【LINE BOT】GASで『テキストメッセージ』の送り方</a></div></section></div></main><aside class=sidebar><div class=sidebar__inner><div class=partials__sidebar><div class="pcShow partials__sidebar__card"><h4 class=partials__sidebar__title>検索</h4><nav class=partials__sidebar__search><form action=/search/ method=get class=partials__sidebar__search__form><input type=text name=query id=search class=partials__sidebar__search__query>
+<button type=submit class=partials__sidebar__search__button>
+<i class="fas fa-search"></i></button></form></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>プロフィール</h3><nav class=partials__sidebar__profile><img src=https://arukayies.github.io/image/profile_icon_hu_b863bd11c300fc2a.webp alt=icon class=partials__sidebar__profile__icon><div class=partials__sidebar__profile__name>arukayies</div><div class=partials__sidebar__profile__description></div><div class=partials__snsLinks><a href=https://x.com/arukayies target=_blank class=partials__snsLinks__link--twitter><i class="fa-lg fab fa-x-twitter"></i>
+</a><a href=https://www.instagram.com/arukayies target=_blank class=partials__snsLinks__link--instagram><i class="fa-lg fab fa-instagram"></i>
+</a><a href=https://www.youtube.com/channel/UCoO5ZwX9e7jToe7eo-h62HQ target=_blank class=partials__snsLinks__link--youtube><i class="fa-lg fab fa-youtube"></i>
+</a><a href=https://github.com/arukayies target=_blank class=partials__snsLinks__link--github><i class="fa-lg fab fa-github"></i>
+</a><a href=https://arukayies.github.io/homepage/ target=_blank class=partials__snsLinks__link--other><i class="fa-lg fas fa-link"></i></a></div></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>新着記事</h3><nav class=partials__sidebar__article><ul class=partials__sidebar__article__items><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-summary/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-summary/thumbnail_hu_76cb231a0b93d187.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3カ国を巡った様子のまとめ loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3カ国を巡った様子のまとめ</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-travel-expenses/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-travel-expenses/thumbnail_hu_5145d4451775f13.webp alt=ヨーロッパ3カ国を巡る新婚旅行にかかった費用は100万円！10日間過ごした内訳！ loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>ヨーロッパ3カ国を巡る新婚旅行にかかった費用は100万円！10日間過ごした内訳！</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-transit-suvarnabhumi-airport/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-transit-suvarnabhumi-airport/thumbnail_hu_ab6b01167f81c539.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】スワンナプーム空港内でトランジット8時間の過ごし方 loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】スワンナプーム空港内でトランジット8時間の過ごし方</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-pari-tourism/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-pari-tourism/thumbnail_hu_6adf033c7ac7507.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】2泊3日のパリ観光 loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】2泊3日のパリ観光</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-budapest-tourism-part2/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-budapest-tourism-part2/thumbnail_hu_d55c9f8cbc269741.webp alt="【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3泊4日のブダベスト観光 後編" loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3泊4日のブダベスト観光 後編</div></div></a></li></ul></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>カテゴリー</h3><nav class=partials__sidebar__category><ul class=partials__sidebar__category__items><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/GAS/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+gas</div><div class=partials__sidebar__category__itemCount>101</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/LINE-BOT/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+line bot</div><div class=partials__sidebar__category__itemCount>28</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%83%9F%E3%82%BA%E3%83%8A%E5%8F%8E%E7%A9%AB%E6%B8%88/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ミズナ(収穫済)</div><div class=partials__sidebar__category__itemCount>14</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%AA%E3%82%AF%E3%83%A9/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+オクラ</div><div class=partials__sidebar__category__itemCount>12</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/DIY/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+diy</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%B4%E3%83%BC%E3%83%A4/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ゴーヤ</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E6%97%85/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+旅</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%83%AB%E3%83%83%E3%82%B3%E3%83%A9%E5%8F%8E%E7%A9%AB%E6%B8%88/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ルッコラ(収穫済)</div><div class=partials__sidebar__category__itemCount>8</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%B3%E3%83%9E%E3%83%84%E3%83%8A/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+コマツナ</div><div class=partials__sidebar__category__itemCount>5</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%A2%E3%83%AB%E3%83%86%E3%82%A3%E3%82%B7%E3%83%9E/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+アルティシマ</div><div class=partials__sidebar__category__itemCount>4</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%AC%E3%82%B8%E3%83%A5%E3%83%9E%E3%83%AB/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ガジュマル</div><div class=partials__sidebar__category__itemCount>4</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/WordpressAPI/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+wordpressapi</div><div class=partials__sidebar__category__itemCount>3</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/Raspberry-Pi/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+raspberry pi</div><div class=partials__sidebar__category__itemCount>1</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E7%94%9F%E6%B4%BB/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+生活</div><div class=partials__sidebar__category__itemCount>1</div></a></li></ul></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>アーカイブ</h3><nav class=partials__sidebar__archive><ul class=partials__sidebar__archive__yearList><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2024年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2024%e5%b9%b410%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2024年10月（6）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2024%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2024年9月（3）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2021年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2021%e5%b9%b43%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2021年3月（1）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2020年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年9月（15）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b48%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年8月（5）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b47%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年7月（21）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b46%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年6月（34）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b45%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年5月（9）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b44%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年4月（6）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b43%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年3月（17）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b42%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年2月（2）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2019年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b412%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年12月（2）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b411%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年11月（22）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b410%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年10月（3）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年9月（22）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b48%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年8月（13）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b47%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年7月（14）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b46%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年6月（9）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b45%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年5月（3）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b44%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年4月（1）</a></li></ul></div></li></ul></nav></div><script>document.querySelectorAll(".archive-accordion").forEach(function(e){e.addEventListener("click",function(e){if(e.target.tagName==="A")return;e.currentTarget.classList.toggle("open"),e.currentTarget.classList.toggle("close"),e.currentTarget.classList.contains("open")?e.currentTarget.querySelector(".archive-accordion-child-wrapper").style.height=e.currentTarget.querySelector(".archive-accordion-child").offsetHeight+"px":e.currentTarget.querySelector(".archive-accordion-child-wrapper").style.height="0"})})</script></div></div></aside></div><footer class=footer><div class=footer__inner><div class=partials__footer><div class=partials__footer__menu><ul class=partials__footer__menu__list><li><a href=/privacy-policy>プライバシーポリシー</a></li></ul><ul class=partials__footer__menu__list><li><a href=https://x.com/arukayies>お問い合わせ</a></li></ul></div><p class=partials__footer__copyright>© 2019-2025 @arukayies<br>Powered by <a href=https://gohugo.io/ target=_blank>Hugo</a> | Hugo Theme Salt</p></div></div></footer></div><div id=overlay class="close overlay"></div><script>window.addEventListener("DOMContentLoaded",e=>{document.querySelector("#headerBlock").style.height=document.querySelector(".header").offsetHeight+"px"})</script><script>document.querySelectorAll("#hamburger, #overlay").forEach(e=>{e.addEventListener("click",function(){document.querySelector("#hamburger").classList.toggle("open"),document.querySelector("#hamburger").classList.toggle("close"),document.querySelector("#hamburgerMenu").classList.toggle("open"),document.querySelector("#hamburgerMenu").classList.toggle("close"),document.querySelector("#overlay").classList.toggle("open"),document.querySelector("#overlay").classList.toggle("close")})})</script></body></html>

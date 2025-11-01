@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2020年8月 on くらぶろぐ</title><link>https://arukayies.github.io/archives/2020%E5%B9%B48%E6%9C%88/</link><description>Recent content in 2020年8月 on くらぶろぐ</description><generator>Hugo</generator><language>ja</language><copyright>© 2019-2025 @arukayies</copyright><lastBuildDate>Tue, 18 Aug 2020 14:04:09 +0000</lastBuildDate><atom:link href="https://arukayies.github.io/archives/2020%E5%B9%B48%E6%9C%88/index.xml" rel="self" type="application/rss+xml"/><item><title>GASでスプレッドシートの指定セルから行番号を取得する方法徹底解説</title><link>https://arukayies.github.io/gas/getrow/</link><pubDate>Tue, 18 Aug 2020 14:04:09 +0000</pubDate><guid>https://arukayies.github.io/gas/getrow/</guid><description>&lt;p>Google Apps Script（GAS）を使ってスプレッドシートを操作するなら、&lt;strong>getRow()メソッド&lt;/strong>は避けて通れんばい！ 「セルが何行目か取得したい！」って時にめちゃくちゃ便利なメソッドじゃけ。 この記事では、&lt;strong>getRow()の基本から実践的な使い方、応用テクニック&lt;/strong>までわかりやすく解説するばい。&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="1-getrowって何するメソッド">1. getRow()って何するメソッド？&lt;/h2>
+&lt;p>&lt;code>getRow()&lt;/code>は、&lt;strong>指定したセル範囲の最初の行番号を返す&lt;/strong>メソッドじゃ。&lt;/p></description></item><item><title>GASでスプレッドシートの指定範囲からリッチテキスト情報を一括取得する方法</title><link>https://arukayies.github.io/gas/getrichtextvalues/</link><pubDate>Thu, 06 Aug 2020 14:31:40 +0000</pubDate><guid>https://arukayies.github.io/gas/getrichtextvalues/</guid><description>&lt;p>Googleスプレッドシートを使いこなしたいなら、”リッチテキスト” も避けては通れんばい。普通の文字列じゃなくて、部分的に太字にしたり、色を変えたり、リンクを仕込んだり……そんな高度な装飾を自在に操れると、シートの見栄えも格段にアップするっちゃね！&lt;/p>
+&lt;p>今回は、Google Apps Script（GAS）の &lt;code>getRichTextValues()&lt;/code> メソッドを中心に、リッチテキストの扱い方を分かりやすく解説するけん、しっかりついてきてね。&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;hr class="wp-block-separator has-alpha-channel-opacity" />
+&lt;h2 id="リッチテキストとは">リッチテキストとは？&lt;/h2>
+&lt;p>スプレッドシートのセルに書き込む文字列は、普通のテキスト（プレーンテキスト）とリッチテキストの2種類があるとばい。リッチテキストは、文字ごとに違うフォントや色、太字・斜体などのスタイル情報を持っとるとさ。&lt;/p></description></item><item><title>GASでスプレッドシートのセルからリッチテキスト情報を取得する方法</title><link>https://arukayies.github.io/gas/getrichtextvalue/</link><pubDate>Thu, 06 Aug 2020 13:32:05 +0000</pubDate><guid>https://arukayies.github.io/gas/getrichtextvalue/</guid><description>&lt;p>みんな、スプレッドシートでリッチテキストを扱ったことあるかい？普通の&lt;code>getValue()&lt;/code>じゃ取得できない文字の装飾やリンク情報を、プログラムで操作したいってこと、あるよね？そんなときに活躍するのが&lt;code>getRichTextValue()&lt;/code>メソッドばい！&lt;/p>
+&lt;p>今回は、このメソッドの使い方や応用テクニックを、わかりやすくまとめてみたけん、一緒に学んでいこうじゃ！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;hr class="wp-block-separator has-alpha-channel-opacity" />
+&lt;h2 id="そもそもリッチテキストって">そもそもリッチテキストって？&lt;/h2>
+&lt;p>Googleスプレッドシートのセルに入力するテキストは、単なる文字列じゃなくて、&lt;strong>太字・斜体・色付き・リンク付き&lt;/strong> なんかの装飾をつけることができるっちゃね。こういう装飾付きの文字を「リッチテキスト」って呼ぶんじゃ。&lt;/p></description></item><item><title>GASでスプレッドシートの指定範囲から数値フォーマットを一括取得する方法</title><link>https://arukayies.github.io/gas/getnumberformats/</link><pubDate>Thu, 06 Aug 2020 12:29:38 +0000</pubDate><guid>https://arukayies.github.io/gas/getnumberformats/</guid><description>&lt;p>GoogleスプレッドシートをGAS（Google Apps Script）で操作する時、セルの数値フォーマットを一括取得したいことってあるばい？ そんな時に便利なのが &lt;code>getNumberFormats()&lt;/code> メソッドさ！&lt;/p>
+&lt;p>今回は、この &lt;code>getNumberFormats()&lt;/code> の基本から応用まで、わかりやすく解説していくけんね！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="1-getnumberformats-ってどんなメソッド">1. getNumberFormats() ってどんなメソッド？&lt;/h2>
+&lt;h3 id="メソッドの概要">メソッドの概要&lt;/h3>
+&lt;p>このメソッドを使えば、指定した範囲内の数値フォーマットや日付フォーマットを一括取得できるばい。データの整合性チェックやフォーマットの統一にも使えるけん、便利さ！&lt;/p></description></item><item><title>Google Apps ScriptのgetNumberFormat()を使いこなすばい！</title><link>https://arukayies.github.io/gas/getnumberformat/</link><pubDate>Thu, 06 Aug 2020 12:21:47 +0000</pubDate><guid>https://arukayies.github.io/gas/getnumberformat/</guid><description>&lt;p>Google Apps Script（GAS）でスプレッドシートのデータを扱うとき、数値や日付の表示形式を取得したいことってあるばい？ そんなとき役立つのが&lt;code>getNumberFormat()&lt;/code>メソッドたい。本記事では、その使い方から応用まで、しっかり解説するばい！&lt;/p>
+&lt;h3 id="getnumberformatって何するもん">getNumberFormat()って何するもん？&lt;/h3>
+&lt;p>&lt;code>getNumberFormat()&lt;/code>は、セルに設定されとる表示形式を取得するメソッドじゃ。例えば、&lt;code>yyyy/MM/dd&lt;/code>の形式になっとる日付や、通貨のフォーマットを取得できるとさ。&lt;/p></description></item></channel></rss>

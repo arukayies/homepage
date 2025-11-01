@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2019年10月 on くらぶろぐ</title><link>https://arukayies.github.io/archives/2019%E5%B9%B410%E6%9C%88/</link><description>Recent content in 2019年10月 on くらぶろぐ</description><generator>Hugo</generator><language>ja</language><copyright>© 2019-2025 @arukayies</copyright><lastBuildDate>Sat, 26 Oct 2019 12:36:19 +0000</lastBuildDate><atom:link href="https://arukayies.github.io/archives/2019%E5%B9%B410%E6%9C%88/index.xml" rel="self" type="application/rss+xml"/><item><title>【GAS】JRAのレース成績データをスクレイピングして天皇賞秋2019の着順を予想してみた</title><link>https://arukayies.github.io/gas/horse-racing-prediction/</link><pubDate>Sat, 26 Oct 2019 12:36:19 +0000</pubDate><guid>https://arukayies.github.io/gas/horse-racing-prediction/</guid><description>&lt;p>見出しにそれっぽく書いていますが、&lt;br>
+私は&lt;span class="marker">&lt;strong>競馬の知識・データ分析の知識もありません。&lt;/strong>&lt;/span>&lt;/p>
+&lt;p>もしこのデータを参考にする場合は&lt;span style="color: red;">&lt;strong>自己責任&lt;/strong>&lt;/span>でお願いします。&lt;/p>
+&lt;p>明日１０月２７日(日)に東京競馬場で天皇賞を見に行くので、&lt;br>
+思い付きでやってみたものです。&lt;/p>
+&lt;h2 id="予想する方法">予想する方法&lt;/h2>
+&lt;p>JRAのサイトから過去のレース結果が閲覧出来ます。&lt;/p>
+&lt;div class="blogcard-type bct-reference">
+ &lt;div class="blogcard-shortcode-wrap paragraph">
+ &lt;a rel="noopener" href="http://www.jra.go.jp/datafile/seiseki/" title="&amp;#12524;&amp;#12540;&amp;#12473;&amp;#25104;&amp;#32318;&amp;#12487;&amp;#12540;&amp;#12479;&amp;#12288;JRA" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target="_blank">
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;blogcard external-blogcard eb-left cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-label external-blogcard-label&amp;quot;&amp;gt;
+ &amp;lt;span class=&amp;quot;fa&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;
+ &amp;lt;/div&amp;gt;&amp;lt;figure class=&amp;quot;blogcard-thumbnail external-blogcard-thumbnail&amp;quot;&amp;gt;
+ 
+ &amp;lt;img data-src=&amp;quot;https://s.wordpress.com/mshots/v1/http%3A%2F%2Fwww.jra.go.jp%2Fdatafile%2Fseiseki%2F?w=160&amp;amp;#038;h=90&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://s.wordpress.com/mshots/v1/http%3A%2F%2Fwww.jra.go.jp%2Fdatafile%2Fseiseki%2F?w=160&amp;amp;#038;h=90&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;&amp;lt;/figure&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-content external-blogcard-content&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-title external-blogcard-title&amp;quot;&amp;gt;
+ &amp;amp;#12524;&amp;amp;#12540;&amp;amp;#12473;&amp;amp;#25104;&amp;amp;#32318;&amp;amp;#12487;&amp;amp;#12540;&amp;amp;#12479;&amp;amp;#12288;JRA
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-snippet external-blogcard-snippet&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-footer external-blogcard-footer cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-site external-blogcard-site&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-favicon external-blogcard-favicon&amp;quot;&amp;gt;
+ &amp;lt;img data-src=&amp;quot;https://www.google.com/s2/favicons?domain=http://www.jra.go.jp/datafile/seiseki/&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://www.google.com/s2/favicons?domain=http://www.jra.go.jp/datafile/seiseki/&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-domain external-blogcard-domain&amp;quot;&amp;gt;
+ www.jra.go.jp
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&amp;lt;/a&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;p>ここから以下のデータを取得してきます。&lt;/p></description></item><item><title>【水耕栽培】コマツナの観察日記(64日目)</title><link>https://arukayies.github.io/hydroponic_culture/komatsuna/diary5-5/</link><pubDate>Tue, 22 Oct 2019 12:59:09 +0000</pubDate><guid>https://arukayies.github.io/hydroponic_culture/komatsuna/diary5-5/</guid><description>&lt;p>こんにちは！&lt;/p>
+&lt;p>&lt;span class="marker">&lt;strong>水耕栽培&lt;/strong>&lt;/span>で&lt;strong>コマツナ&lt;/strong>を育成し始めました、「くら(&lt;a rel="noopener" href="http://www.twitter.com/arukayies" target="_blank">&lt;i class="fa fa-twitter" aria-hidden="true" style="color: #55ACEE;font-size:1.2em;">&lt;/i>@arukayies&lt;/a>)」です！&lt;/p>
+&lt;p>&lt;span style="color: blue;">観察64日目&lt;/span>の様子です！&lt;/p>
+&lt;div class="blogcard-type bct-together">
+ &lt;div class="blogcard-shortcode-wrap paragraph">
+ 前回までの日記はこちらです。&lt;br /> &lt;a href="https://arukayies.com/hydroponic_culture/komatsuna/diary4-5" title="【水耕栽培】コマツナの観察日記(42日目)" class="blogcard-wrap internal-blogcard-wrap a-wrap cf" target="_blank">
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;blogcard internal-blogcard ib-left cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-label internal-blogcard-label&amp;quot;&amp;gt;
+ &amp;lt;span class=&amp;quot;fa&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;
+ &amp;lt;/div&amp;gt;&amp;lt;figure class=&amp;quot;blogcard-thumbnail internal-blogcard-thumbnail&amp;quot;&amp;gt;
+ 
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2019/12/diary4-5-160x90.png&amp;quot; class=&amp;quot;blogcard-thumb-image internal-blogcard-thumb-image wp-post-image&amp;quot; alt=&amp;quot;&amp;quot; srcset=&amp;quot;https://arukayies.com/wp-content/uploads/2019/12/diary4-5-160x90.png 160w, https://arukayies.com/wp-content/uploads/2019/12/diary4-5-120x68.png 120w, https://arukayies.com/wp-content/uploads/2019/12/diary4-5-320x180.png 320w, https://arukayies.com/wp-content/uploads/2019/12/diary4-5-376x212.png 376w&amp;quot; sizes=&amp;quot;(max-width: 160px) 100vw, 160px&amp;quot; /&amp;gt;&amp;lt;/figure&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-content internal-blogcard-content&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-title internal-blogcard-title&amp;quot;&amp;gt;
+ 【水耕栽培】コマツナの観察日記(42日目)
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-snippet internal-blogcard-snippet&amp;quot;&amp;gt;
+ こんにちは！水耕栽培でコマツナを育成し始めました、「くら(twitter@arukayies)」です！観察42日目の様子です！前回までの日記はこちらです。【1号機】水耕栽培装置の紹介はこちらです。【2号機】水耕栽培装置の紹介はこちらです。観...
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-footer internal-blogcard-footer cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-site internal-blogcard-site&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-favicon internal-blogcard-favicon&amp;quot;&amp;gt;
+ &amp;lt;img data-src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image internal-blogcard-favicon-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image internal-blogcard-favicon-image&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-domain internal-blogcard-domain&amp;quot;&amp;gt;
+ arukayies.com
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-date internal-blogcard-date&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-post-date internal-blogcard-post-date&amp;quot;&amp;gt;
+ 2019.12.22
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&amp;lt;/a&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+ &lt;div class="blogcard-shortcode-wrap paragraph">
+ 【1号機】水耕栽培装置の紹介はこちらです。&lt;br /> &lt;a href="https://arukayies.com/diy/hydroponic_culture_first_machine" title="ほぼ100均で作る循環式の水耕栽培装置の紹介" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target="_blank">
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;blogcard external-blogcard eb-left cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-label external-blogcard-label&amp;quot;&amp;gt;
+ &amp;lt;span class=&amp;quot;fa&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;
+ &amp;lt;/div&amp;gt;&amp;lt;figure class=&amp;quot;blogcard-thumbnail external-blogcard-thumbnail&amp;quot;&amp;gt;
+ 
+ &amp;lt;img data-src=&amp;quot;https://arukayies.com/wp-content/uploads/2019/09/hydroponic_culture_first_machine.png&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2019/09/hydroponic_culture_first_machine.png&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;&amp;lt;/figure&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-content external-blogcard-content&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-title external-blogcard-title&amp;quot;&amp;gt;
+ ほぼ100均で作る循環式の水耕栽培装置の紹介
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-snippet external-blogcard-snippet&amp;quot;&amp;gt;
+ こんにちは！自宅で野菜を作ってみたくて、水耕栽培に興味を持った「くら」です！これが実際に自作した水耕栽培装置です。↓今回は私が自作した水耕栽培装置を紹介します！大規模にやるならこれも気になる・・・【2024進化版】LAPOND 水耕栽培シス...
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-footer external-blogcard-footer cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-site external-blogcard-site&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-favicon external-blogcard-favicon&amp;quot;&amp;gt;
+ &amp;lt;img data-src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com/diy/hydroponic-culture-first-machine&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com/diy/hydroponic-culture-first-machine&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-domain external-blogcard-domain&amp;quot;&amp;gt;
+ arukayies.com
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&amp;lt;/a&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+ &lt;div class="blogcard-shortcode-wrap paragraph">
+ 【2号機】水耕栽培装置の紹介はこちらです。&lt;br /> &lt;a href="https://arukayies.com/diy/hydroponic_culture_second_machine" title="【2号機】循環式の水耕栽培装置を本格的に作ってみた" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target="_blank">
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;blogcard external-blogcard eb-left cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-label external-blogcard-label&amp;quot;&amp;gt;
+ &amp;lt;span class=&amp;quot;fa&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;
+ &amp;lt;/div&amp;gt;&amp;lt;figure class=&amp;quot;blogcard-thumbnail external-blogcard-thumbnail&amp;quot;&amp;gt;
+ 
+ &amp;lt;img data-src=&amp;quot;https://arukayies.com/wp-content/uploads/2019/09/hydroponic_culture_second_machine.png&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2019/09/hydroponic_culture_second_machine.png&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;&amp;lt;/figure&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-content external-blogcard-content&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-title external-blogcard-title&amp;quot;&amp;gt;
+ 【2号機】循環式の水耕栽培装置を本格的に作ってみた
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-snippet external-blogcard-snippet&amp;quot;&amp;gt;
+ こんにちは！水耕栽培装置1号機を運用して4ヶ月ほど・・・。　ふと見かけたAmazonの水耕栽培キットを見て、これなら自作できるんじゃね？　と思いさっそく作ってみた「くら」です！前回の水耕栽培装置【1号機】はこちらです。見かけたAmazonは...
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-footer external-blogcard-footer cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-site external-blogcard-site&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-favicon external-blogcard-favicon&amp;quot;&amp;gt;
+ &amp;lt;img data-src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com/diy/hydroponic-culture-second-machine&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com/diy/hydroponic-culture-second-machine&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-domain external-blogcard-domain&amp;quot;&amp;gt;
+ arukayies.com
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&amp;lt;/a&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="観察64日目">観察64日目&lt;/h2>
+&lt;p>これはもう収穫しても良さそうです！！！&lt;br>
+&lt;img loading="lazy" decoding="async" class="size-medium aligncenter" src="https://arukayies.com/wp-content/uploads/2019/12/img_5dff3b9c87ebd.jpg" width="680" height="420" />&lt;/p></description></item><item><title>【水耕栽培】オクラの観察日記(91日目)</title><link>https://arukayies.github.io/hydroponic_culture/okra/diary12-3/</link><pubDate>Fri, 11 Oct 2019 12:43:33 +0000</pubDate><guid>https://arukayies.github.io/hydroponic_culture/okra/diary12-3/</guid><description>&lt;p>こんにちは！&lt;/p>
+&lt;p>&lt;span class="marker">&lt;strong>水耕栽培&lt;/strong>&lt;/span>で&lt;strong>オクラ&lt;/strong>を育成し始めました、「くら(&lt;a rel="noopener" href="http://www.twitter.com/arukayies" target="_blank">&lt;i class="fa fa-twitter" aria-hidden="true" style="color: #55ACEE;font-size:1.2em;">&lt;/i>@arukayies&lt;/a>)」です！&lt;/p>
+&lt;p>&lt;span style="color: blue;">観察91日目&lt;/span>の様子です！&lt;/p>
+&lt;div class="blogcard-type bct-together">
+ &lt;div class="blogcard-shortcode-wrap paragraph">
+ 前回までの日記はこちらです。&lt;br /> &lt;a href="https://arukayies.com/hydroponic_culture/okra/diary11-3" title="【水耕栽培】オクラの観察日記(76日目)" class="blogcard-wrap internal-blogcard-wrap a-wrap cf" target="_blank">
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;blogcard internal-blogcard ib-left cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-label internal-blogcard-label&amp;quot;&amp;gt;
+ &amp;lt;span class=&amp;quot;fa&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;
+ &amp;lt;/div&amp;gt;&amp;lt;figure class=&amp;quot;blogcard-thumbnail internal-blogcard-thumbnail&amp;quot;&amp;gt;
+ 
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2019/09/diary11-3-160x90.png&amp;quot; class=&amp;quot;blogcard-thumb-image internal-blogcard-thumb-image wp-post-image&amp;quot; alt=&amp;quot;&amp;quot; srcset=&amp;quot;https://arukayies.com/wp-content/uploads/2019/09/diary11-3-160x90.png 160w, https://arukayies.com/wp-content/uploads/2019/09/diary11-3-120x68.png 120w, https://arukayies.com/wp-content/uploads/2019/09/diary11-3-320x180.png 320w, https://arukayies.com/wp-content/uploads/2019/09/diary11-3-376x212.png 376w&amp;quot; sizes=&amp;quot;(max-width: 160px) 100vw, 160px&amp;quot; /&amp;gt;&amp;lt;/figure&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-content internal-blogcard-content&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-title internal-blogcard-title&amp;quot;&amp;gt;
+ 【水耕栽培】オクラの観察日記(76日目)
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-snippet internal-blogcard-snippet&amp;quot;&amp;gt;
+ こんにちは！水耕栽培でオクラを育成し始めました、「くら(twitter@arukayies)」です！観察76日目の様子です！前回までの日記はこちらです。【1号機】水耕栽培装置の紹介はこちらです。【2号機】水耕栽培装置の紹介はこちらです。観察...
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-footer internal-blogcard-footer cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-site internal-blogcard-site&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-favicon internal-blogcard-favicon&amp;quot;&amp;gt;
+ &amp;lt;img data-src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image internal-blogcard-favicon-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image internal-blogcard-favicon-image&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-domain internal-blogcard-domain&amp;quot;&amp;gt;
+ arukayies.com
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-date internal-blogcard-date&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-post-date internal-blogcard-post-date&amp;quot;&amp;gt;
+ 2019.12.22
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&amp;lt;/a&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+ &lt;div class="blogcard-shortcode-wrap paragraph">
+ 【1号機】水耕栽培装置の紹介はこちらです。&lt;br /> &lt;a href="https://arukayies.com/diy/hydroponic_culture_first_machine" title="ほぼ100均で作る循環式の水耕栽培装置の紹介" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target="_blank">
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;blogcard external-blogcard eb-left cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-label external-blogcard-label&amp;quot;&amp;gt;
+ &amp;lt;span class=&amp;quot;fa&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;
+ &amp;lt;/div&amp;gt;&amp;lt;figure class=&amp;quot;blogcard-thumbnail external-blogcard-thumbnail&amp;quot;&amp;gt;
+ 
+ &amp;lt;img data-src=&amp;quot;https://arukayies.com/wp-content/uploads/2019/09/hydroponic_culture_first_machine.png&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2019/09/hydroponic_culture_first_machine.png&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;&amp;lt;/figure&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-content external-blogcard-content&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-title external-blogcard-title&amp;quot;&amp;gt;
+ ほぼ100均で作る循環式の水耕栽培装置の紹介
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-snippet external-blogcard-snippet&amp;quot;&amp;gt;
+ こんにちは！自宅で野菜を作ってみたくて、水耕栽培に興味を持った「くら」です！これが実際に自作した水耕栽培装置です。↓今回は私が自作した水耕栽培装置を紹介します！大規模にやるならこれも気になる・・・【2024進化版】LAPOND 水耕栽培シス...
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-footer external-blogcard-footer cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-site external-blogcard-site&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-favicon external-blogcard-favicon&amp;quot;&amp;gt;
+ &amp;lt;img data-src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com/diy/hydroponic-culture-first-machine&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com/diy/hydroponic-culture-first-machine&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-domain external-blogcard-domain&amp;quot;&amp;gt;
+ arukayies.com
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&amp;lt;/a&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+ &lt;div class="blogcard-shortcode-wrap paragraph">
+ 【2号機】水耕栽培装置の紹介はこちらです。&lt;br /> &lt;a href="https://arukayies.com/diy/hydroponic_culture_second_machine" title="【2号機】循環式の水耕栽培装置を本格的に作ってみた" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target="_blank">
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;blogcard external-blogcard eb-left cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-label external-blogcard-label&amp;quot;&amp;gt;
+ &amp;lt;span class=&amp;quot;fa&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;
+ &amp;lt;/div&amp;gt;&amp;lt;figure class=&amp;quot;blogcard-thumbnail external-blogcard-thumbnail&amp;quot;&amp;gt;
+ 
+ &amp;lt;img data-src=&amp;quot;https://arukayies.com/wp-content/uploads/2019/09/hydroponic_culture_second_machine.png&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2019/09/hydroponic_culture_second_machine.png&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;&amp;lt;/figure&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-content external-blogcard-content&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-title external-blogcard-title&amp;quot;&amp;gt;
+ 【2号機】循環式の水耕栽培装置を本格的に作ってみた
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-snippet external-blogcard-snippet&amp;quot;&amp;gt;
+ こんにちは！水耕栽培装置1号機を運用して4ヶ月ほど・・・。　ふと見かけたAmazonの水耕栽培キットを見て、これなら自作できるんじゃね？　と思いさっそく作ってみた「くら」です！前回の水耕栽培装置【1号機】はこちらです。見かけたAmazonは...
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-footer external-blogcard-footer cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-site external-blogcard-site&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-favicon external-blogcard-favicon&amp;quot;&amp;gt;
+ &amp;lt;img data-src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com/diy/hydroponic-culture-second-machine&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com/diy/hydroponic-culture-second-machine&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-domain external-blogcard-domain&amp;quot;&amp;gt;
+ arukayies.com
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&amp;lt;/a&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="観察91日目">観察91日目&lt;/h2>
+&lt;p>メンテ最中に折ってしまいました。。。（ダメ元でテープ巻いてるけど、、、）&lt;br>
+&lt;img loading="lazy" decoding="async" class="size-medium aligncenter" src="https://arukayies.com/wp-content/uploads/2019/12/img_5dfa4ca30c69b.jpg" width="680" height="420" />&lt;/p></description></item></channel></rss>

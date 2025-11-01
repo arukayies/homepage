@@ -1,0 +1,688 @@
+<!doctype html><html lang=ja><head><meta charset=UTF-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>GASのV8ランタイムで使えるECMAScript構文のまとめ | くらぶろぐ</title><meta name=description content='
+  
+    
+  
+  
+    
+      
+  <div class="blogcard external-blogcard eb-left cf">
+    <div class="blogcard-label external-blogcard-label">
+      <span class="fa"></span>
+    </div><figure class="blogcard-thumbnail external-blogcard-thumbnail">
+    
+    <img data-src="https://www.gstatic.com/devrel-devsite/prod/v90b15eef664021f94a1ab8a4ca14c533325a9006d6183b165fb79714a6fcd6a0/developers/images/opengraph/white.png" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
+    
+    <noscript>
+      <img loading="lazy" decoding="async" src="https://www.gstatic.com/devrel-devsite/prod/v90b15eef664021f94a1ab8a4ca14c533325a9006d6183b165fb79714a6fcd6a0/developers/images/opengraph/white.png" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
+    </noscript></figure>
+    
+    <div class="blogcard-content external-blogcard-content">
+      <div class="blogcard-title external-blogcard-title">
+        V8 ランタイムの概要  |  Apps Script  |  Google for Developers
+      </div>
+      
+      <div class="blogcard-snippet external-blogcard-snippet">
+      </div>
+    </div>
+    
+    <div class="blogcard-footer external-blogcard-footer cf">
+      <div class="blogcard-site external-blogcard-site">
+        <div class="blogcard-favicon external-blogcard-favicon">
+          <img data-src="https://www.google.com/s2/favicons?domain=https://developers.google.com/apps-script/guides/v8-runtime?hl=ja" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
+          
+          <noscript>
+            <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://developers.google.com/apps-script/guides/v8-runtime?hl=ja" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
+          </noscript>
+        </div>
+        
+        <div class="blogcard-domain external-blogcard-domain">
+          developers.google.com
+        </div>
+      </div>
+    </div>
+  </div></a>
+</div>
+
+<p class="has-text-align-left">
+  結構前に公式よりお知らせがありました「<strong>V8ランタイムの対応</strong>」
+</p>
+
+<p>
+  今回はこの<strong>V8ランタイム</strong>で使える<strong>ECMAScript構文</strong>をまとめてみました！
+</p>
+
+<p>
+  これが書けるとこんなメリットがあります。
+</p>
+
+  
+
+
+  
+    V8ランタイムのメリット！！
+  
+  
+    
+      let&nbsp;と&nbsp;const&nbsp;の使い分けで、変数を間違ってしまう可能性を減らすことできます。
+    
+    
+      アロー関数で無名関数を短く表現することができます。
+    
+    
+      Class構文を使うことで、同じモノの設計を繰り返し使う時に便利！
+    
+    
+      Class構文でコードが見やすくなる！
+    
+    
+      Class構文は見た目がかっこいい！
+    
+    
+      分割代入で、複数の変数に代入する時に1行で書けるようになる！
+    
+    
+      テンプレート文字列で、ダブルクォーテーションやシングルクォーテーションを打つ量が減ります！
+    
+    
+      テンプレート文字列で、『\n』を使わずに、改行を表すことができます！
+    
+    
+      デフォルト引数で、デフォルト値を指定することで、処理を簡略化することができます！
+    
+  
+
+
+
+
+  
+    
+  
+  
+    
+      それでは各構文を紹介していきます！
+    '><meta name=thumbnail content="https://arukayies.github.io/gas/v8-runtime-ecmascript/thumbnail_hu_296c46e47340488f.webp"><meta property="og:locale" content="ja_JP"><meta property='og:title' content='GASのV8ランタイムで使えるECMAScript構文のまとめ | くらぶろぐ'><meta property='og:description' content='
+  
+    
+  
+  
+    
+      
+  <div class="blogcard external-blogcard eb-left cf">
+    <div class="blogcard-label external-blogcard-label">
+      <span class="fa"></span>
+    </div><figure class="blogcard-thumbnail external-blogcard-thumbnail">
+    
+    <img data-src="https://www.gstatic.com/devrel-devsite/prod/v90b15eef664021f94a1ab8a4ca14c533325a9006d6183b165fb79714a6fcd6a0/developers/images/opengraph/white.png" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
+    
+    <noscript>
+      <img loading="lazy" decoding="async" src="https://www.gstatic.com/devrel-devsite/prod/v90b15eef664021f94a1ab8a4ca14c533325a9006d6183b165fb79714a6fcd6a0/developers/images/opengraph/white.png" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
+    </noscript></figure>
+    
+    <div class="blogcard-content external-blogcard-content">
+      <div class="blogcard-title external-blogcard-title">
+        V8 ランタイムの概要  |  Apps Script  |  Google for Developers
+      </div>
+      
+      <div class="blogcard-snippet external-blogcard-snippet">
+      </div>
+    </div>
+    
+    <div class="blogcard-footer external-blogcard-footer cf">
+      <div class="blogcard-site external-blogcard-site">
+        <div class="blogcard-favicon external-blogcard-favicon">
+          <img data-src="https://www.google.com/s2/favicons?domain=https://developers.google.com/apps-script/guides/v8-runtime?hl=ja" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
+          
+          <noscript>
+            <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://developers.google.com/apps-script/guides/v8-runtime?hl=ja" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
+          </noscript>
+        </div>
+        
+        <div class="blogcard-domain external-blogcard-domain">
+          developers.google.com
+        </div>
+      </div>
+    </div>
+  </div></a>
+</div>
+
+<p class="has-text-align-left">
+  結構前に公式よりお知らせがありました「<strong>V8ランタイムの対応</strong>」
+</p>
+
+<p>
+  今回はこの<strong>V8ランタイム</strong>で使える<strong>ECMAScript構文</strong>をまとめてみました！
+</p>
+
+<p>
+  これが書けるとこんなメリットがあります。
+</p>
+
+  
+
+
+  
+    V8ランタイムのメリット！！
+  
+  
+    
+      let&nbsp;と&nbsp;const&nbsp;の使い分けで、変数を間違ってしまう可能性を減らすことできます。
+    
+    
+      アロー関数で無名関数を短く表現することができます。
+    
+    
+      Class構文を使うことで、同じモノの設計を繰り返し使う時に便利！
+    
+    
+      Class構文でコードが見やすくなる！
+    
+    
+      Class構文は見た目がかっこいい！
+    
+    
+      分割代入で、複数の変数に代入する時に1行で書けるようになる！
+    
+    
+      テンプレート文字列で、ダブルクォーテーションやシングルクォーテーションを打つ量が減ります！
+    
+    
+      テンプレート文字列で、『\n』を使わずに、改行を表すことができます！
+    
+    
+      デフォルト引数で、デフォルト値を指定することで、処理を簡略化することができます！
+    
+  
+
+
+
+
+  
+    
+  
+  
+    
+      それでは各構文を紹介していきます！
+    '><meta property='og:image' content="https://arukayies.github.io/gas/v8-runtime-ecmascript/thumbnail_hu_296c46e47340488f.webp"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property='og:url' content='https://arukayies.github.io/gas/v8-runtime-ecmascript/'><meta property='og:site_name' content='くらぶろぐ'><meta property='og:type' content='article'><meta property="article:published_time" content="2020-05-05T09:56:16+00:00"><meta property="article:modified_time" content="2020-05-05T09:56:16+00:00"><meta property="article:author" content="arukayies"><meta property="article:section" content="[GAS]"><meta property="article:tag" content="GAS"><meta property="article:tag" content="Google Apps Script"><meta name=twitter:title content="GASのV8ランタイムで使えるECMAScript構文のまとめ | くらぶろぐ"><meta name=twitter:description content='
+  
+    
+  
+  
+    
+      
+  <div class="blogcard external-blogcard eb-left cf">
+    <div class="blogcard-label external-blogcard-label">
+      <span class="fa"></span>
+    </div><figure class="blogcard-thumbnail external-blogcard-thumbnail">
+    
+    <img data-src="https://www.gstatic.com/devrel-devsite/prod/v90b15eef664021f94a1ab8a4ca14c533325a9006d6183b165fb79714a6fcd6a0/developers/images/opengraph/white.png" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
+    
+    <noscript>
+      <img loading="lazy" decoding="async" src="https://www.gstatic.com/devrel-devsite/prod/v90b15eef664021f94a1ab8a4ca14c533325a9006d6183b165fb79714a6fcd6a0/developers/images/opengraph/white.png" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
+    </noscript></figure>
+    
+    <div class="blogcard-content external-blogcard-content">
+      <div class="blogcard-title external-blogcard-title">
+        V8 ランタイムの概要  |  Apps Script  |  Google for Developers
+      </div>
+      
+      <div class="blogcard-snippet external-blogcard-snippet">
+      </div>
+    </div>
+    
+    <div class="blogcard-footer external-blogcard-footer cf">
+      <div class="blogcard-site external-blogcard-site">
+        <div class="blogcard-favicon external-blogcard-favicon">
+          <img data-src="https://www.google.com/s2/favicons?domain=https://developers.google.com/apps-script/guides/v8-runtime?hl=ja" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
+          
+          <noscript>
+            <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://developers.google.com/apps-script/guides/v8-runtime?hl=ja" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
+          </noscript>
+        </div>
+        
+        <div class="blogcard-domain external-blogcard-domain">
+          developers.google.com
+        </div>
+      </div>
+    </div>
+  </div></a>
+</div>
+
+<p class="has-text-align-left">
+  結構前に公式よりお知らせがありました「<strong>V8ランタイムの対応</strong>」
+</p>
+
+<p>
+  今回はこの<strong>V8ランタイム</strong>で使える<strong>ECMAScript構文</strong>をまとめてみました！
+</p>
+
+<p>
+  これが書けるとこんなメリットがあります。
+</p>
+
+  
+
+
+  
+    V8ランタイムのメリット！！
+  
+  
+    
+      let&nbsp;と&nbsp;const&nbsp;の使い分けで、変数を間違ってしまう可能性を減らすことできます。
+    
+    
+      アロー関数で無名関数を短く表現することができます。
+    
+    
+      Class構文を使うことで、同じモノの設計を繰り返し使う時に便利！
+    
+    
+      Class構文でコードが見やすくなる！
+    
+    
+      Class構文は見た目がかっこいい！
+    
+    
+      分割代入で、複数の変数に代入する時に1行で書けるようになる！
+    
+    
+      テンプレート文字列で、ダブルクォーテーションやシングルクォーテーションを打つ量が減ります！
+    
+    
+      テンプレート文字列で、『\n』を使わずに、改行を表すことができます！
+    
+    
+      デフォルト引数で、デフォルト値を指定することで、処理を簡略化することができます！
+    
+  
+
+
+
+
+  
+    
+  
+  
+    
+      それでは各構文を紹介していきます！
+    '><meta name=twitter:image content="https://arukayies.github.io/gas/v8-runtime-ecmascript/thumbnail_hu_296c46e47340488f.webp"><meta name=twitter:card content="summary_large_image"><meta name=robots content="index,follow"><meta name=googlebot content="index,follow"><meta name=generator content="Hugo 0.147.5"><link rel=icon href=https://arukayies.github.io/favicon.ico><link rel=apple-touch-icon href=https://arukayies.github.io/image/icon.png><link rel=apple-touch-icon sizes=180x180 href=https://arukayies.github.io/image/icon_hu_bc3a3d10bb972f2d.png><meta name=msapplication-TileImage content="https://arukayies.github.io/image/icon_hu_89f2d4f9250944e3.png"><link rel=canonical href=https://arukayies.github.io/gas/v8-runtime-ecmascript/><link rel=preload href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as=style><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" media=print onload='this.media="all"'><link rel=stylesheet href=https://arukayies.github.io/scss/style.min.f6e3827402c49df761979d470dc7e943a2cb144de4606f4b855708bf67c293ff.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css as=style><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css media=print onload='this.media="all"'><link rel=preload href=https://arukayies.github.io/css/vendor/github-markdown-css/github-markdown.css as=style><link rel=stylesheet href=https://arukayies.github.io/css/vendor/github-markdown-css/github-markdown.css media=print onload='this.media="all"'><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr/lunr.min.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/lunr.stemmer.support.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/tinyseg.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/lunr.ja.js></script><script type=text/javascript src=/js/search.min.js></script><script type=application/ld+json>{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://arukayies.github.io/#website","name":"くらぶろぐ","url":"https://arukayies.github.io/","potentialAction":{"@type":"SearchAction","target":"https://arukayies.github.io/search/?query={search_term_string}","query-input":"required name=search_term_string"},"publisher":{"@id":"https://arukayies.github.io/#publisher"}},{"@type":"Article","headline":"GASのV8ランタイムで使えるECMAScript構文のまとめ","description":" \u0026lt;div class=\u0026quot;blogcard external-blogcard eb-left cf\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-label external-blogcard-label\u0026quot;\u0026gt; \u0026lt;span class=\u0026quot;fa\u0026quot;\u0026gt;\u0026lt;/span\u0026gt; \u0026lt;/div\u0026gt;\u0026lt;figure class=\u0026quot;blogcard-thumbnail external-blogcard-thumbnail\u0026quot;\u0026gt; \u0026lt;img data-src=\u0026quot;https://www.gstatic.com/devrel-devsite/prod/v90b15eef664021f94a1ab8a4ca14c533325a9006d6183b165fb79714a6fcd6a0/developers/images/opengraph/white.png\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img\u0026quot; loading=\u0026quot;lazy\u0026quot; width=\u0026quot;160\u0026quot; height=\u0026quot;90\u0026quot; /\u0026gt; \u0026lt;noscript\u0026gt; \u0026lt;img loading=\u0026quot;lazy\u0026quot; decoding=\u0026quot;async\u0026quot; src=\u0026quot;https://www.gstatic.com/devrel-devsite/prod/v90b15eef664021f94a1ab8a4ca14c533325a9006d6183b165fb79714a6fcd6a0/developers/images/opengraph/white.png\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-thumb-image external-blogcard-thumb-image\u0026quot; width=\u0026quot;160\u0026quot; height=\u0026quot;90\u0026quot; /\u0026gt; \u0026lt;/noscript\u0026gt;\u0026lt;/figure\u0026gt; \u0026lt;div class=\u0026quot;blogcard-content external-blogcard-content\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-title external-blogcard-title\u0026quot;\u0026gt; V8 ランタイムの概要 | Apps Script | Google for Developers \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;blogcard-snippet external-blogcard-snippet\u0026quot;\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;blogcard-footer external-blogcard-footer cf\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-site external-blogcard-site\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-favicon external-blogcard-favicon\u0026quot;\u0026gt; \u0026lt;img data-src=\u0026quot;https://www.google.com/s2/favicons?domain=https://developers.google.com/apps-script/guides/v8-runtime?hl=ja\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img\u0026quot; loading=\u0026quot;lazy\u0026quot; width=\u0026quot;16\u0026quot; height=\u0026quot;16\u0026quot; /\u0026gt; \u0026lt;noscript\u0026gt; \u0026lt;img loading=\u0026quot;lazy\u0026quot; decoding=\u0026quot;async\u0026quot; src=\u0026quot;https://www.google.com/s2/favicons?domain=https://developers.google.com/apps-script/guides/v8-runtime?hl=ja\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-favicon-image external-blogcard-favicon-image\u0026quot; width=\u0026quot;16\u0026quot; height=\u0026quot;16\u0026quot; /\u0026gt; \u0026lt;/noscript\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;blogcard-domain external-blogcard-domain\u0026quot;\u0026gt; developers.google.com \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt;\u0026lt;/a\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;p class=\u0026quot;has-text-align-left\u0026quot;\u0026gt; 結構前に公式よりお知らせがありました「\u0026lt;strong\u0026gt;V8ランタイムの対応\u0026lt;/strong\u0026gt;」 \u0026lt;/p\u0026gt; \u0026lt;p\u0026gt; 今回はこの\u0026lt;strong\u0026gt;V8ランタイム\u0026lt;/strong\u0026gt;で使える\u0026lt;strong\u0026gt;ECMAScript構文\u0026lt;/strong\u0026gt;をまとめてみました！ \u0026lt;/p\u0026gt; \u0026lt;p\u0026gt; これが書けるとこんなメリットがあります。 \u0026lt;/p\u0026gt; V8ランタイムのメリット！！ let\u0026nbsp;と\u0026nbsp;const\u0026nbsp;の使い分けで、変数を間違ってしまう可能性を減らすことできます。 アロー関数で無名関数を短く表現することができます。 Class構文を使うことで、同じモノの設計を繰り返し使う時に便利！ Class構文でコードが見やすくなる！ Class構文は見た目がかっこいい！ 分割代入で、複数の変数に代入する時に1行で書けるようになる！ テンプレート文字列で、ダブルクォーテーションやシングルクォーテーションを打つ量が減ります！ テンプレート文字列で、『\\n』を使わずに、改行を表すことができます！ デフォルト引数で、デフォルト値を指定することで、処理を簡略化することができます！ それでは各構文を紹介していきます！ ","image":"https://arukayies.github.io/gas/v8-runtime-ecmascript/thumbnail_hu_90c751f6ca92e15f.webp","keywords":["GAS","Google Apps Script"],"author":{"@type":"Person","url":"https://arukayies.github.io/homepage/","name":"arukayies"},"datePublished":"2020-05-05T09:56:16+00:00","dateModified":"2020-05-05T09:56:16+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://arukayies.github.io/gas/v8-runtime-ecmascript/"},"isPartOf":{"@id":"https://arukayies.github.io/#website"},"breadcrumb":{"@id":"https://arukayies.github.io/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://arukayies.github.io/#breadcrumb","name":"パンくずリスト","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://arukayies.github.io/"},{"@type":"ListItem","position":2,"name":["GAS"],"item":"https://arukayies.github.io/categories/%5BGAS%5D"}]}]}</script></head><body class=body><div class=container><header class=header><div class=header__inner><div class=partials__header><div class=partials__header__title><a href=https://arukayies.github.io/>くらぶろぐ</a><div id=hamburger class="spShow close partials__header__hamburger"><div class=partials__header__hamburger__line></div></div></div><div id=hamburgerMenu class="close partials__header__menu"><nav class="spShow partials__header__menu__search"><form action=/search/ class=partials__header__menu__search__form><input type=text name=query id=search class=partials__header__menu__search__query>
+<button type=submit class=partials__header__menu__search__button>
+<i class="fas fa-search"></i></button></form></nav><nav class=partials__header__menu__topMenu><ul class=partials__header__menu__topMenu__items></ul></nav><nav class="spShow partials__header__menu__sideMenu"><h3 class=partials__header__menu__sideMenu__title>メニュー</h3><ul class=partials__header__menu__sideMenu__items></ul></nav></div></div></div></header><div id=headerBlock class=spShow></div><div class=content><main class=main><div class=main__inner><section class=single><article class=single__article><div class=single__article__header><ol class=partials__breadcrumb><li><a href=https://arukayies.github.io/><i class="fas fa-home"></i>Home</a></li><li>/</li><li><a href=/categories/[GAS]><i class="fas fa-folder"></i>[GAS]</a></li><li>/</li><li>GASのV8ランタイムで使えるECMAScript構文のまとめ</li></ol><div class="pcShow single__article__date"><i class="far fa-clock"></i>2020-05-05
+ / <i class="fas fa-history"></i>2020-05-05</div></div><h1 class=single__article__title>GASのV8ランタイムで使えるECMAScript構文のまとめ</h1><div class="spShow single__article__date"><i class="far fa-clock"></i>2020-05-05
+ / <i class="fas fa-history"></i>2020-05-05</div><section class=single__article__shareLinks><ul class=partials__shareLinks><li class=partials__shareLinks__item><a href="http://x.com/intent/tweet?url=https%3a%2f%2farukayies.github.io%2fgas%2fv8-runtime-ecmascript%2f&text=GAS%e3%81%aeV8%e3%83%a9%e3%83%b3%e3%82%bf%e3%82%a4%e3%83%a0%e3%81%a7%e4%bd%bf%e3%81%88%e3%82%8bECMAScript%e6%a7%8b%e6%96%87%e3%81%ae%e3%81%be%e3%81%a8%e3%82%81" target=_blank title=Tweet class=partials__shareLinks__itemLink--twitter><i class="fab fa-x-twitter"></i>Twitter</a></li><li class=partials__shareLinks__item><a href="http://www.facebook.com/sharer.php?u=https%3a%2f%2farukayies.github.io%2fgas%2fv8-runtime-ecmascript%2f&t=GAS%e3%81%aeV8%e3%83%a9%e3%83%b3%e3%82%bf%e3%82%a4%e3%83%a0%e3%81%a7%e4%bd%bf%e3%81%88%e3%82%8bECMAScript%e6%a7%8b%e6%96%87%e3%81%ae%e3%81%be%e3%81%a8%e3%82%81" target=_blank title=Facebook class=partials__shareLinks__itemLink--facebook><i class="fab fa-facebook"></i>Facebook</a></li><li class=partials__shareLinks__item><a href="http://b.hatena.ne.jp/add?mode=confirm&url=https%3a%2f%2farukayies.github.io%2fgas%2fv8-runtime-ecmascript%2f&title=GAS%e3%81%aeV8%e3%83%a9%e3%83%b3%e3%82%bf%e3%82%a4%e3%83%a0%e3%81%a7%e4%bd%bf%e3%81%88%e3%82%8bECMAScript%e6%a7%8b%e6%96%87%e3%81%ae%e3%81%be%e3%81%a8%e3%82%81" target=_blank title=hatena class=partials__shareLinks__itemLink--hatena>はてブ</a></li><li class=partials__shareLinks__item><a href="http://getpocket.com/edit?url=https%3a%2f%2farukayies.github.io%2fgas%2fv8-runtime-ecmascript%2f&title=GAS%e3%81%aeV8%e3%83%a9%e3%83%b3%e3%82%bf%e3%82%a4%e3%83%a0%e3%81%a7%e4%bd%bf%e3%81%88%e3%82%8bECMAScript%e6%a7%8b%e6%96%87%e3%81%ae%e3%81%be%e3%81%a8%e3%82%81" target=_blank title=pocket class=partials__shareLinks__itemLink--pocket><i class="fab fa-get-pocket"></i>Pocket</a></li><li class=partials__shareLinks__item><a href=https://line.me/R/msg/text/?GAS%e3%81%aeV8%e3%83%a9%e3%83%b3%e3%82%bf%e3%82%a4%e3%83%a0%e3%81%a7%e4%bd%bf%e3%81%88%e3%82%8bECMAScript%e6%a7%8b%e6%96%87%e3%81%ae%e3%81%be%e3%81%a8%e3%82%81%0D%0Ahttps%3a%2f%2farukayies.github.io%2fgas%2fv8-runtime-ecmascript%2f target=_blank title=line class=partials__shareLinks__itemLink--line><i class="fab fa-line"></i>Line</a></li><li class=partials__shareLinks__item><a href=javascript:void(0) onclick='navigator.clipboard.writeText("https://arukayies.github.io/gas/v8-runtime-ecmascript/"),alert("URLをコピーしました")' title=line class=partials__shareLinks__itemLink--copy><i class="far fa-copy"></i>URL</a></li></ul></section><img src=/gas/v8-runtime-ecmascript/thumbnail_hu_ad718162b9d97a92.webp alt=GASのV8ランタイムで使えるECMAScript構文のまとめ class=single__article__thumbnail><aside class=single__article__toc><h3 class=single__article__toc__title><i class="fas fa-list-ul"></i>目次</h3><nav id=TableOfContents><ul><li><a href=#v8ランタイムを有効にする>V8ランタイムを有効にする</a></li><li><a href=#新機能ecmascript構文>【新機能①】ECMAScript構文</a><ul><li><a href=#ecmascript構文とは>ECMAScript構文とは？</a></li><li><a href=#let-と-const>let と const</a></li><li><a href=#アロー関数>アロー関数</a></li><li><a href=#class構文>Class構文</a></li><li><a href=#分割代入>分割代入</a></li><li><a href=#テンプレート文字列>テンプレート文字列</a></li><li><a href=#デフォルト引数>デフォルト引数</a></li><li><a href=#複数行の文字列>複数行の文字列</a></li></ul></li><li><a href=#まとめ>まとめ</a></li></ul></nav></aside><div class="single__article__content markdown-body"><div class="wp-block-cocoon-blocks-balloon-ex-box-1 speech-wrap sb-id-1 sbs-stn sbp-l sbis-cb cf block-box"><div class=speech-person><figure class=speech-icon><img decoding=async src=https://arukayies.com/wp-content/uploads/2019/12/icon-1.png alt=くら class=speech-icon-image></figure></div><div class=speech-balloon><div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-official"><a rel=noopener href="https://developers.google.com/apps-script/guides/v8-runtime?hl=ja" title="V8 ランタイムの概要  |  Apps Script  |  Google for Developers" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank><pre><code>  &lt;div class=&quot;blogcard external-blogcard eb-left cf&quot;&gt;
+    &lt;div class=&quot;blogcard-label external-blogcard-label&quot;&gt;
+      &lt;span class=&quot;fa&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;&lt;figure class=&quot;blogcard-thumbnail external-blogcard-thumbnail&quot;&gt;
+    
+    &lt;img data-src=&quot;https://www.gstatic.com/devrel-devsite/prod/v90b15eef664021f94a1ab8a4ca14c533325a9006d6183b165fb79714a6fcd6a0/developers/images/opengraph/white.png&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+    
+    &lt;noscript&gt;
+      &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.gstatic.com/devrel-devsite/prod/v90b15eef664021f94a1ab8a4ca14c533325a9006d6183b165fb79714a6fcd6a0/developers/images/opengraph/white.png&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+    &lt;/noscript&gt;&lt;/figure&gt;
+    
+    &lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+      &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+        V8 ランタイムの概要  |  Apps Script  |  Google for Developers
+      &lt;/div&gt;
+      
+      &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+      &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+        &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+          &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://developers.google.com/apps-script/guides/v8-runtime?hl=ja&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+          
+          &lt;noscript&gt;
+            &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://developers.google.com/apps-script/guides/v8-runtime?hl=ja&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+          &lt;/noscript&gt;
+        &lt;/div&gt;
+        
+        &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+          developers.google.com
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;p class=&quot;has-text-align-left&quot;&gt;
+  結構前に公式よりお知らせがありました「&lt;strong&gt;V8ランタイムの対応&lt;/strong&gt;」
+&lt;/p&gt;
+
+&lt;p&gt;
+  今回はこの&lt;strong&gt;V8ランタイム&lt;/strong&gt;で使える&lt;strong&gt;ECMAScript構文&lt;/strong&gt;をまとめてみました！
+&lt;/p&gt;
+
+&lt;p&gt;
+  これが書けるとこんなメリットがあります。
+&lt;/p&gt;
+</code></pre></div></div><div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-check block-box has-background has-border-color has-watery-red-background-color has-red-border-color"><div class=iconlist-title>V8ランタイムのメリット！！</div><ul class=wp-block-list><li><span class=keyboard-key><strong>let&nbsp;</strong></span>と<span class=keyboard-key><strong>&nbsp;const</strong></span>&nbsp;の使い分けで、変数を間違ってしまう可能性を減らすことできます。</li><li><strong>アロー関数</strong>で無名関数を短く表現することができます。</li><li><strong>Class構文</strong>を使うことで、同じモノの設計を繰り返し使う時に便利！</li><li><strong>Class構文</strong>でコードが見やすくなる！</li><li><strong>Class構文</strong>は見た目がかっこいい！</li><li><strong>分割代入</strong>で、複数の変数に代入する時に1行で書けるようになる！</li><li><strong>テンプレート文字列</strong>で、ダブルクォーテーションやシングルクォーテーションを打つ量が減ります！</li><li><strong>テンプレート文字列</strong>で、『\n』を使わずに、改行を表すことができます！</li><li><strong>デフォルト引数</strong>で、デフォルト値を指定することで、処理を簡略化することができます！</li></ul></div><div style=height:20px aria-hidden=true class=wp-block-spacer></div><div class="wp-block-cocoon-blocks-balloon-ex-box-1 speech-wrap sb-id-1 sbs-stn sbp-l sbis-cb cf block-box"><div class=speech-person><figure class=speech-icon><img decoding=async src=https://arukayies.com/wp-content/uploads/2019/12/icon-1.png alt=くら class=speech-icon-image></figure></div><div class=speech-balloon><p class=has-text-align-center>それでは各構文を紹介していきます！</p></div></div><div style=height:20px aria-hidden=true class=wp-block-spacer></div><div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-caret-right block-box has-background has-border-color has-icon-color has-watery-blue-background-color has-key-color-border-color has-key-color-icon-color"><div class=iconlist-title>こんな人にむけた記事です。</div><ul class=wp-block-list><li>簡単な書き方を理解して、きれいなコードを書きたい！</li><li>便利な機能を使いこなして、効率よくしたい！</li></ul></div><h2 id=v8ランタイムを有効にする>V8ランタイムを有効にする</h2><p>新しい機能を使う前に、V8ランタイムを有効にします。</p><p>やり方はとても簡単です！</p><p>メニューの <span class=keyboard-key>実行</span> > <span class=keyboard-key>Chrome V8 を搭載した新しい Apps Script ランタイムを有効にする</span></p><p>と選択するだけです！<figure class="wp-block-image size-large"></p><p><img loading=lazy decoding=async width=1024 height=458 src=https://arukayies.com/wp-content/uploads/2020/04/v8_on-1-1024x458.png alt class=wp-image-2897 srcset="https://arukayies.com/wp-content/uploads/2020/04/v8_on-1-1024x458.png 1024w, https://arukayies.com/wp-content/uploads/2020/04/v8_on-1-300x134.png 300w, https://arukayies.com/wp-content/uploads/2020/04/v8_on-1-768x344.png 768w, https://arukayies.com/wp-content/uploads/2020/04/v8_on-1.png 1332w" sizes="(max-width: 1024px) 100vw, 1024px"><figcaption>実行 > Chrome V8 を搭載した新しい Apps Script ランタイムを有効にする を選択</figcaption></figure></p><h2 id=新機能ecmascript構文>【新機能①】ECMAScript構文</h2><h3 id=ecmascript構文とは>ECMAScript構文とは？</h3><p>ECMAScript略して<strong>ES</strong>って呼ばれます。JavaScriptを使用したサービスで使われる一般的な構文です。</p><p>GASのJavaScriptは古いものでした。。。</p><p>それでは実際に使える構文を見ていきましょう。</p><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h3 id=let-と-const>let と const</h3><p>まず最初に、</p><p><span class=fz-24px>いままで変数を宣言してきた <span class=keyboard-key>var</span> は使わないようにしましょう。</span></p><p>時代は <span class=keyboard-key>let</span> と <span class=keyboard-key>const</span> です。それでは使い方を見ていきます。</p><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h4 id=letは再宣言が不可能な宣言です><span class=keyboard-key>let</span>は<strong>再宣言が不可能</strong>な宣言です</h4><pre class="wp-block-code javascript"><code>function let_sample() {
+  let test = "サンプル";
+  test = "OK";
+  let test = "NG";
+}</code></pre><p>GASで<strong>保存</strong>する時点で以下のエラーとなります。</p><pre class=wp-block-preformatted>SyntaxError: Identifier 'test' has already been declared（行 4、ファイル「sample.gs」） </pre><p><strong>再代入</strong>はできますが、4行目の<strong>再宣言</strong>が不可能なためです。</p><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h4 id=constは再宣言と再代入が不可能な宣言です><span class=keyboard-key>const</span>は<strong>再宣言と再代入が不可能</strong>な宣言です</h4><pre class="wp-block-code javascript"><code>function const_sample() {
+  const test = "サンプル";
+  test = "NG";
+}</code></pre><p>GASで<strong>実行</strong>しようとすると 以下のエラーとなります。</p><pre class=wp-block-preformatted>TypeError: Assignment to constant variable.at const_sample(sample:3:8)</pre><p>3行目の<strong>再代入</strong>が不可能なためです。</p><div style=height:20px aria-hidden=true class=wp-block-spacer></div><p>また、<strong>再宣言</strong>も</p><pre class="wp-block-code javascript"><code>function const_sample() {
+  const test = "サンプル";
+  const test = "NG";
+}</code></pre><p>GASで<strong>保存</strong>する時点で以下のエラーとなります。</p><pre class=wp-block-preformatted>SyntaxError: Identifier 'test' has already been declared（行 3、ファイル「sample.gs」） </pre><p>3行目の<strong>再宣言</strong>が不可能なためです。</p><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h4 id=ちなみに-var-は再宣言も再代入も可能な宣言です>ちなみに <span class=keyboard-key>var</span> は再宣言も再代入も可能な宣言です</h4><pre class="wp-block-code javascript"><code>function var_sample() {
+  var test = "サンプル";
+  test = "OK";
+  var test = "OK";
+}</code></pre><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h4 id=let-と-constを使うメリット>let と constを使うメリット</h4><div class="wp-block-cocoon-blocks-tab-box-1 blank-box bb-tab bb-point block-box has-border-color has-red-border-color"><div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-check block-box"><div class=iconlist-title>これが使うメリット！</div><pre><code>&lt;ul class=&quot;wp-block-list&quot;&gt;
+  &lt;li&gt;
+    &lt;span class=&quot;keyboard-key&quot;&gt;let&lt;/span&gt; と &lt;span class=&quot;keyboard-key&quot;&gt;const&lt;/span&gt; の使い分けで、変数を間違ってしまう可能性を減らすことできます。
+  &lt;/li&gt;
+  &lt;li&gt;
+    コードを見る人にとって、読みやすくなります。
+  &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre></div></div><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h3 id=アロー関数>アロー関数</h3><p>アロー関数は今までの無名関数の書き方より短いコードで表現することができます。</p><p>その名の通り <span class=keyboard-key>=></span> 矢を使ってコードを書きます。</p><div class="wp-block-cocoon-blocks-column-2 column-wrap column-2 column-2-2-1-1 layout-box"><div class="wp-block-cocoon-blocks-column-left column-left"><ul class=wp-block-list><li>今までの書き方</li></ul><pre><code>&lt;pre class=&quot;wp-block-code javascript&quot;&gt;&lt;code&gt;// 従来の無名関数
+</code></pre><p>function arrow_before_sample() {
+var addText = function (text) {
+return text + &ldquo;サンプル&rdquo;;
+};
+console.log(addText(&ldquo;サンプル&rdquo;));
+// サンプルサンプルというログが出力
+}</code></pre></p></div><div class="wp-block-cocoon-blocks-column-right column-right"><ul class=wp-block-list><li>アロー関数での書き方</li></ul><pre class="wp-block-code javascript"><code>// アロー関数
+function arrow_after_sample1() {
+  let addText = (text) => {
+  return text + "サンプル";
+  };
+  console.log(addText("サンプル"));
+  // サンプルサンプルというログが出力
+}</code></pre><p></p></div></div><p><span class=keyboard-key>function</span> の代わりに <span class=keyboard-key>=></span> が使われています。</p><p>また、アロー関数は条件によってさらに簡単に表現することができます。</p><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h4 id=関数が1文の場合8230とreturnが省略できます>関数が1文の場合、{…}とreturnが省略できます</h4><div class="wp-block-cocoon-blocks-column-2 column-wrap column-2 column-2-2-1-1 layout-box"><div class="wp-block-cocoon-blocks-column-left column-left"><ul class=wp-block-list><li>アロー関数での書き方</li></ul><pre><code>&lt;pre class=&quot;wp-block-code javascript&quot;&gt;&lt;code&gt;// アロー関数
+</code></pre><p>function arrow_after_sample1() {
+let addText = (text1,text2) => {
+return text1 + text2 + &ldquo;サンプル3&rdquo;;
+};
+console.log(addText(&ldquo;サンプル1&rdquo;,&ldquo;サンプル2&rdquo;));
+// サンプル1サンプル2サンプル3というログが出力
+}</code></pre></p></div><div class="wp-block-cocoon-blocks-column-right column-right"><ul class=wp-block-list><li>さらに簡単にした書き方</li></ul><pre class="wp-block-code javascript"><code>// 関数が1文の場合、{...}とreturenが省略できます
+function arrow_after_sample2() {
+  let addText = (text1,text2) => text1 + text2 + "サンプル3";
+  console.log(addText("サンプル1","サンプル2"));
+  // サンプル1サンプル2サンプル3というログが出力
+}</code></pre><p></p></div></div><p>このように簡単なコードで表現できます！</p><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h4 id=関数が1文で引数が1つの場合8230とreturnと8230が省略できます>関数が1文で引数が1つの場合、{…}とreturnと(…)が省略できます</h4><div class="wp-block-cocoon-blocks-column-2 column-wrap column-2 column-2-2-1-1 layout-box"><div class="wp-block-cocoon-blocks-column-left column-left"><ul class=wp-block-list><li>アロー関数での書き方</li></ul><pre><code>&lt;pre class=&quot;wp-block-code javascript&quot;&gt;&lt;code&gt;// アロー関数
+</code></pre><p>function arrow_after_sample1() {
+let addText = (text) => {
+return text + &ldquo;サンプル&rdquo;;
+};
+console.log(addText(&ldquo;サンプル&rdquo;));
+// サンプルサンプルというログが出力
+}</code></pre></p></div><div class="wp-block-cocoon-blocks-column-right column-right"><ul class=wp-block-list><li>さらに簡単にした書き方</li></ul><pre class="wp-block-code javascript"><code>// 関数が1文で引数が1つの場合、{...}とreturenと(...)が省略できます
+function arrow_after_sample2() {
+  let addText = text => text + "サンプル";
+  console.log(addText("サンプル"));
+  // サンプルサンプルというログが出力
+}</code></pre><p></p></div></div><p>さらにシンプルになりましたね！</p><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h4 id=アロー関数は-this-の値を束縛します>アロー関数は this の値を束縛します。。。？</h4><p><span class=keyboard-key>this</span> についていろいろ書かれており、整理できたら追記します。</p><div class="wp-block-cocoon-blocks-balloon-ex-box-1 speech-wrap sb-id-1 sbs-stn sbp-l sbis-cb cf block-box"><div class=speech-person><figure class=speech-icon><img decoding=async src=https://arukayies.com/wp-content/uploads/2019/12/icon-1.png alt=くら class=speech-icon-image></figure></div><div class=speech-balloon><p><span class=keyboard-key>this</span> を使うようなコードを書いたことないよ。。。</p></div></div><h4 id=アロー関数を使うメリット>アロー関数を使うメリット</h4><div class="wp-block-cocoon-blocks-tab-box-1 blank-box bb-tab bb-point block-box has-border-color has-red-border-color"><div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-check block-box"><div class=iconlist-title>これが使うメリット！</div><pre><code>&lt;ul class=&quot;wp-block-list&quot;&gt;
+  &lt;li&gt;
+    無名関数を短く表現することができます。
+  &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre></div></div><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h3 id=class構文>Class構文</h3><p>今回のアップデートで<strong>Class</strong>が使えるようになりました！</p><p>JavaScriptのClassはこちらの記事が参考になりました！</p><div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-reference"><a rel=noopener href=https://qiita.com/JPNYKW/items/248f99c94c00c3d1aa27 title="JavaScript初心者にclassを伝える - Qiita" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-user-contents.imgix.net%2Fhttps%253A%252F%252Fcdn.qiita.com%252Fassets%252Fpublic%252Farticle-ogp-background-afbab5eb44e0b055cce1258705637a91.png%3Fixlib%3Drb-4.0.0%26w%3D1200%26blend64%3DaHR0cHM6Ly9xaWl0YS11c2VyLXByb2ZpbGUtaW1hZ2VzLmltZ2l4Lm5ldC9odHRwcyUzQSUyRiUyRnFpaXRhLWltYWdlLXN0b3JlLnMzLmFwLW5vcnRoZWFzdC0xLmFtYXpvbmF3cy5jb20lMkYwJTJGMjAxNDYzJTJGcHJvZmlsZS1pbWFnZXMlMkYxNjI2MjkxMzI5P2l4bGliPXJiLTQuMC4wJmFyPTElM0ExJmZpdD1jcm9wJm1hc2s9ZWxsaXBzZSZiZz1GRkZGRkYmZm09cG5nMzImcz1kNzRiZjNhNDNlOGExMWRiN2Q2OGYyYjllOWI4ODU0Zg%26blend-x%3D120%26blend-y%3D462%26blend-w%3D90%26blend-h%3D90%26blend-mode%3Dnormal%26mark64%3DaHR0cHM6Ly9xaWl0YS1vcmdhbml6YXRpb24taW1hZ2VzLmltZ2l4Lm5ldC9odHRwcyUzQSUyRiUyRnMzLWFwLW5vcnRoZWFzdC0xLmFtYXpvbmF3cy5jb20lMkZxaWl0YS1vcmdhbml6YXRpb24taW1hZ2UlMkY4OTJlYzFlNGI2NDgxMWYwODZiNDU5OGJkZmEwZjE4M2IxYTFjODFiJTJGb3JpZ2luYWwuanBnJTNGMTYxNzg0OTM3Mz9peGxpYj1yYi00LjAuMCZ3PTQ0Jmg9NDQmZml0PWNyb3AmbWFzaz1jb3JuZXJzJmNvcm5lci1yYWRpdXM9OCZiZz1GRkZGRkYmYm9yZGVyPTIlMkNGRkZGRkYmZm09cG5nMzImcz0xMGNhYmFjOWZkYTFjZTIyMmVhZGMzNTEwMDQ5Yzg0Ng%26mark-x%3D186%26mark-y%3D515%26mark-w%3D40%26mark-h%3D40%26s%3D40599610841b5323ff2559c946bd4910?ixlib=rb-4.0.0&amp;#038;w=1200&amp;#038;fm=jpg&amp;#038;mark64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTk2MCZoPTMyNCZ0eHQ9SmF2YVNjcmlwdCVFNSU4OCU5RCVFNSVCRiU4MyVFOCU4MCU4NSVFMyU4MSVBQmNsYXNzJUUzJTgyJTkyJUU0JUJDJTlEJUUzJTgxJTg4JUUzJTgyJThCJnR4dC1hbGlnbj1sZWZ0JTJDdG9wJnR4dC1jb2xvcj0lMjMxRTIxMjEmdHh0LWZvbnQ9SGlyYWdpbm8lMjBTYW5zJTIwVzYmdHh0LXNpemU9NTYmdHh0LXBhZD0wJnM9MzlkMjUwY2UyYjc1ZGViNmIxYjMyNWY5ZDU2MGM3NGI&amp;#038;mark-x=120&amp;#038;mark-y=112&amp;#038;blend64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTgzOCZoPTU4JnR4dD0lNDBqcG55a3cmdHh0LWNvbG9yPSUyMzFFMjEyMSZ0eHQtZm9udD1IaXJhZ2lubyUyMFNhbnMlMjBXNiZ0eHQtc2l6ZT0zNiZ0eHQtcGFkPTAmcz02M2JlZTFiOGJhMWU0ZmFiYjJjY2VkN2ZjNWI2ZjQzNg&amp;#038;blend-x=242&amp;#038;blend-y=454&amp;#038;blend-w=838&amp;#038;blend-h=46&amp;#038;blend-fit=crop&amp;#038;blend-crop=left%2Cbottom&amp;#038;blend-mode=normal&amp;#038;txt64=TumrmOetieWtpuagoeODu1Ppq5jnrYnlrabmoKE&amp;#038;txt-x=242&amp;#038;txt-y=539&amp;#038;txt-width=838&amp;#038;txt-clip=end%2Cellipsis&amp;#038;txt-color=%231E2121&amp;#038;txt-font=Hiragino%20Sans%20W6&amp;#038;txt-size=28&amp;#038;s=f71d9a465b5346df26bc2faa0713955d&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    JavaScript初心者にclassを伝える - Qiita
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+    初めに この記事ではJavascriptのclassについてザックリですが解説します。 多くの初心者にとってclassは「何だこれ？？？」と躓くポイントだと思います。 （実際、自分も最初眺めた時は意味が分からず頭が学級崩壊してました。） な...
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://qiita.com/jpnykw/items/248f99c94c00c3d1aa27&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://qiita.com/jpnykw/items/248f99c94c00c3d1aa27&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      qiita.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a></div><div style=height:20px aria-hidden=true class=wp-block-spacer></div><p>実際にClass構文を使わない場合と使った場合で比べてみます。</p><div class="wp-block-cocoon-blocks-column-2 column-wrap column-2 column-2-2-1-1 layout-box"><div class="wp-block-cocoon-blocks-column-left column-left"><p>Classを使わないで実装する場合</p><pre><code>&lt;pre class=&quot;wp-block-code&quot;&gt;&lt;code&gt;function class_sample_before() {
+</code></pre><p>let persons = [];</p><p>persons[0] = {
+firstName: &ldquo;田中&rdquo;,
+lastName: &ldquo;太郎&rdquo;,
+height: 165,
+weight: 65,
+bmi: getBMI(165, 65),
+standardWeight: getStandardWeight(165, 65),
+};</p><p>persons[1] = {
+firstName: &ldquo;木村&rdquo;,
+lastName: &ldquo;花子&rdquo;,
+height: 150,
+weight: 45,
+bmi: getBMI(150, 45),
+standardWeight: getStandardWeight(150, 45),
+};</p><p>console.log(persons);
+}</p><p>function getBMI(height, weight) {
+return Math.round(weight / (((height / 100) * height) / 100));
+}</p><p>function getStandardWeight(height, weight) {
+return Math.round((((height / 100) * height) / 100) * 22);
+}</code></pre></p></div><div class="wp-block-cocoon-blocks-column-right column-right"><p>Classを使って実装した場合</p><pre class=wp-block-code><code>function class_sample_after() {
+  class Person {
+    constructor(firstName, lastName, height, weight) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.height = height;
+      this.weight = weight;
+      this.bmi();
+      this.standardWeight();
+    }
+
+    bmi() {
+      this.bmi = Math.round(
+        this.weight / (((this.height / 100) * this.height) / 100)
+      );
+    }
+
+    standardWeight() {
+      this.standardWeight = Math.round(
+        (((this.height / 100) * this.height) / 100) * 22
+      );
+    }
+  }
+
+  let persons = &#91;];
+  persons&#91;0] = new Person("田中", "太郎", 165, 65);
+  persons&#91;1] = new Person("木村", "花子", 150, 45);
+  console.log(persons);
+}</code></pre></div></div><p>どっちのコードも同じ結果を返します。</p><pre class=wp-block-code><code> &#91; { firstName: '田中',
+    lastName: '太郎',
+    height: 165,
+    weight: 65,
+    bmi: 24,
+    standardWeight: 60 },
+  { firstName: '木村',
+    lastName: '花子',
+    height: 150,
+    weight: 45,
+    bmi: 20,
+    standardWeight: 50 } ]
+</code></pre><p>2人のみのデータを格納するだけなので、コード量は変わりませんが、</p><p>これが10人、100人と増えた場合どうなるでしょう。。。</p><p><strong><span class=fz-20px><span class=fz-24px><span class=bold-red>Classを使えば、こんなシンプルに書くことができます！</span></span></span></strong></p><pre class=wp-block-code><code>persons&#91;0] = new Person("田中", "太郎", 165, 65);
+persons&#91;1] = new Person("木村", "花子", 150, 45);
+persons&#91;2] = new Person("鈴木", "潤", 160, 55);
+persons&#91;3] = new Person("佐々木", "次郎", 170, 80);
+persons&#91;4] = new Person("中村", "かおり", 150, 45);</code></pre><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h4 id=class構文を使うメリット>Class構文を使うメリット</h4><div class="wp-block-cocoon-blocks-tab-box-1 blank-box bb-tab bb-point block-box has-border-color has-red-border-color"><div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-check block-box"><div class=iconlist-title>これが使うメリット！</div><pre><code>&lt;ul class=&quot;wp-block-list&quot;&gt;
+  &lt;li&gt;
+    同じモノの設計を繰り返し使う時に便利！
+  &lt;/li&gt;
+  &lt;li&gt;
+    コードが見やすくなる！
+  &lt;/li&gt;
+  &lt;li&gt;
+    見た目がかっこいい！
+  &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre></div></div><h3 id=分割代入>分割代入</h3><p>配列やオブジェクトを複数の変数に<strong>分割</strong>して<strong>代入</strong>できます。</p><h4 id=配列の分割代入>配列の分割代入</h4><div class="wp-block-cocoon-blocks-column-2 column-wrap column-2 column-2-2-1-1 layout-box"><div class="wp-block-cocoon-blocks-column-left column-left"><p>従来の方法</p><pre><code>&lt;pre class=&quot;wp-block-code&quot;&gt;&lt;code&gt;function before() {
+</code></pre><p>let array = [1, 2, 3];
+let x = array[0];
+let y = array[1];
+let z = array[2];
+// ログに『1 2 3』と出力
+console.log(x, y, z);
+}</code></pre></p></div><div class="wp-block-cocoon-blocks-column-right column-right"><p>分割代入を使った方法</p><pre class=wp-block-code><code>function after() {
+  let array = &#91;1, 2, 3];
+  let &#91;x, y, z] = array;
+  // ログに『1 2 3』と出力
+  console.log(x, y, z);
+}</code></pre><p></p></div></div><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h4 id=オブジェクトの分割代入>オブジェクトの分割代入</h4><div class="wp-block-cocoon-blocks-column-2 column-wrap column-2 column-2-2-1-1 layout-box"><div class="wp-block-cocoon-blocks-column-left column-left"><p>従来の方法</p><pre><code>&lt;pre class=&quot;wp-block-code&quot;&gt;&lt;code&gt;function before() {
+</code></pre><p>let data = {a: 12, b: false, c: &lsquo;blue&rsquo;};
+let a = data.a;
+let c = data.c;
+// ログに『12 &lsquo;blue&rsquo;』と出力
+console.log(a, c);
+}</code></pre></p></div><div class="wp-block-cocoon-blocks-column-right column-right"><p>分割代入を使った方法</p><pre class=wp-block-code><code>function after() {
+  let data = {a: 12, b: false, c: 'blue'};
+  let {a, c} = data;
+  // ログに『12 'blue'』と出力
+  console.log(a, c);
+}
+</code></pre><p></p></div></div><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h4 id=分割代入を使うメリット>分割代入を使うメリット</h4><div class="wp-block-cocoon-blocks-tab-box-1 blank-box bb-tab bb-point block-box has-border-color has-red-border-color"><div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-check block-box"><div class=iconlist-title>これが使うメリット！</div><pre><code>&lt;ul class=&quot;wp-block-list&quot;&gt;
+  &lt;li&gt;
+    複数の変数に代入する時に1行で書けるようになる！
+  &lt;/li&gt;
+  &lt;li&gt;
+    コードが見やすくなります！
+  &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre></div></div><h3 id=テンプレート文字列>テンプレート文字列</h3><p><code>&lt;strong>&lt;span class="badge-grey">``&lt;/span>&lt;/strong></code>（<strong>バッククオート</strong>）で文字列を囲むと、<code>&lt;strong>&lt;span class="badge-grey">${}&lt;/span>&lt;/strong></code>で変数を展開できます。</p><div class="wp-block-cocoon-blocks-column-2 column-wrap column-2 column-2-2-1-1 layout-box"><div class="wp-block-cocoon-blocks-column-left column-left"><p>従来の方法</p><pre><code>&lt;pre class=&quot;wp-block-code&quot;&gt;&lt;code&gt;function before() {
+</code></pre><p>let first = &lsquo;田中&rsquo;;
+let last = &lsquo;太郎&rsquo;;
+let name =　&lsquo;Hi &rsquo; + first + &rsquo; &rsquo; + last + &lsquo;.&rsquo;;
+// ログに『Hi 田中 太郎.』と出力
+console.log(name);
+}</code></pre></p></div><div class="wp-block-cocoon-blocks-column-right column-right"><p>テンプレート文字列を使った方法</p><pre class=wp-block-code><code>function after() {
+  let first = '田中';
+  let last = '太郎';
+  let name =　`Hi ${first} ${last}.`;
+  // ログに『Hi 田中 太郎.』と出力
+  console.log(name);
+}
+</code></pre><p></p></div></div><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h4 id=テンプレート文字列を使うメリット>テンプレート文字列を使うメリット</h4><div class="wp-block-cocoon-blocks-tab-box-1 blank-box bb-tab bb-point block-box has-border-color has-red-border-color"><div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-check block-box"><div class=iconlist-title>これが使うメリット！</div><pre><code>&lt;ul class=&quot;wp-block-list&quot;&gt;
+  &lt;li&gt;
+    ダブルクォーテーションやシングルクォーテーションを打つ量が減ります！
+  &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre></div><p></p></div><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h3 id=デフォルト引数>デフォルト引数</h3><p>読んで字のごとくです。関数にデフォルト引数を指定できます。</p><div class="wp-block-cocoon-blocks-column-2 column-wrap column-2 column-2-2-1-1 layout-box"><div class="wp-block-cocoon-blocks-column-left column-left"><p>従来の場合</p><pre><code>&lt;pre class=&quot;wp-block-code&quot;&gt;&lt;code&gt;function before() {
+</code></pre><p>// ログに『hello world!』と出力
+hello()
+}</p><p>function hello(greeting, name) {
+greeting = greeting || &ldquo;hello&rdquo;;
+name = name || &ldquo;world&rdquo;;
+console.log(greeting + " " + name + &ldquo;!&rdquo;);
+}</code></pre></p></div><div class="wp-block-cocoon-blocks-column-right column-right"><p>デフォルト引数を使う場合</p><pre class=wp-block-code><code>function after() {
+  let hello =
+  function(greeting="hello", name="world") {
+    console.log(greeting + " " + name + "!");
+  }
+  // ログに『hello world!』と出力
+  hello();
+}</code></pre></div></div><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h4 id=デフォルト引数を使うメリット>デフォルト引数を使うメリット</h4><div class="wp-block-cocoon-blocks-tab-box-1 blank-box bb-tab bb-point block-box has-border-color has-red-border-color"><div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-check block-box"><div class=iconlist-title>これが使うメリット！</div><pre><code>&lt;ul class=&quot;wp-block-list&quot;&gt;
+  &lt;li&gt;
+    デフォルト値を指定することで、処理を簡略化することができます！
+  &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre></div><p></p></div><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h3 id=複数行の文字列>複数行の文字列</h3><p><code>&lt;strong>&lt;span class="badge-grey">``&lt;/span>&lt;/strong></code>（<strong>バッククオート</strong>）で文字列を囲むと、<strong>改行</strong>をそのまま表すことができます！</p><div class="wp-block-cocoon-blocks-column-2 column-wrap column-2 column-2-2-1-1 layout-box"><div class="wp-block-cocoon-blocks-column-left column-left"><p>従来の方法</p><pre><code>&lt;pre class=&quot;wp-block-code&quot;&gt;&lt;code&gt;function before() {
+</code></pre><p>let multiline = &ldquo;This string is sort of\n&rdquo;</p><ul><li>&ldquo;like a multi-line string,\n&rdquo;</li><li>&ldquo;but it&rsquo;s not really one.&rdquo;;
+console.log(multiline);
+}</code></pre></li></ul></div><div class="wp-block-cocoon-blocks-column-right column-right"><p>『<span class=badge-grey>\n</span>』を使わない方法</p><pre class=wp-block-code><code>function after() {
+  let multiline = `This on the other hand,
+  actually is a multi-line string,
+  thanks to JavaScript ES6`;
+  console.log(multiline);
+}
+</code></pre><p></p></div></div><div style=height:20px aria-hidden=true class=wp-block-spacer></div><div class="wp-block-cocoon-blocks-tab-box-1 blank-box bb-tab bb-point block-box has-border-color has-red-border-color"><div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-check block-box"><div class=iconlist-title>これが使うメリット！</div><pre><code>&lt;ul class=&quot;wp-block-list&quot;&gt;
+  &lt;li&gt;
+    『&lt;span class=&quot;badge-grey&quot;&gt;\n&lt;/span&gt;』を使わずに、改行を表すことができます！
+  &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre></div><p></p></div><div style=height:20px aria-hidden=true class=wp-block-spacer></div><h2 id=まとめ>まとめ</h2><div class="wp-block-cocoon-blocks-balloon-ex-box-1 speech-wrap sb-id-1 sbs-stn sbp-l sbis-cb cf block-box"><div class=speech-person><figure class=speech-icon><img decoding=async src=https://arukayies.com/wp-content/uploads/2019/12/icon-1.png alt=くら class=speech-icon-image></figure></div><div class=speech-balloon><p>今回紹介した新しい構文を活用して、どんどんGASを使っていきたいですね！</p></div></div><div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-check block-box has-background has-border-color has-watery-red-background-color has-red-border-color"><div class=iconlist-title>V8ランタイムのメリット！！</div><ul class=wp-block-list><li><span class=keyboard-key><strong>let&nbsp;</strong></span>と<span class=keyboard-key><strong>&nbsp;const</strong></span>&nbsp;の使い分けで、変数を間違ってしまう可能性を減らすことできます。</li><li><strong>アロー関数</strong>で無名関数を短く表現することができます。</li><li><strong>Class構文</strong>を使うことで、同じモノの設計を繰り返し使う時に便利！</li><li><strong>Class構文</strong>でコードが見やすくなる！</li><li><strong>Class構文</strong>は見た目がかっこいい！</li><li><strong>分割代入</strong>で、複数の変数に代入する時に1行で書けるようになる！</li><li><strong>テンプレート文字列</strong>で、ダブルクォーテーションやシングルクォーテーションを打つ量が減ります！</li><li><strong>テンプレート文字列</strong>で、『\n』を使わずに、改行を表すことができます！</li><li><strong>デフォルト引数</strong>で、デフォルト値を指定することで、処理を簡略化することができます！</li><li></li></ul></div></div><div class=single__article__comment></div></article><div class=single__relatedArticleList><h3 class=single__relatedArticleList__title>関連記事</h3><article class=partials__relatedArticle><div class=partials__relatedArticle__inner><a href=https://arukayies.github.io/gas/getwraps/ class=partials__relatedArticle__link></a><img src=https://arukayies.github.io/gas/getwraps/thumbnail_hu_d073a708842806bd.webp alt=GASでスプレッドシートの折り返し設定を一括取得！制御する方法 loading=lazy class=partials__relatedArticle__thumbnail><div class=partials__relatedArticle__content><h4 class=partials__relatedArticle__title>GASでスプレッドシートの折り返し設定を一括取得！制御する方法</h4><div class=partials__relatedArticle__description><p>Google Apps Script（GAS）を使ってスプレッドシートを操作する際、<code>getWraps()</code>メソッドはテキストの折り返し設定を取得するために非常に便利なツールばい。このメソッドは、特に大量のデータを扱うときに、折り返し設定の状態を一括で取得できるので、効率的な作業ができるんだよね。今回は、この<code>getWraps()</code>メソッドの使い方を、初心者向けに解説するけん、最後まで読んでみてね。</p><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div><h2 id=getwrapsとは基本の使い方>getWraps()とは？基本の使い方</h2><p>まずは、<code>getWraps()</code>メソッドがどういうものかを簡単に説明するよ。スプレッドシートでセル内のテキストが自動的に折り返されるかどうかは、データの可読性に大きく影響するんだ。<code>getWraps()</code>は、その折り返しの状態を確認するために使うメソッドばい。</p></div></div></div></article><article class=partials__relatedArticle><div class=partials__relatedArticle__inner><a href=https://arukayies.github.io/gas/getwrap/ class=partials__relatedArticle__link></a><img src=https://arukayies.github.io/gas/getwrap/thumbnail_hu_eff97127e3ea148b.webp alt=GASでスプレッドシートのセルの折り返し設定状態を取得・判定する方法 loading=lazy class=partials__relatedArticle__thumbnail><div class=partials__relatedArticle__content><h4 class=partials__relatedArticle__title>GASでスプレッドシートのセルの折り返し設定状態を取得・判定する方法</h4><div class=partials__relatedArticle__description><p>Google Apps Script（GAS）を使うと、スプレッドシートのテキスト折り返し設定をプログラムで簡単に管理できるんよ。今回はその中でも、<code>getWrap()</code>メソッドに焦点を当てて、具体的な使い方を紹介するけね。これを覚えると、大量のデータを扱うシートでも効率よく作業できるようになるばい！</p><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div><h2 id=まずはテキスト折り返しって何>まずはテキスト折り返しって何？</h2><p>スプレッドシートにおける「テキスト折り返し」とは、セル内に収まりきらないテキストが自動的に複数行に分かれる機能のことじゃ。これを設定することで、セル内のテキストが見やすくなったり、セルを越えてテキストが表示されるのを防いだりできるんよ。スプレッドシートでよく使われるテキスト表示のモードは次の3つやけ。</p></div></div></div></article></div><div class=single__navigation><a href=https://arukayies.github.io/gas/line_bot/shopping-list-post/ class=single__navigation__prev>GASだけで作れる買い物リストを管理するLINE BOTの作り方</a><div class=single__navigation__center></div><a href=https://arukayies.github.io/gas/copyvaluestorange/ class=single__navigation__next>GASでスプレッドシートの指定範囲を値のみコピーする効率的な方法</a></div></section></div></main><aside class=sidebar><div class=sidebar__inner><div class=partials__sidebar><div class="pcShow partials__sidebar__card"><h4 class=partials__sidebar__title>検索</h4><nav class=partials__sidebar__search><form action=/search/ method=get class=partials__sidebar__search__form><input type=text name=query id=search class=partials__sidebar__search__query>
+<button type=submit class=partials__sidebar__search__button>
+<i class="fas fa-search"></i></button></form></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>プロフィール</h3><nav class=partials__sidebar__profile><img src=https://arukayies.github.io/image/profile_icon_hu_b863bd11c300fc2a.webp alt=icon class=partials__sidebar__profile__icon><div class=partials__sidebar__profile__name>arukayies</div><div class=partials__sidebar__profile__description></div><div class=partials__snsLinks><a href=https://x.com/arukayies target=_blank class=partials__snsLinks__link--twitter><i class="fa-lg fab fa-x-twitter"></i>
+</a><a href=https://www.instagram.com/arukayies target=_blank class=partials__snsLinks__link--instagram><i class="fa-lg fab fa-instagram"></i>
+</a><a href=https://www.youtube.com/channel/UCoO5ZwX9e7jToe7eo-h62HQ target=_blank class=partials__snsLinks__link--youtube><i class="fa-lg fab fa-youtube"></i>
+</a><a href=https://github.com/arukayies target=_blank class=partials__snsLinks__link--github><i class="fa-lg fab fa-github"></i>
+</a><a href=https://arukayies.github.io/homepage/ target=_blank class=partials__snsLinks__link--other><i class="fa-lg fas fa-link"></i></a></div></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>新着記事</h3><nav class=partials__sidebar__article><ul class=partials__sidebar__article__items><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-summary/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-summary/thumbnail_hu_76cb231a0b93d187.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3カ国を巡った様子のまとめ loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3カ国を巡った様子のまとめ</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-travel-expenses/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-travel-expenses/thumbnail_hu_5145d4451775f13.webp alt=ヨーロッパ3カ国を巡る新婚旅行にかかった費用は100万円！10日間過ごした内訳！ loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>ヨーロッパ3カ国を巡る新婚旅行にかかった費用は100万円！10日間過ごした内訳！</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-transit-suvarnabhumi-airport/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-transit-suvarnabhumi-airport/thumbnail_hu_ab6b01167f81c539.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】スワンナプーム空港内でトランジット8時間の過ごし方 loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】スワンナプーム空港内でトランジット8時間の過ごし方</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-pari-tourism/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-pari-tourism/thumbnail_hu_6adf033c7ac7507.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】2泊3日のパリ観光 loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】2泊3日のパリ観光</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-budapest-tourism-part2/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-budapest-tourism-part2/thumbnail_hu_d55c9f8cbc269741.webp alt="【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3泊4日のブダベスト観光 後編" loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3泊4日のブダベスト観光 後編</div></div></a></li></ul></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>カテゴリー</h3><nav class=partials__sidebar__category><ul class=partials__sidebar__category__items><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/GAS/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+gas</div><div class=partials__sidebar__category__itemCount>101</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/LINE-BOT/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+line bot</div><div class=partials__sidebar__category__itemCount>28</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%83%9F%E3%82%BA%E3%83%8A%E5%8F%8E%E7%A9%AB%E6%B8%88/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ミズナ(収穫済)</div><div class=partials__sidebar__category__itemCount>14</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%AA%E3%82%AF%E3%83%A9/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+オクラ</div><div class=partials__sidebar__category__itemCount>12</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/DIY/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+diy</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%B4%E3%83%BC%E3%83%A4/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ゴーヤ</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E6%97%85/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+旅</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%83%AB%E3%83%83%E3%82%B3%E3%83%A9%E5%8F%8E%E7%A9%AB%E6%B8%88/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ルッコラ(収穫済)</div><div class=partials__sidebar__category__itemCount>8</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%B3%E3%83%9E%E3%83%84%E3%83%8A/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+コマツナ</div><div class=partials__sidebar__category__itemCount>5</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%A2%E3%83%AB%E3%83%86%E3%82%A3%E3%82%B7%E3%83%9E/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+アルティシマ</div><div class=partials__sidebar__category__itemCount>4</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%AC%E3%82%B8%E3%83%A5%E3%83%9E%E3%83%AB/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ガジュマル</div><div class=partials__sidebar__category__itemCount>4</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/WordpressAPI/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+wordpressapi</div><div class=partials__sidebar__category__itemCount>3</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/Raspberry-Pi/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+raspberry pi</div><div class=partials__sidebar__category__itemCount>1</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E7%94%9F%E6%B4%BB/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+生活</div><div class=partials__sidebar__category__itemCount>1</div></a></li></ul></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>アーカイブ</h3><nav class=partials__sidebar__archive><ul class=partials__sidebar__archive__yearList><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2024年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2024%e5%b9%b410%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2024年10月（6）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2024%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2024年9月（3）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2021年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2021%e5%b9%b43%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2021年3月（1）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2020年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年9月（15）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b48%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年8月（5）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b47%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年7月（21）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b46%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年6月（34）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b45%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年5月（9）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b44%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年4月（6）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b43%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年3月（17）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b42%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年2月（2）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2019年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b412%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年12月（2）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b411%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年11月（22）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b410%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年10月（3）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年9月（22）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b48%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年8月（13）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b47%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年7月（14）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b46%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年6月（9）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b45%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年5月（3）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b44%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年4月（1）</a></li></ul></div></li></ul></nav></div><script>document.querySelectorAll(".archive-accordion").forEach(function(e){e.addEventListener("click",function(e){if(e.target.tagName==="A")return;e.currentTarget.classList.toggle("open"),e.currentTarget.classList.toggle("close"),e.currentTarget.classList.contains("open")?e.currentTarget.querySelector(".archive-accordion-child-wrapper").style.height=e.currentTarget.querySelector(".archive-accordion-child").offsetHeight+"px":e.currentTarget.querySelector(".archive-accordion-child-wrapper").style.height="0"})})</script></div></div></aside></div><footer class=footer><div class=footer__inner><div class=partials__footer><div class=partials__footer__menu><ul class=partials__footer__menu__list><li><a href=/privacy-policy>プライバシーポリシー</a></li></ul><ul class=partials__footer__menu__list><li><a href=https://x.com/arukayies>お問い合わせ</a></li></ul></div><p class=partials__footer__copyright>© 2019-2025 @arukayies<br>Powered by <a href=https://gohugo.io/ target=_blank>Hugo</a> | Hugo Theme Salt</p></div></div></footer></div><div id=overlay class="close overlay"></div><script>window.addEventListener("DOMContentLoaded",e=>{document.querySelector("#headerBlock").style.height=document.querySelector(".header").offsetHeight+"px"})</script><script>document.querySelectorAll("#hamburger, #overlay").forEach(e=>{e.addEventListener("click",function(){document.querySelector("#hamburger").classList.toggle("open"),document.querySelector("#hamburger").classList.toggle("close"),document.querySelector("#hamburgerMenu").classList.toggle("open"),document.querySelector("#hamburgerMenu").classList.toggle("close"),document.querySelector("#overlay").classList.toggle("open"),document.querySelector("#overlay").classList.toggle("close")})})</script></body></html>

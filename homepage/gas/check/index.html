@@ -1,0 +1,548 @@
+<!doctype html><html lang=ja><head><meta charset=UTF-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>GASでスプレッドシートのチェックボックスを一括でオンにする方法 | くらぶろぐ</title><meta name=description content='Google Apps Script（GAS）を使うと、Googleスプレッドシート上でチェックボックスを簡単に操作できるようになるばい。これをうまく活用すれば、データ管理がぐっと楽になるけん、ぜひ試してみてほしいな。今回は、チェックボックスを操作するための基本的なメソッドや使い方を、やさしく解説していくけ。
+
+  
+    
+      
+    
+<div class="kaerebalink-info">
+  <div class="kaerebalink-name">
+    <a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成</a><img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+    
+    <div class="kaerebalink-powered-date">
+      posted with <a rel="nofollow noopener" href="https://kaereba.com" target="_blank">カエレバ</a>
+    </div>
+  </div>
+  
+  <div class="kaerebalink-detail">
+  </div>
+  
+  <div class="kaerebalink-link1">
+    <div class="shoplinkrakuten">
+      <a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >楽天市場</a><img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+    </div>
+    
+    <div class="shoplinkamazon">
+      <a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A" target="_blank" >Amazon</a><img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif" width="1" height="1" style="border:none;" />
+    </div>
+    
+    <div class="shoplinkyahoo">
+      <a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script" target="_blank" >Yahooショッピング</a><img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif" width="1" height="1" style="border:none;" />
+    </div>
+  </div>
+</div>
+
+<div class="booklink-footer">
+</div>
+
+  
+
+チェックボックスの基本
+まず、Googleスプレッドシートで使えるチェックボックスは、TRUE（チェックされている） と FALSE（チェックされていない） という値を使って動作するんよ。これを理解しておけば、チェックボックスを使った操作はスムーズにできるけ。'><meta name=thumbnail content="https://arukayies.github.io/gas/check/thumbnail_hu_dd063c317d3f04cc.webp"><meta property="og:locale" content="ja_JP"><meta property='og:title' content='GASでスプレッドシートのチェックボックスを一括でオンにする方法 | くらぶろぐ'><meta property='og:description' content='Google Apps Script（GAS）を使うと、Googleスプレッドシート上でチェックボックスを簡単に操作できるようになるばい。これをうまく活用すれば、データ管理がぐっと楽になるけん、ぜひ試してみてほしいな。今回は、チェックボックスを操作するための基本的なメソッドや使い方を、やさしく解説していくけ。
+
+  
+    
+      
+    
+<div class="kaerebalink-info">
+  <div class="kaerebalink-name">
+    <a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成</a><img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+    
+    <div class="kaerebalink-powered-date">
+      posted with <a rel="nofollow noopener" href="https://kaereba.com" target="_blank">カエレバ</a>
+    </div>
+  </div>
+  
+  <div class="kaerebalink-detail">
+  </div>
+  
+  <div class="kaerebalink-link1">
+    <div class="shoplinkrakuten">
+      <a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >楽天市場</a><img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+    </div>
+    
+    <div class="shoplinkamazon">
+      <a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A" target="_blank" >Amazon</a><img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif" width="1" height="1" style="border:none;" />
+    </div>
+    
+    <div class="shoplinkyahoo">
+      <a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script" target="_blank" >Yahooショッピング</a><img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif" width="1" height="1" style="border:none;" />
+    </div>
+  </div>
+</div>
+
+<div class="booklink-footer">
+</div>
+
+  
+
+チェックボックスの基本
+まず、Googleスプレッドシートで使えるチェックボックスは、TRUE（チェックされている） と FALSE（チェックされていない） という値を使って動作するんよ。これを理解しておけば、チェックボックスを使った操作はスムーズにできるけ。'><meta property='og:image' content="https://arukayies.github.io/gas/check/thumbnail_hu_dd063c317d3f04cc.webp"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property='og:url' content='https://arukayies.github.io/gas/check/'><meta property='og:site_name' content='くらぶろぐ'><meta property='og:type' content='article'><meta property="article:published_time" content="2020-03-12T12:52:11+00:00"><meta property="article:modified_time" content="2020-03-12T12:52:11+00:00"><meta property="article:author" content="arukayies"><meta property="article:section" content="[GAS]"><meta property="article:tag" content="check()"><meta property="article:tag" content="GAS"><meta property="article:tag" content="Google Apps Script"><meta property="article:tag" content="スプレッドシート"><meta name=twitter:title content="GASでスプレッドシートのチェックボックスを一括でオンにする方法 | くらぶろぐ"><meta name=twitter:description content='Google Apps Script（GAS）を使うと、Googleスプレッドシート上でチェックボックスを簡単に操作できるようになるばい。これをうまく活用すれば、データ管理がぐっと楽になるけん、ぜひ試してみてほしいな。今回は、チェックボックスを操作するための基本的なメソッドや使い方を、やさしく解説していくけ。
+
+  
+    
+      
+    
+<div class="kaerebalink-info">
+  <div class="kaerebalink-name">
+    <a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成</a><img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+    
+    <div class="kaerebalink-powered-date">
+      posted with <a rel="nofollow noopener" href="https://kaereba.com" target="_blank">カエレバ</a>
+    </div>
+  </div>
+  
+  <div class="kaerebalink-detail">
+  </div>
+  
+  <div class="kaerebalink-link1">
+    <div class="shoplinkrakuten">
+      <a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >楽天市場</a><img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+    </div>
+    
+    <div class="shoplinkamazon">
+      <a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A" target="_blank" >Amazon</a><img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif" width="1" height="1" style="border:none;" />
+    </div>
+    
+    <div class="shoplinkyahoo">
+      <a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script" target="_blank" >Yahooショッピング</a><img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif" width="1" height="1" style="border:none;" />
+    </div>
+  </div>
+</div>
+
+<div class="booklink-footer">
+</div>
+
+  
+
+チェックボックスの基本
+まず、Googleスプレッドシートで使えるチェックボックスは、TRUE（チェックされている） と FALSE（チェックされていない） という値を使って動作するんよ。これを理解しておけば、チェックボックスを使った操作はスムーズにできるけ。'><meta name=twitter:image content="https://arukayies.github.io/gas/check/thumbnail_hu_dd063c317d3f04cc.webp"><meta name=twitter:card content="summary_large_image"><meta name=robots content="index,follow"><meta name=googlebot content="index,follow"><meta name=generator content="Hugo 0.147.5"><link rel=icon href=https://arukayies.github.io/favicon.ico><link rel=apple-touch-icon href=https://arukayies.github.io/image/icon.png><link rel=apple-touch-icon sizes=180x180 href=https://arukayies.github.io/image/icon_hu_bc3a3d10bb972f2d.png><meta name=msapplication-TileImage content="https://arukayies.github.io/image/icon_hu_89f2d4f9250944e3.png"><link rel=canonical href=https://arukayies.github.io/gas/check/><link rel=preload href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as=style><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" media=print onload='this.media="all"'><link rel=stylesheet href=https://arukayies.github.io/scss/style.min.f6e3827402c49df761979d470dc7e943a2cb144de4606f4b855708bf67c293ff.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css as=style><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css media=print onload='this.media="all"'><link rel=preload href=https://arukayies.github.io/css/vendor/github-markdown-css/github-markdown.css as=style><link rel=stylesheet href=https://arukayies.github.io/css/vendor/github-markdown-css/github-markdown.css media=print onload='this.media="all"'><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr/lunr.min.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/lunr.stemmer.support.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/tinyseg.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/lunr.ja.js></script><script type=text/javascript src=/js/search.min.js></script><script type=application/ld+json>{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://arukayies.github.io/#website","name":"くらぶろぐ","url":"https://arukayies.github.io/","potentialAction":{"@type":"SearchAction","target":"https://arukayies.github.io/search/?query={search_term_string}","query-input":"required name=search_term_string"},"publisher":{"@id":"https://arukayies.github.io/#publisher"}},{"@type":"Article","headline":"GASでスプレッドシートのチェックボックスを一括でオンにする方法","description":"Google Apps Script（GAS）を使うと、Googleスプレッドシート上でチェックボックスを簡単に操作できるようになるばい。これをうまく活用すれば、データ管理がぐっと楽になるけん、ぜひ試してみてほしいな。今回は、チェックボックスを操作するための基本的なメソッドや使い方を、やさしく解説していくけ。\n\u0026lt;div class=\u0026quot;kaerebalink-info\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;kaerebalink-name\u0026quot;\u0026gt; \u0026lt;a rel=\u0026quot;noopener\u0026quot; href=\u0026quot;//af.moshimo.com/af/c/click?a_id=1612575\u0026amp;#038;p_id=54\u0026amp;#038;pc_id=54\u0026amp;#038;pl_id=616\u0026amp;#038;s_v=b5Rz2P0601xu\u0026amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742\u0026quot; target=\u0026quot;_blank\u0026quot; \u0026gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成\u0026lt;/a\u0026gt;\u0026lt;img loading=\u0026quot;lazy\u0026quot; decoding=\u0026quot;async\u0026quot; src=\u0026quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif\u0026quot; width=\u0026quot;1\u0026quot; height=\u0026quot;1\u0026quot; style=\u0026quot;border:none;\u0026quot; /\u0026gt; \u0026lt;div class=\u0026quot;kaerebalink-powered-date\u0026quot;\u0026gt; posted with \u0026lt;a rel=\u0026quot;nofollow noopener\u0026quot; href=\u0026quot;https://kaereba.com\u0026quot; target=\u0026quot;_blank\u0026quot;\u0026gt;カエレバ\u0026lt;/a\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;kaerebalink-detail\u0026quot;\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;kaerebalink-link1\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;shoplinkrakuten\u0026quot;\u0026gt; \u0026lt;a rel=\u0026quot;noopener\u0026quot; href=\u0026quot;//af.moshimo.com/af/c/click?a_id=1612575\u0026amp;#038;p_id=54\u0026amp;#038;pc_id=54\u0026amp;#038;pl_id=616\u0026amp;#038;s_v=b5Rz2P0601xu\u0026amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742\u0026quot; target=\u0026quot;_blank\u0026quot; \u0026gt;楽天市場\u0026lt;/a\u0026gt;\u0026lt;img loading=\u0026quot;lazy\u0026quot; decoding=\u0026quot;async\u0026quot; src=\u0026quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif\u0026quot; width=\u0026quot;1\u0026quot; height=\u0026quot;1\u0026quot; style=\u0026quot;border:none;\u0026quot; /\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;shoplinkamazon\u0026quot;\u0026gt; \u0026lt;a rel=\u0026quot;noopener\u0026quot; href=\u0026quot;//af.moshimo.com/af/c/click?a_id=1612578\u0026amp;#038;p_id=170\u0026amp;#038;pc_id=185\u0026amp;#038;pl_id=4062\u0026amp;#038;s_v=b5Rz2P0601xu\u0026amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A\u0026quot; target=\u0026quot;_blank\u0026quot; \u0026gt;Amazon\u0026lt;/a\u0026gt;\u0026lt;img loading=\u0026quot;lazy\u0026quot; decoding=\u0026quot;async\u0026quot; src=\u0026quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif\u0026quot; width=\u0026quot;1\u0026quot; height=\u0026quot;1\u0026quot; style=\u0026quot;border:none;\u0026quot; /\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;shoplinkyahoo\u0026quot;\u0026gt; \u0026lt;a rel=\u0026quot;noopener\u0026quot; href=\u0026quot;//af.moshimo.com/af/c/click?a_id=1615240\u0026amp;#038;p_id=1225\u0026amp;#038;pc_id=1925\u0026amp;#038;pl_id=18502\u0026amp;#038;s_v=b5Rz2P0601xu\u0026amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script\u0026quot; target=\u0026quot;_blank\u0026quot; \u0026gt;Yahooショッピング\u0026lt;/a\u0026gt;\u0026lt;img loading=\u0026quot;lazy\u0026quot; decoding=\u0026quot;async\u0026quot; src=\u0026quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif\u0026quot; width=\u0026quot;1\u0026quot; height=\u0026quot;1\u0026quot; style=\u0026quot;border:none;\u0026quot; /\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;booklink-footer\u0026quot;\u0026gt; \u0026lt;/div\u0026gt; チェックボックスの基本 まず、Googleスプレッドシートで使えるチェックボックスは、TRUE（チェックされている） と FALSE（チェックされていない） という値を使って動作するんよ。これを理解しておけば、チェックボックスを使った操作はスムーズにできるけ。\n","image":"https://arukayies.github.io/gas/check/thumbnail_hu_9106d004588545aa.webp","keywords":["check()","GAS","Google Apps Script","スプレッドシート"],"author":{"@type":"Person","url":"https://arukayies.github.io/homepage/","name":"arukayies"},"datePublished":"2020-03-12T12:52:11+00:00","dateModified":"2020-03-12T12:52:11+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://arukayies.github.io/gas/check/"},"isPartOf":{"@id":"https://arukayies.github.io/#website"},"breadcrumb":{"@id":"https://arukayies.github.io/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://arukayies.github.io/#breadcrumb","name":"パンくずリスト","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://arukayies.github.io/"},{"@type":"ListItem","position":2,"name":["GAS"],"item":"https://arukayies.github.io/categories/%5BGAS%5D"}]}]}</script></head><body class=body><div class=container><header class=header><div class=header__inner><div class=partials__header><div class=partials__header__title><a href=https://arukayies.github.io/>くらぶろぐ</a><div id=hamburger class="spShow close partials__header__hamburger"><div class=partials__header__hamburger__line></div></div></div><div id=hamburgerMenu class="close partials__header__menu"><nav class="spShow partials__header__menu__search"><form action=/search/ class=partials__header__menu__search__form><input type=text name=query id=search class=partials__header__menu__search__query>
+<button type=submit class=partials__header__menu__search__button>
+<i class="fas fa-search"></i></button></form></nav><nav class=partials__header__menu__topMenu><ul class=partials__header__menu__topMenu__items></ul></nav><nav class="spShow partials__header__menu__sideMenu"><h3 class=partials__header__menu__sideMenu__title>メニュー</h3><ul class=partials__header__menu__sideMenu__items></ul></nav></div></div></div></header><div id=headerBlock class=spShow></div><div class=content><main class=main><div class=main__inner><section class=single><article class=single__article><div class=single__article__header><ol class=partials__breadcrumb><li><a href=https://arukayies.github.io/><i class="fas fa-home"></i>Home</a></li><li>/</li><li><a href=/categories/[GAS]><i class="fas fa-folder"></i>[GAS]</a></li><li>/</li><li>GASでスプレッドシートのチェックボックスを一括でオンにする方法</li></ol><div class="pcShow single__article__date"><i class="far fa-clock"></i>2020-03-12
+ / <i class="fas fa-history"></i>2020-03-12</div></div><h1 class=single__article__title>GASでスプレッドシートのチェックボックスを一括でオンにする方法</h1><div class="spShow single__article__date"><i class="far fa-clock"></i>2020-03-12
+ / <i class="fas fa-history"></i>2020-03-12</div><section class=single__article__shareLinks><ul class=partials__shareLinks><li class=partials__shareLinks__item><a href="http://x.com/intent/tweet?url=https%3a%2f%2farukayies.github.io%2fgas%2fcheck%2f&text=GAS%e3%81%a7%e3%82%b9%e3%83%97%e3%83%ac%e3%83%83%e3%83%89%e3%82%b7%e3%83%bc%e3%83%88%e3%81%ae%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e3%83%9c%e3%83%83%e3%82%af%e3%82%b9%e3%82%92%e4%b8%80%e6%8b%ac%e3%81%a7%e3%82%aa%e3%83%b3%e3%81%ab%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" target=_blank title=Tweet class=partials__shareLinks__itemLink--twitter><i class="fab fa-x-twitter"></i>Twitter</a></li><li class=partials__shareLinks__item><a href="http://www.facebook.com/sharer.php?u=https%3a%2f%2farukayies.github.io%2fgas%2fcheck%2f&t=GAS%e3%81%a7%e3%82%b9%e3%83%97%e3%83%ac%e3%83%83%e3%83%89%e3%82%b7%e3%83%bc%e3%83%88%e3%81%ae%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e3%83%9c%e3%83%83%e3%82%af%e3%82%b9%e3%82%92%e4%b8%80%e6%8b%ac%e3%81%a7%e3%82%aa%e3%83%b3%e3%81%ab%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" target=_blank title=Facebook class=partials__shareLinks__itemLink--facebook><i class="fab fa-facebook"></i>Facebook</a></li><li class=partials__shareLinks__item><a href="http://b.hatena.ne.jp/add?mode=confirm&url=https%3a%2f%2farukayies.github.io%2fgas%2fcheck%2f&title=GAS%e3%81%a7%e3%82%b9%e3%83%97%e3%83%ac%e3%83%83%e3%83%89%e3%82%b7%e3%83%bc%e3%83%88%e3%81%ae%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e3%83%9c%e3%83%83%e3%82%af%e3%82%b9%e3%82%92%e4%b8%80%e6%8b%ac%e3%81%a7%e3%82%aa%e3%83%b3%e3%81%ab%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" target=_blank title=hatena class=partials__shareLinks__itemLink--hatena>はてブ</a></li><li class=partials__shareLinks__item><a href="http://getpocket.com/edit?url=https%3a%2f%2farukayies.github.io%2fgas%2fcheck%2f&title=GAS%e3%81%a7%e3%82%b9%e3%83%97%e3%83%ac%e3%83%83%e3%83%89%e3%82%b7%e3%83%bc%e3%83%88%e3%81%ae%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e3%83%9c%e3%83%83%e3%82%af%e3%82%b9%e3%82%92%e4%b8%80%e6%8b%ac%e3%81%a7%e3%82%aa%e3%83%b3%e3%81%ab%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" target=_blank title=pocket class=partials__shareLinks__itemLink--pocket><i class="fab fa-get-pocket"></i>Pocket</a></li><li class=partials__shareLinks__item><a href=https://line.me/R/msg/text/?GAS%e3%81%a7%e3%82%b9%e3%83%97%e3%83%ac%e3%83%83%e3%83%89%e3%82%b7%e3%83%bc%e3%83%88%e3%81%ae%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e3%83%9c%e3%83%83%e3%82%af%e3%82%b9%e3%82%92%e4%b8%80%e6%8b%ac%e3%81%a7%e3%82%aa%e3%83%b3%e3%81%ab%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95%0D%0Ahttps%3a%2f%2farukayies.github.io%2fgas%2fcheck%2f target=_blank title=line class=partials__shareLinks__itemLink--line><i class="fab fa-line"></i>Line</a></li><li class=partials__shareLinks__item><a href=javascript:void(0) onclick='navigator.clipboard.writeText("https://arukayies.github.io/gas/check/"),alert("URLをコピーしました")' title=line class=partials__shareLinks__itemLink--copy><i class="far fa-copy"></i>URL</a></li></ul></section><img src=/gas/check/thumbnail_hu_fb80fd46eb30415d.webp alt=GASでスプレッドシートのチェックボックスを一括でオンにする方法 class=single__article__thumbnail><aside class=single__article__toc><h3 class=single__article__toc__title><i class="fas fa-list-ul"></i>目次</h3><nav id=TableOfContents><ul><li><a href=#チェックボックスの基本>チェックボックスの基本</a><ul><li><a href=#メソッドの分類>メソッドの分類</a></li></ul></li><li><a href=#checkメソッドの使い方>check()メソッドの使い方</a></li><li><a href=#実際の使い方タスク管理システム>実際の使い方：タスク管理システム</a></li><li><a href=#ischeckedメソッドの使い方>isChecked()メソッドの使い方</a></li><li><a href=#応用的な使い方>応用的な使い方</a></li><li><a href=#デバッグとエラー処理>デバッグとエラー処理</a></li></ul></nav></aside><div class="single__article__content markdown-body"><p>Google Apps Script（GAS）を使うと、Googleスプレッドシート上でチェックボックスを簡単に操作できるようになるばい。これをうまく活用すれば、データ管理がぐっと楽になるけん、ぜひ試してみてほしいな。今回は、チェックボックスを操作するための基本的なメソッドや使い方を、やさしく解説していくけ。</p><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div><h2 id=チェックボックスの基本>チェックボックスの基本</h2><p>まず、Googleスプレッドシートで使えるチェックボックスは、<strong>TRUE（チェックされている）</strong> と <strong>FALSE（チェックされていない）</strong> という値を使って動作するんよ。これを理解しておけば、チェックボックスを使った操作はスムーズにできるけ。</p><h3 id=メソッドの分類>メソッドの分類</h3><p>GASで使えるチェックボックス操作のメソッドは大きく分けて3つのカテゴリがあるばい。</p><ol class=wp-block-list><li><strong>状態設定メソッド</strong>：<code>check()</code>, <code>uncheck()</code>, <code>toggle()</code></li><li><strong>状態確認メソッド</strong>：<code>isChecked()</code></li><li><strong>バリデーションメソッド</strong>：<code>getDataValidations()</code>, <code>createCheckboxValidation()</code></li></ol><p>特に、<code>check()</code>メソッドを使えば、指定した範囲内のチェックボックスを一気にチェックできるんよ。このメソッドを使いこなすことができれば、タスク管理やデータ処理が効率化されるけ。</p><h2 id=checkメソッドの使い方>check()メソッドの使い方</h2><p>例えば、<code>check()</code>メソッドを使うことで、特定の範囲内のチェックボックスを一括で選択できるんよ。こんな感じで使うばい。</p><pre class=wp-block-code><code>const range = sheet.getRange('A2:A10');
+range.check(); // 範囲内のチェックボックスを全選択
+</code></pre><p>このコードを実行すれば、<code>A2</code>から<code>A10</code>までのセルにあるチェックボックスを一気にチェックできるけ。ただし、範囲にチェックボックスがないセルが含まれていると、そのセルは無視されるけん、範囲を正確に指定することが大事じゃ。</p><h2 id=実際の使い方タスク管理システム>実際の使い方：タスク管理システム</h2><p>たとえば、タスク管理のシステムを作りたい場合、以下のようにチェックボックスを一括でチェックすることができるんよ。</p><pre class=wp-block-code><code>function completeTasks() {
+  const sheet = SpreadsheetApp.getActive().getSheetByName('Tasks');
+  const taskRange = sheet.getRange('B2:B');
+  const checkboxes = taskRange.getDataValidations()
+    .map((row, i) =&gt; &#91;row&#91;0] && row&#91;0].getCriteriaType() === SpreadsheetApp.DataValidationCriteria.CHECKBOX, i+2])
+    .filter((&#91;isCheckbox]) =&gt; isCheckbox)
+    .map((&#91;, row]) =&gt; sheet.getRange(`A${row}`));
+  
+  checkboxes.forEach(checkbox =&gt; checkbox.check());
+  SpreadsheetApp.getUi().alert('選択可能タスクを全て完了済みに更新しました');
+}
+</code></pre><p>このスクリプトは、B列にチェックボックスバリデーションが設定されている行のA列チェックボックスを全て選択するものじゃ。<code>getDataValidations()</code>を使ってチェックボックスの範囲を動的に取得できるけん、柔軟な操作が可能になるんよ。</p><h2 id=ischeckedメソッドの使い方>isChecked()メソッドの使い方</h2><p>次は、チェックボックスがチェックされているかどうかを確認する<code>isChecked()</code>メソッドについても触れておくけ。これを使うことで、チェックボックスの状態を簡単に確認できるんじゃ。</p><pre class=wp-block-code><code>function validateCheckboxes() {
+  const sheet = SpreadsheetApp.getActive().getActiveSheet();
+  const range = sheet.getRange('A2:A10');
+  const values = range.getValues();
+  
+  values.forEach((&#91;checkboxValue], rowIndex) =&gt; {
+    const cell = range.getCell(rowIndex + 1, 1);
+    if (cell.isChecked() === null) {
+      throw new Error(`行 ${rowIndex + 2} はチェックボックスではありません`);
+    }
+  });
+}
+</code></pre><p>このコードでは、<code>isChecked()</code>を使って、チェックボックスの状態を確認し、不正なセルを検出してエラーを投げてるんよ。これでデータの整合性が保たれるけん、大事な部分じゃ。</p><h2 id=応用的な使い方>応用的な使い方</h2><p><code>check()</code>メソッドと<code>uncheck()</code>メソッドを組み合わせることで、データの選択状態を動的に制御することもできるけん、在庫管理などでも活用できるよ。例えば、以下のようにチェックボックスの選択状態を条件に応じて変更することができるんじゃ。</p><pre class=wp-block-code><code>function smartCheck(threshold = 0.8) {
+  const sheet = SpreadsheetApp.getActive().getSheetByName('Inventory');
+  const dataRange = sheet.getDataRange();
+  const checkboxCol = 1;
+  
+  const checkStates = dataRange.getValues().map(row =&gt; row&#91;checkboxCol - 1]);
+  const total = checkStates.filter(state =&gt; typeof state === 'boolean').length;
+  const checkedCount = checkStates.filter(state =&gt; state === true).length;
+  
+  if (checkedCount / total &gt;= threshold) {
+    dataRange.uncheck();
+  } else {
+    dataRange.check();
+  }
+}
+</code></pre><p>このコードは、チェックされた項目の割合が指定された閾値を超えたら、全てのチェックボックスを解除する、という処理をしているんよ。逆に、閾値を下回った場合は、全て選択するようになってるばい。</p><h2 id=デバッグとエラー処理>デバッグとエラー処理</h2><p>スクリプトを使う上で、エラー処理やデバッグは欠かせんけん、しっかりチェックしておく必要があるばい。以下のコードで、個々のセルの状態をログに出力して、デバッグしやすくしてるんよ。</p><pre class=wp-block-code><code>function debugCheckboxBehavior() {
+  const cell = SpreadsheetApp.getActive().getRange('A1');
+  console.log({
+    value: cell.getValue(),
+    isCheckbox: cell.getDataValidation()?.getCriteriaType() === SpreadsheetApp.DataValidationCriteria.CHECKBOX,
+    isChecked: cell.isChecked()
+  });
+}
+</code></pre><p>このように、<code>console.log()</code>を使うことで、チェックボックスの状態や種類を確認できるけ、デバッグ作業が楽になるんじゃ。</p><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div><hr class="wp-block-separator has-alpha-channel-opacity"><div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-reference"><a rel=noopener href=https://zumilog.org/checkbox_gas title=スプレッドシートのチェックボックスの値を判定し処理を実行する方法【GAS】 class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img data-src=&quot;https://zumilog.assets.newt.so/v1/f1a708bb-ba87-4728-b3c3-5d71570ca420/checkbox_gas-940x539.jpg?width=1200&amp;#038;height=630&amp;#038;format=png&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+
+&lt;noscript&gt;
+  &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://zumilog.assets.newt.so/v1/f1a708bb-ba87-4728-b3c3-5d71570ca420/checkbox_gas-940x539.jpg?width=1200&amp;#038;height=630&amp;#038;format=png&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+&lt;/noscript&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    スプレッドシートのチェックボックスの値を判定し処理を実行する方法【GAS】
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+    本記事ではGoogleスプレッドシートのチェックボックスの値を判定して処理を実行する方法を解説しています。実際の例を交えてわかりやすく解説していますのでご覧くださいませ
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://zumilog.org/checkbox_gas&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://zumilog.org/checkbox_gas&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      zumilog.org
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a><p><br><a rel=noopener href=https://yagisanatode.com/google-apps-script-how-to-check-if-there-is-a-tick-box-check-box-in-a-cell-or-range/ title=https://yagisanatode.com/google-apps-script-how-to-check-if-there-is-a-tick-box-check-box-in-a-cell-or-range/ class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank></p><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img data-src=&quot;https://s.wordpress.com/mshots/v1/https%3A%2F%2Fyagisanatode.com%2Fgoogle-apps-script-how-to-check-if-there-is-a-tick-box-check-box-in-a-cell-or-range%2F?w=160&amp;#038;h=90&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+
+&lt;noscript&gt;
+  &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://s.wordpress.com/mshots/v1/https%3A%2F%2Fyagisanatode.com%2Fgoogle-apps-script-how-to-check-if-there-is-a-tick-box-check-box-in-a-cell-or-range%2F?w=160&amp;#038;h=90&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+&lt;/noscript&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    https://yagisanatode.com/google-apps-script-how-to-check-if-there-is-a-tick-box-check-box-in-a-cell-or-range/
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://yagisanatode.com/google-apps-script-how-to-check-if-there-is-a-tick-box-check-box-in-a-cell-or-range/&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://yagisanatode.com/google-apps-script-how-to-check-if-there-is-a-tick-box-check-box-in-a-cell-or-range/&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      yagisanatode.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a><p><br><a rel=noopener href=https://note.com/lssa/n/ne2f5043a9b60 title="[GAS]ドキュメントからデータ取得 #9｜Y.Yamada" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank></p><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img data-src=&quot;https://assets.st-note.com/production/uploads/images/92292490/rectangle_large_type_2_7a8d01a79b0589baa0874f59502e520c.png?fit=bounds&amp;#038;quality=85&amp;#038;width=1280&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+
+&lt;noscript&gt;
+  &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://assets.st-note.com/production/uploads/images/92292490/rectangle_large_type_2_7a8d01a79b0589baa0874f59502e520c.png?fit=bounds&amp;#038;quality=85&amp;#038;width=1280&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+&lt;/noscript&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    [GAS]ドキュメントからデータ取得 #9｜Y.Yamada
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+    これまではGASとGmailだけを利用して「メール送信」や「検索結果の取得」、「メール一括削除」などを学んできました。GASは、他にもGoogleドキュメントやGoogleスプレッドシートのデータをGmailと組み合わせることもできます。 ...
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://note.com/lssa/n/ne2f5043a9b60&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://note.com/lssa/n/ne2f5043a9b60&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      note.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a><p><br><a rel=noopener href=https://note.com/mir4545/n/na62fe8eb1dd9 title="【GAS】Googleスプレッドシート自作関数で シート情報を取得する -1｜mir" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank></p><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img data-src=&quot;https://assets.st-note.com/production/uploads/images/89869144/rectangle_large_type_2_d9eb7a1ad83901195b090644fe76cb71.png?fit=bounds&amp;#038;quality=85&amp;#038;width=1280&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+
+&lt;noscript&gt;
+  &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://assets.st-note.com/production/uploads/images/89869144/rectangle_large_type_2_d9eb7a1ad83901195b090644fe76cb71.png?fit=bounds&amp;#038;quality=85&amp;#038;width=1280&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+&lt;/noscript&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    【GAS】Googleスプレッドシート自作関数で シート情報を取得する -1｜mir
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+    これは本編のシリーズネタとは別で、旬の話題や Googleスプレッドシート、GoogleWorkspace関連でランダムに気になったことを書いていく雑談記事です。土日に新しい記事を出していこうかなと思います。 前回の記事 【LAMBDA /...
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://note.com/mir4545/n/na62fe8eb1dd9&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://note.com/mir4545/n/na62fe8eb1dd9&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      note.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a><p><br><a rel=noopener href=https://qiita.com/ytsuyuzaki/items/a5d8881a6703abe934e1 title="GASで実装した死活監視コードの紹介、あるいはclasp管理の設定例 - Qiita" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank></p><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-user-contents.imgix.net%2Fhttps%253A%252F%252Fcdn.qiita.com%252Fassets%252Fpublic%252Farticle-ogp-background-afbab5eb44e0b055cce1258705637a91.png%3Fixlib%3Drb-4.0.0%26w%3D1200%26blend64%3DaHR0cHM6Ly9xaWl0YS11c2VyLXByb2ZpbGUtaW1hZ2VzLmltZ2l4Lm5ldC9odHRwcyUzQSUyRiUyRnMzLWFwLW5vcnRoZWFzdC0xLmFtYXpvbmF3cy5jb20lMkZxaWl0YS1pbWFnZS1zdG9yZSUyRjAlMkY2NDA2JTJGYTA4NzA1YzhlOTM4Yjk0ZWIwNzg0ZWU4OWY1ZDdhZmVkNjFiN2QzMyUyRnhfbGFyZ2UucG5nJTNGMTcxNjk2MDE5MD9peGxpYj1yYi00LjAuMCZhcj0xJTNBMSZmaXQ9Y3JvcCZtYXNrPWVsbGlwc2UmYmc9RkZGRkZGJmZtPXBuZzMyJnM9NzExYmFkYzE3MTNjNzhiZjdkODRlN2NhN2JjMmI1Nzg%26blend-x%3D120%26blend-y%3D467%26blend-w%3D82%26blend-h%3D82%26blend-mode%3Dnormal%26s%3De19aaa62d3cc383fa0f39b10391815a6?ixlib=rb-4.0.0&amp;#038;w=1200&amp;#038;fm=jpg&amp;#038;mark64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTk2MCZoPTMyNCZ0eHQ9R0FTJUUzJTgxJUE3JUU1JUFFJTlGJUU4JUEzJTg1JUUzJTgxJTk3JUUzJTgxJTlGJUU2JUFEJUJCJUU2JUI0JUJCJUU3JTlCJUEzJUU4JUE2JTk2JUUzJTgyJUIzJUUzJTgzJUJDJUUzJTgzJTg5JUUzJTgxJUFFJUU3JUI0JUI5JUU0JUJCJThCJUUzJTgwJTgxJUUzJTgxJTgyJUUzJTgyJThCJUUzJTgxJTg0JUUzJTgxJUFGY2xhc3AlRTclQUUlQTElRTclOTAlODYlRTMlODElQUUlRTglQTglQUQlRTUlQUUlOUElRTQlQkUlOEImdHh0LWFsaWduPWxlZnQlMkN0b3AmdHh0LWNvbG9yPSUyMzFFMjEyMSZ0eHQtZm9udD1IaXJhZ2lubyUyMFNhbnMlMjBXNiZ0eHQtc2l6ZT01NiZ0eHQtcGFkPTAmcz04ZDM3NWQ5OWMyNzgxZjM5ZDIyNjhlM2JhYWFiZGVhMg&amp;#038;mark-x=120&amp;#038;mark-y=112&amp;#038;blend64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTgzOCZoPTU4JnR4dD0lNDB5dHN1eXV6YWtpJnR4dC1jb2xvcj0lMjMxRTIxMjEmdHh0LWZvbnQ9SGlyYWdpbm8lMjBTYW5zJTIwVzYmdHh0LXNpemU9MzYmdHh0LXBhZD0wJnM9NGU1ZWRkYzc4YjllYTNmMjkzZDliYTg5MjU0MGM1Nzk&amp;#038;blend-x=242&amp;#038;blend-y=480&amp;#038;blend-w=838&amp;#038;blend-h=46&amp;#038;blend-fit=crop&amp;#038;blend-crop=left%2Cbottom&amp;#038;blend-mode=normal&amp;#038;s=2e4dce83a3c59120411e1d3e15f93280&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    GASで実装した死活監視コードの紹介、あるいはclasp管理の設定例 - Qiita
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+    webサイトの死活監視をGoogleAppsScript(GAS)で実装してみました。 soramugi/gas-health-check: GooglaAppsScriptで死活監視 1分毎にhttpステータスコードを確認して、ステータス...
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://qiita.com/ytsuyuzaki/items/a5d8881a6703abe934e1&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://qiita.com/ytsuyuzaki/items/a5d8881a6703abe934e1&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      qiita.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a><p><br><a rel=noopener href=https://zenn.dev/gas/articles/e90b891ea39667 title=【GAS】配列操作を極める：基本から応用まで class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank></p><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img data-src=&quot;https://res.cloudinary.com/zenn/image/upload/s--Siu9sX9S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GAS%25E3%2580%2591%25E9%2585%258D%25E5%2588%2597%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E6%25A5%25B5%25E3%2582%2581%25E3%2582%258B%25EF%25BC%259A%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%258B%25E3%2582%2589%25E5%25BF%259C%25E7%2594%25A8%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GAS%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2583%25BB%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E3%2582%25B5%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2599%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM5Nzg5YzgyMTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+
+&lt;noscript&gt;
+  &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://res.cloudinary.com/zenn/image/upload/s--Siu9sX9S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GAS%25E3%2580%2591%25E9%2585%258D%25E5%2588%2597%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E6%25A5%25B5%25E3%2582%2581%25E3%2582%258B%25EF%25BC%259A%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%258B%25E3%2582%2589%25E5%25BF%259C%25E7%2594%25A8%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GAS%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2583%25BB%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E3%2582%25B5%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2599%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM5Nzg5YzgyMTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+&lt;/noscript&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    【GAS】配列操作を極める：基本から応用まで
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://zenn.dev/gas/articles/e90b891ea39667&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://zenn.dev/gas/articles/e90b891ea39667&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      zenn.dev
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a><p><br><a rel=noopener href=https://note.com/mir4545/n/na688f0525968 title="【チェックボックス2】厳密な 一括 ON/OFF切り替え  【GASでやろう】｜mir" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank></p><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img data-src=&quot;https://assets.st-note.com/production/uploads/images/90675569/rectangle_large_type_2_131309f54722b777a05434cab6b1a70a.png?fit=bounds&amp;#038;quality=85&amp;#038;width=1280&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+
+&lt;noscript&gt;
+  &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://assets.st-note.com/production/uploads/images/90675569/rectangle_large_type_2_131309f54722b777a05434cab6b1a70a.png?fit=bounds&amp;#038;quality=85&amp;#038;width=1280&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+&lt;/noscript&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    【チェックボックス2】厳密な 一括 ON/OFF切り替え 【GASでやろう】｜mir
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+    前回のチェックボックスネタの続きです。今回も GAS回です。土日更新の方も今のシリーズはGASなんで、タイミングがかぶっちゃいましたね。。 前回の記事 Googleスプレッドシートの チェックボックスをGASで制御する 前回リージョンという...
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://note.com/mir4545/n/na688f0525968&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://note.com/mir4545/n/na688f0525968&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      note.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a><p><br><a rel=noopener href=https://spreadsheet.dev/working-with-checkboxes-in-google-sheets-using-google-apps-script title="Working with Checkboxes in Google Sheets using Google Apps Script" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank></p><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img data-src=&quot;https://s.wordpress.com/mshots/v1/https%3A%2F%2Fspreadsheet.dev%2Fworking-with-checkboxes-in-google-sheets-using-google-apps-script?w=160&amp;#038;h=90&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+
+&lt;noscript&gt;
+  &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://s.wordpress.com/mshots/v1/https%3A%2F%2Fspreadsheet.dev%2Fworking-with-checkboxes-in-google-sheets-using-google-apps-script?w=160&amp;#038;h=90&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+&lt;/noscript&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    Working with Checkboxes in Google Sheets using Google Apps Script
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+    Learn how to insert, remove and work with checkboxes in Google Sheets using Google Apps Script.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://spreadsheet.dev/working-with-checkboxes-in-google-sheets-using-google-apps-script&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://spreadsheet.dev/working-with-checkboxes-in-google-sheets-using-google-apps-script&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      spreadsheet.dev
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a></div><p>GASを使えば、Googleスプレッドシートをもっと便利に使いこなせるようになるけん、ぜひ今回紹介したメソッドを活用してみてほしいな。業務の効率化が進むばい。</p></div><div class=single__article__comment></div></article><div class=single__relatedArticleList><h3 class=single__relatedArticleList__title>関連記事</h3><article class=partials__relatedArticle><div class=partials__relatedArticle__inner><a href=https://arukayies.github.io/gas/getwraps/ class=partials__relatedArticle__link></a><img src=https://arukayies.github.io/gas/getwraps/thumbnail_hu_d073a708842806bd.webp alt=GASでスプレッドシートの折り返し設定を一括取得！制御する方法 loading=lazy class=partials__relatedArticle__thumbnail><div class=partials__relatedArticle__content><h4 class=partials__relatedArticle__title>GASでスプレッドシートの折り返し設定を一括取得！制御する方法</h4><div class=partials__relatedArticle__description><p>Google Apps Script（GAS）を使ってスプレッドシートを操作する際、<code>getWraps()</code>メソッドはテキストの折り返し設定を取得するために非常に便利なツールばい。このメソッドは、特に大量のデータを扱うときに、折り返し設定の状態を一括で取得できるので、効率的な作業ができるんだよね。今回は、この<code>getWraps()</code>メソッドの使い方を、初心者向けに解説するけん、最後まで読んでみてね。</p><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div><h2 id=getwrapsとは基本の使い方>getWraps()とは？基本の使い方</h2><p>まずは、<code>getWraps()</code>メソッドがどういうものかを簡単に説明するよ。スプレッドシートでセル内のテキストが自動的に折り返されるかどうかは、データの可読性に大きく影響するんだ。<code>getWraps()</code>は、その折り返しの状態を確認するために使うメソッドばい。</p></div></div></div></article><article class=partials__relatedArticle><div class=partials__relatedArticle__inner><a href=https://arukayies.github.io/gas/getwrap/ class=partials__relatedArticle__link></a><img src=https://arukayies.github.io/gas/getwrap/thumbnail_hu_eff97127e3ea148b.webp alt=GASでスプレッドシートのセルの折り返し設定状態を取得・判定する方法 loading=lazy class=partials__relatedArticle__thumbnail><div class=partials__relatedArticle__content><h4 class=partials__relatedArticle__title>GASでスプレッドシートのセルの折り返し設定状態を取得・判定する方法</h4><div class=partials__relatedArticle__description><p>Google Apps Script（GAS）を使うと、スプレッドシートのテキスト折り返し設定をプログラムで簡単に管理できるんよ。今回はその中でも、<code>getWrap()</code>メソッドに焦点を当てて、具体的な使い方を紹介するけね。これを覚えると、大量のデータを扱うシートでも効率よく作業できるようになるばい！</p><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div><h2 id=まずはテキスト折り返しって何>まずはテキスト折り返しって何？</h2><p>スプレッドシートにおける「テキスト折り返し」とは、セル内に収まりきらないテキストが自動的に複数行に分かれる機能のことじゃ。これを設定することで、セル内のテキストが見やすくなったり、セルを越えてテキストが表示されるのを防いだりできるんよ。スプレッドシートでよく使われるテキスト表示のモードは次の3つやけ。</p></div></div></div></article></div><div class=single__navigation><a href=https://arukayies.github.io/gas/canedit/ class=single__navigation__prev>GASでスプレッドシートの指定範囲の編集権限を確認する方法</a><div class=single__navigation__center></div><a href=https://arukayies.github.io/gas/clear/ class=single__navigation__next>GASでスプレッドシートの指定範囲を完全クリアする方法</a></div></section></div></main><aside class=sidebar><div class=sidebar__inner><div class=partials__sidebar><div class="pcShow partials__sidebar__card"><h4 class=partials__sidebar__title>検索</h4><nav class=partials__sidebar__search><form action=/search/ method=get class=partials__sidebar__search__form><input type=text name=query id=search class=partials__sidebar__search__query>
+<button type=submit class=partials__sidebar__search__button>
+<i class="fas fa-search"></i></button></form></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>プロフィール</h3><nav class=partials__sidebar__profile><img src=https://arukayies.github.io/image/profile_icon_hu_b863bd11c300fc2a.webp alt=icon class=partials__sidebar__profile__icon><div class=partials__sidebar__profile__name>arukayies</div><div class=partials__sidebar__profile__description></div><div class=partials__snsLinks><a href=https://x.com/arukayies target=_blank class=partials__snsLinks__link--twitter><i class="fa-lg fab fa-x-twitter"></i>
+</a><a href=https://www.instagram.com/arukayies target=_blank class=partials__snsLinks__link--instagram><i class="fa-lg fab fa-instagram"></i>
+</a><a href=https://www.youtube.com/channel/UCoO5ZwX9e7jToe7eo-h62HQ target=_blank class=partials__snsLinks__link--youtube><i class="fa-lg fab fa-youtube"></i>
+</a><a href=https://github.com/arukayies target=_blank class=partials__snsLinks__link--github><i class="fa-lg fab fa-github"></i>
+</a><a href=https://arukayies.github.io/homepage/ target=_blank class=partials__snsLinks__link--other><i class="fa-lg fas fa-link"></i></a></div></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>新着記事</h3><nav class=partials__sidebar__article><ul class=partials__sidebar__article__items><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-summary/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-summary/thumbnail_hu_76cb231a0b93d187.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3カ国を巡った様子のまとめ loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3カ国を巡った様子のまとめ</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-travel-expenses/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-travel-expenses/thumbnail_hu_5145d4451775f13.webp alt=ヨーロッパ3カ国を巡る新婚旅行にかかった費用は100万円！10日間過ごした内訳！ loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>ヨーロッパ3カ国を巡る新婚旅行にかかった費用は100万円！10日間過ごした内訳！</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-transit-suvarnabhumi-airport/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-transit-suvarnabhumi-airport/thumbnail_hu_ab6b01167f81c539.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】スワンナプーム空港内でトランジット8時間の過ごし方 loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】スワンナプーム空港内でトランジット8時間の過ごし方</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-pari-tourism/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-pari-tourism/thumbnail_hu_6adf033c7ac7507.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】2泊3日のパリ観光 loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】2泊3日のパリ観光</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-budapest-tourism-part2/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-budapest-tourism-part2/thumbnail_hu_d55c9f8cbc269741.webp alt="【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3泊4日のブダベスト観光 後編" loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3泊4日のブダベスト観光 後編</div></div></a></li></ul></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>カテゴリー</h3><nav class=partials__sidebar__category><ul class=partials__sidebar__category__items><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/GAS/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+gas</div><div class=partials__sidebar__category__itemCount>101</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/LINE-BOT/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+line bot</div><div class=partials__sidebar__category__itemCount>28</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%83%9F%E3%82%BA%E3%83%8A%E5%8F%8E%E7%A9%AB%E6%B8%88/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ミズナ(収穫済)</div><div class=partials__sidebar__category__itemCount>14</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%AA%E3%82%AF%E3%83%A9/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+オクラ</div><div class=partials__sidebar__category__itemCount>12</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/DIY/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+diy</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%B4%E3%83%BC%E3%83%A4/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ゴーヤ</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E6%97%85/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+旅</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%83%AB%E3%83%83%E3%82%B3%E3%83%A9%E5%8F%8E%E7%A9%AB%E6%B8%88/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ルッコラ(収穫済)</div><div class=partials__sidebar__category__itemCount>8</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%B3%E3%83%9E%E3%83%84%E3%83%8A/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+コマツナ</div><div class=partials__sidebar__category__itemCount>5</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%A2%E3%83%AB%E3%83%86%E3%82%A3%E3%82%B7%E3%83%9E/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+アルティシマ</div><div class=partials__sidebar__category__itemCount>4</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%AC%E3%82%B8%E3%83%A5%E3%83%9E%E3%83%AB/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ガジュマル</div><div class=partials__sidebar__category__itemCount>4</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/WordpressAPI/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+wordpressapi</div><div class=partials__sidebar__category__itemCount>3</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/Raspberry-Pi/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+raspberry pi</div><div class=partials__sidebar__category__itemCount>1</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E7%94%9F%E6%B4%BB/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+生活</div><div class=partials__sidebar__category__itemCount>1</div></a></li></ul></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>アーカイブ</h3><nav class=partials__sidebar__archive><ul class=partials__sidebar__archive__yearList><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2024年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2024%e5%b9%b410%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2024年10月（6）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2024%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2024年9月（3）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2021年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2021%e5%b9%b43%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2021年3月（1）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2020年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年9月（15）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b48%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年8月（5）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b47%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年7月（21）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b46%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年6月（34）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b45%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年5月（9）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b44%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年4月（6）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b43%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年3月（17）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b42%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年2月（2）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2019年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b412%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年12月（2）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b411%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年11月（22）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b410%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年10月（3）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年9月（22）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b48%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年8月（13）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b47%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年7月（14）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b46%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年6月（9）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b45%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年5月（3）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b44%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年4月（1）</a></li></ul></div></li></ul></nav></div><script>document.querySelectorAll(".archive-accordion").forEach(function(e){e.addEventListener("click",function(e){if(e.target.tagName==="A")return;e.currentTarget.classList.toggle("open"),e.currentTarget.classList.toggle("close"),e.currentTarget.classList.contains("open")?e.currentTarget.querySelector(".archive-accordion-child-wrapper").style.height=e.currentTarget.querySelector(".archive-accordion-child").offsetHeight+"px":e.currentTarget.querySelector(".archive-accordion-child-wrapper").style.height="0"})})</script></div></div></aside></div><footer class=footer><div class=footer__inner><div class=partials__footer><div class=partials__footer__menu><ul class=partials__footer__menu__list><li><a href=/privacy-policy>プライバシーポリシー</a></li></ul><ul class=partials__footer__menu__list><li><a href=https://x.com/arukayies>お問い合わせ</a></li></ul></div><p class=partials__footer__copyright>© 2019-2025 @arukayies<br>Powered by <a href=https://gohugo.io/ target=_blank>Hugo</a> | Hugo Theme Salt</p></div></div></footer></div><div id=overlay class="close overlay"></div><script>window.addEventListener("DOMContentLoaded",e=>{document.querySelector("#headerBlock").style.height=document.querySelector(".header").offsetHeight+"px"})</script><script>document.querySelectorAll("#hamburger, #overlay").forEach(e=>{e.addEventListener("click",function(){document.querySelector("#hamburger").classList.toggle("open"),document.querySelector("#hamburger").classList.toggle("close"),document.querySelector("#hamburgerMenu").classList.toggle("open"),document.querySelector("#hamburgerMenu").classList.toggle("close"),document.querySelector("#overlay").classList.toggle("open"),document.querySelector("#overlay").classList.toggle("close")})})</script></body></html>

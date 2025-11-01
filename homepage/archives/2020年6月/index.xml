@@ -1,0 +1,1267 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2020年6月 on くらぶろぐ</title><link>https://arukayies.github.io/archives/2020%E5%B9%B46%E6%9C%88/</link><description>Recent content in 2020年6月 on くらぶろぐ</description><generator>Hugo</generator><language>ja</language><copyright>© 2019-2025 @arukayies</copyright><lastBuildDate>Mon, 29 Jun 2020 15:04:02 +0000</lastBuildDate><atom:link href="https://arukayies.github.io/archives/2020%E5%B9%B46%E6%9C%88/index.xml" rel="self" type="application/rss+xml"/><item><title>Google Apps Scriptでフォントサイズを取得する方法：getFontSize()完全ガイド</title><link>https://arukayies.github.io/gas/getfontsize/</link><pubDate>Mon, 29 Jun 2020 15:04:02 +0000</pubDate><guid>https://arukayies.github.io/gas/getfontsize/</guid><description>&lt;p>Googleスプレッドシートを使ってると、セルのフォントサイズを取得したい場面って結構あるばい。特にスクリプトを組んでると「このセルのフォントサイズは何ptか？」って知りたいことがあるっちゃね。そこで登場するのが &lt;code>getFontSize()&lt;/code> メソッドじゃ。&lt;/p>
+&lt;p>今回は &lt;code>getFontSize()&lt;/code> の基本から、複数セルのフォントサイズ取得、応用的な使い方まで、わかりやすく解説するけ！&lt;/p>
+&lt;hr class="wp-block-separator has-alpha-channel-opacity" />
+&lt;h2 id="getfontsize-とは">getFontSize() とは？&lt;/h2>
+&lt;p>&lt;code>getFontSize()&lt;/code> はGoogle Apps Script（GAS）でスプレッドシートのセルのフォントサイズを取得するメソッドたい。&lt;/p></description></item><item><title>GASでスプレッドシートの指定範囲から下線・取り消し線を一括取得する方法</title><link>https://arukayies.github.io/gas/getfontlines/</link><pubDate>Sun, 28 Jun 2020 18:19:16 +0000</pubDate><guid>https://arukayies.github.io/gas/getfontlines/</guid><description>&lt;p>みんな、Googleスプレッドシートの装飾情報をプログラムで取得したいことってないかい？たとえば、どのセルに下線や取り消し線が付いてるかをチェックしたい時、手作業じゃ面倒だよね？&lt;/p>
+&lt;p>そこで登場するのがGAS（Google Apps Script）の &lt;code>getFontLines()&lt;/code> メソッドばい！このメソッドを使えば、セル範囲のフォント装飾をプログラムで取得できるっちゃ。&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="getfontlines-ってなんね">getFontLines() ってなんね？&lt;/h2>
+&lt;p>GASでスプレッドシートのフォント装飾（下線・取り消し線）を取得するためのメソッドじゃ！使い方はシンプルで、&lt;code>Range&lt;/code> オブジェクトに対して呼び出せば、各セルの装飾情報を配列で返してくれるんよ。&lt;/p></description></item><item><title>【蛇口交換のやり方】ドラム式洗濯機を購入するつもりで蛇口を自分で交換してみた</title><link>https://arukayies.github.io/diy/how-to-faucet-exchange/</link><pubDate>Sun, 28 Jun 2020 14:37:48 +0000</pubDate><guid>https://arukayies.github.io/diy/how-to-faucet-exchange/</guid><description>&lt;div class="wp-block-cocoon-blocks-balloon-ex-box-1 speech-wrap sb-id-1 sbs-stn sbp-l sbis-cb cf block-box">
+ &lt;div class="speech-person">
+ &lt;figure class="speech-icon">&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2019/12/icon-1.png" alt="くら" class="speech-icon-image" />&lt;/figure>
+ &lt;/div>
+ &lt;div class="speech-balloon">
+ &lt;p>
+ &lt;span class="fz-36px">&lt;span class="bold-red">給付金入ったらドラム式洗濯機がほしい！！！&lt;/span>&lt;/span>
+ &lt;/p>
+ &lt;/div>
+&lt;/div>
+&lt;div class="wp-block-cocoon-blocks-balloon-ex-box-1 speech-wrap sb-id-1 sbs-stn sbp-l sbis-cb cf block-box">
+ &lt;div class="speech-person">
+ &lt;figure class="speech-icon">&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2019/12/icon-1.png" alt="くら" class="speech-icon-image" />&lt;/figure>
+ &lt;/div>
+ &lt;div class="speech-balloon">
+ &lt;p>
+ はい。そんな理由で最近ドラム式洗濯機のことばかり調べています。
+ &lt;/p>
+&lt;pre>&lt;code>&amp;lt;p&amp;gt;
+ 狙っている型番は『 &amp;lt;strong&amp;gt;BD-SG100E&amp;lt;/strong&amp;gt; 』 です！
+&amp;lt;/p&amp;gt;
+
+&amp;lt;div class=&amp;quot;wp-block-cocoon-blocks-blogcard blogcard-type bct-check&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;https://kadenfan.hitachi.co.jp/wash/lineup/bdsg100e/&amp;quot; title=&amp;quot;&amp;amp;#27927;&amp;amp;#28655;&amp;amp;#20094;&amp;amp;#29157;&amp;amp;#27231; BD-SG100E &amp;amp;#65306; &amp;amp;#27927;&amp;amp;#28655;&amp;amp;#27231;&amp;amp;#12539;&amp;amp;#34915;&amp;amp;#39006;&amp;amp;#20094;&amp;amp;#29157;&amp;amp;#27231; &amp;amp;#65306; &amp;amp;#26085;&amp;amp;#31435;&amp;amp;#12398;&amp;amp;#23478;&amp;amp;#38651;&amp;amp;#21697;&amp;quot; class=&amp;quot;blogcard-wrap external-blogcard-wrap a-wrap cf&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard external-blogcard eb-left cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-label external-blogcard-label&amp;quot;&amp;gt;
+ &amp;lt;span class=&amp;quot;fa&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;
+ &amp;lt;/div&amp;gt;&amp;lt;figure class=&amp;quot;blogcard-thumbnail external-blogcard-thumbnail&amp;quot;&amp;gt;
+ 
+ &amp;lt;img data-src=&amp;quot;https://s.wordpress.com/mshots/v1/https%3A%2F%2Fkadenfan.hitachi.co.jp%2Fwash%2Flineup%2Fbdsg100e%2F?w=160&amp;amp;#038;h=90&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://s.wordpress.com/mshots/v1/https%3A%2F%2Fkadenfan.hitachi.co.jp%2Fwash%2Flineup%2Fbdsg100e%2F?w=160&amp;amp;#038;h=90&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;&amp;lt;/figure&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-content external-blogcard-content&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-title external-blogcard-title&amp;quot;&amp;gt;
+ &amp;amp;#27927;&amp;amp;#28655;&amp;amp;#20094;&amp;amp;#29157;&amp;amp;#27231; BD-SG100E &amp;amp;#65306; &amp;amp;#27927;&amp;amp;#28655;&amp;amp;#27231;&amp;amp;#12539;&amp;amp;#34915;&amp;amp;#39006;&amp;amp;#20094;&amp;amp;#29157;&amp;amp;#27231; &amp;amp;#65306; &amp;amp;#26085;&amp;amp;#31435;&amp;amp;#12398;&amp;amp;#23478;&amp;amp;#38651;&amp;amp;#21697;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-snippet external-blogcard-snippet&amp;quot;&amp;gt;
+ 日立の洗濯機に関する情報をご紹介するページです。洗濯乾燥機や全自動洗濯機・衣類乾燥機等の情報がご覧いただけます。
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-footer external-blogcard-footer cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-site external-blogcard-site&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-favicon external-blogcard-favicon&amp;quot;&amp;gt;
+ &amp;lt;img data-src=&amp;quot;https://www.google.com/s2/favicons?domain=https://kadenfan.hitachi.co.jp/wash/lineup/bdsg100e/&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://www.google.com/s2/favicons?domain=https://kadenfan.hitachi.co.jp/wash/lineup/bdsg100e/&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-domain external-blogcard-domain&amp;quot;&amp;gt;
+ kadenfan.hitachi.co.jp
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;&amp;lt;/a&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;div class="wp-block-cocoon-blocks-balloon-ex-box-1 speech-wrap sb-id-1 sbs-stn sbp-l sbis-cb cf block-box">
+ &lt;div class="speech-person">
+ &lt;figure class="speech-icon">&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2019/12/icon-1.png" alt="くら" class="speech-icon-image" />&lt;/figure>
+ &lt;/div>
+ &lt;div class="speech-balloon">
+ &lt;p>
+ そこで私は気づいてしまったのです。
+ &lt;/p></description></item><item><title>【掃除方法】素人が限界まで分解してエアコンクリーニングを自分でやってみた</title><link>https://arukayies.github.io/diy/how-to-air-conditioner-cleaning/</link><pubDate>Sun, 28 Jun 2020 12:14:23 +0000</pubDate><guid>https://arukayies.github.io/diy/how-to-air-conditioner-cleaning/</guid><description>&lt;div class="wp-block-cocoon-blocks-balloon-ex-box-1 speech-wrap sb-id-1 sbs-stn sbp-l sbis-cb cf block-box">
+ &lt;div class="speech-person">
+ &lt;figure class="speech-icon">&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2019/12/icon-1.png" alt="くら" class="speech-icon-image" />&lt;/figure>
+ &lt;/div>
+ &lt;div class="speech-balloon">
+ &lt;p>
+ 我が家には3台のエアコンがあるのですが、主に稼働しているのは2台のみです。なぜかというと。。。
+ &lt;/p>
+&lt;pre>&lt;code>&amp;lt;div style=&amp;quot;height:100px&amp;quot; aria-hidden=&amp;quot;true&amp;quot; class=&amp;quot;wp-block-spacer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;p&amp;gt;
+ &amp;lt;span class=&amp;quot;fz-36px&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;bold-red&amp;quot;&amp;gt;古いエアコンが汚れており、&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;
+&amp;lt;/p&amp;gt;
+
+&amp;lt;p&amp;gt;
+ &amp;lt;span class=&amp;quot;fz-36px&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;bold-red&amp;quot;&amp;gt;こんな空気は吸えん！！！&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;
+&amp;lt;/p&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;div class="wp-block-cocoon-blocks-balloon-ex-box-1 speech-wrap sb-id-1 sbs-stn sbp-l sbis-cb cf block-box">
+ &lt;div class="speech-person">
+ &lt;figure class="speech-icon">&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2019/12/icon-1.png" alt="くら" class="speech-icon-image" />&lt;/figure>
+ &lt;/div>
+ &lt;div class="speech-balloon">
+ &lt;p>
+ はい。想像以上に奥までカビており、とてもじゃないけど使う勇気はありませんでした。。。
+ &lt;/p></description></item><item><title>GASでスプレッドシートの指定セルの文字線設定を取得する方法徹底解説</title><link>https://arukayies.github.io/gas/getfontline/</link><pubDate>Sat, 27 Jun 2020 13:44:16 +0000</pubDate><guid>https://arukayies.github.io/gas/getfontline/</guid><description>&lt;p>Google Apps Script（GAS）は、Googleスプレッドシートの自動化に便利なツールばい。今回はその中でも、テキスト装飾を取得できる&lt;code>getFontLine()&lt;/code>メソッドについて詳しく掘り下げていくけ！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="getfontlineメソッドとは">getFontLine()メソッドとは？&lt;/h2>
+&lt;p>&lt;code>getFontLine()&lt;/code>は、スプレッドシート内の特定のセルや範囲のテキスト装飾（下線や取り消し線）を取得するためのメソッドじゃ。&lt;/p></description></item><item><title>GASでスプレッドシートの指定範囲からフォントファミリーを一括取得する方法</title><link>https://arukayies.github.io/gas/getfontfamilies/</link><pubDate>Fri, 26 Jun 2020 15:24:49 +0000</pubDate><guid>https://arukayies.github.io/gas/getfontfamilies/</guid><description>&lt;p>どーも！今日はGoogle Apps Script（GAS）の &lt;code>getFontFamilies()&lt;/code> メソッドについて話すけん、スプレッドシートのフォント情報を効率的に取得したいなら最後まで読んでいきんしゃい！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="getfontfamilies-とは">getFontFamilies() とは？&lt;/h2>
+&lt;p>GASの &lt;code>getFontFamilies()&lt;/code> は、指定範囲のセルに設定されているフォントファミリーを一括取得できるメソッドじゃ。このメソッドを使えば、手作業でチェックせんでも、一瞬でフォントの情報を取得できるけん、便利な機能たい。&lt;/p></description></item><item><title>GASでスプレッドシートの指定セルからフォント名を取得する方法徹底解説</title><link>https://arukayies.github.io/gas/getfontfamily/</link><pubDate>Thu, 25 Jun 2020 15:19:28 +0000</pubDate><guid>https://arukayies.github.io/gas/getfontfamily/</guid><description>&lt;p>Google Apps Script（GAS）を使ってスプレッドシートをカスタマイズするなら、フォントの取得と設定は避けて通れんばい！この記事では、&lt;code>getFontFamily()&lt;/code>メソッドの基本から応用まで、わかりやすく解説していくけ。&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;hr class="wp-block-separator has-alpha-channel-opacity" />
+&lt;h2 id="1-getfontfamilyとは">1. getFontFamily()とは？&lt;/h2>
+&lt;p>&lt;code>getFontFamily()&lt;/code>メソッドは、スプレッドシートのセルや範囲のフォント名を取得するための機能ばい。&lt;/p></description></item><item><title>GASでスプレッドシートの指定範囲から文字色コードを効率的に取得する方法</title><link>https://arukayies.github.io/gas/getfontcolors/</link><pubDate>Wed, 24 Jun 2020 16:13:16 +0000</pubDate><guid>https://arukayies.github.io/gas/getfontcolors/</guid><description>&lt;p>Google Apps Script（GAS）を使ってスプレッドシートの文字色を取得したい？それなら &lt;code>getFontColors()&lt;/code> メソッドの使い方を押さえておくべきばい！この記事では、このメソッドの基本から応用まで、実践的なコード例を交えて解説するけん、ぜひ最後まで読んでみてな！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="getfontcolors-とは">getFontColors() とは？&lt;/h2>
+&lt;p>&lt;code>getFontColors()&lt;/code> は、スプレッドシートの特定範囲のセルの文字色を取得するためのメソッドじゃ。&lt;code>Range&lt;/code> クラスのインスタンスメソッドであり、取得結果は二次元配列（&lt;code>String[][]&lt;/code>）で返ってくるっちゃね。&lt;/p></description></item><item><title>GASでスプレッドシートの指定範囲から文字色のカラークラスを効率的に取得する方法</title><link>https://arukayies.github.io/gas/getfontcolorobjects/</link><pubDate>Tue, 23 Jun 2020 15:39:23 +0000</pubDate><guid>https://arukayies.github.io/gas/getfontcolorobjects/</guid><description>&lt;p>Google Apps Script（GAS）を使ってスプレッドシートを操作しとると、セルの文字色を取得したい場面が出てくるばい。最近、&lt;code>getFontColorObjects()&lt;/code>メソッドが登場して、これまでの&lt;code>getFontColors()&lt;/code>からパワーアップしたんじゃ。今回は、この新メソッドをしっかり使いこなすための基礎から応用まで解説していくけ！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="getfontcolorobjectsって何">getFontColorObjects()って何？&lt;/h2>
+&lt;p>このメソッドを使うと、スプレッドシートのセル範囲の文字色を取得できるばい。返ってくるのは&lt;strong>Colorオブジェクト&lt;/strong>の2次元配列で、各セルの色をRGB値や16進数カラーコードとして取得できるけ。&lt;/p></description></item><item><title>GASでスプレッドシートの指定セルから文字色の詳細情報を取得する方法</title><link>https://arukayies.github.io/gas/getfontcolorobject/</link><pubDate>Mon, 22 Jun 2020 12:07:22 +0000</pubDate><guid>https://arukayies.github.io/gas/getfontcolorobject/</guid><description>&lt;p>Google Apps Script（GAS）を使ってスプレッドシートを操作しとると、文字色を取得したり、変更したりする場面に出くわすことがあるっちゃね。そんなときに便利なのが &lt;code>getFontColorObject()&lt;/code> メソッドばい！&lt;/p>
+&lt;p>今回は、この &lt;code>getFontColorObject()&lt;/code> の基本的な使い方から応用的な活用法まで、わかりやすく解説するけ。初心者でもしっかり理解できるようにまとめたばい！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="getfontcolorobject-とは">getFontColorObject() とは？&lt;/h2>
+&lt;p>&lt;code>getFontColorObject()&lt;/code> は、Googleスプレッドシートのセル内のフォントカラーをオブジェクト形式で取得できるメソッドじゃ。従来の &lt;code>getFontColor()&lt;/code> では16進数の文字列（例：&lt;code>#ff0000&lt;/code>）しか取得できんかったけど、新しいメソッドならRGB値やアルファ値（透明度）も扱えるとよ！&lt;/p></description></item><item><title>GASでスプレッドシートの指定セルから文字のカラーコードを取得する方法</title><link>https://arukayies.github.io/gas/getfontcolor/</link><pubDate>Sun, 21 Jun 2020 16:38:04 +0000</pubDate><guid>https://arukayies.github.io/gas/getfontcolor/</guid><description>&lt;p>こんにちは！GoogleスプレッドシートをカスタマイズするのにGAS（Google Apps Script）を使ってる人、多いんじゃなかろうか？その中でも「セルの文字色を取得する方法」は、条件付き書式の拡張やデータ可視化にめちゃくちゃ便利なんだばい！&lt;/p>
+&lt;p>今回は、最新のGAS APIを踏まえながら、文字色取得の方法を基礎から応用までガッツリ解説していくけ！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="1-文字色を取得する基本メソッド">1. 文字色を取得する基本メソッド&lt;/h2>
+&lt;p>GASでは、セルの文字色を取得するには主に2つのメソッドがあるっちゃね。&lt;/p></description></item><item><title>GASでスプレッドシートの指定範囲からフィルター設定を取得・操作する方法</title><link>https://arukayies.github.io/gas/getfilter/</link><pubDate>Sat, 20 Jun 2020 05:36:12 +0000</pubDate><guid>https://arukayies.github.io/gas/getfilter/</guid><description>&lt;p>Google Apps Script（GAS）の&lt;code>getFilter()&lt;/code>メソッド、使いこなせてるかい？ スプレッドシートのフィルタ機能を自動化できる便利なメソッドばってん、意外と知らん人も多かばい。 今回は、その基本から応用テクニックまでしっかり解説するばい！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="getfilterとは">getFilter()とは？&lt;/h2>
+&lt;p>まず、&lt;code>getFilter()&lt;/code>メソッドは何をするものか？ 簡単に言うと「指定した範囲のフィルタオブジェクトを取得する」ためのメソッドばい。&lt;/p></description></item><item><title>GASでスプレッドシートの指定範囲から表示形式の値を一括取得する方法</title><link>https://arukayies.github.io/gas/getdisplayvalues/</link><pubDate>Fri, 19 Jun 2020 16:16:41 +0000</pubDate><guid>https://arukayies.github.io/gas/getdisplayvalues/</guid><description>&lt;p>Google Apps Script（GAS）を使ってスプレッドシートの操作をしてると、「表示値」を扱う場面がよくあるばい。特に、日付や通貨、パーセンテージなど、フォーマットが大事なデータを取り扱うときには、&lt;code>getDisplayValues()&lt;/code>メソッドが大活躍するんじゃ。今回はそのメソッドの使い方を、初心者にもわかりやすく解説していくけん、ぜひ参考にしてみてや！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="getdisplayvaluesとは">getDisplayValues()とは？&lt;/h2>
+&lt;p>まず、&lt;code>getDisplayValues()&lt;/code>ってどんなメソッドかって話をしとくばい。Googleスプレッドシートでは、セルに入力されたデータは「表示値」としてユーザーに見えるけど、その裏側では実際には異なるデータ型が使われていることが多いんだよ。例えば、「2023/04/02」って日付が表示されているけど、実際にはそのセルには「UNIX時間」って数値が格納されとるわけよ。&lt;/p></description></item><item><title>GASでスプレッドシートのセルに表示されている値を取得する方法徹底解説</title><link>https://arukayies.github.io/gas/getdisplayvalue/</link><pubDate>Thu, 18 Jun 2020 17:28:39 +0000</pubDate><guid>https://arukayies.github.io/gas/getdisplayvalue/</guid><description>&lt;p>Google Apps Script（GAS）を使ったスプレッドシート操作では、&lt;code>getDisplayValue()&lt;/code>メソッドがとても役立つばい。これ、セルに表示されている値をそのまま取得できる機能なんよね。例えば、日付や通貨形式のデータをそのまんま扱いたい時に超便利なメソッドなんだけ。&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="メソッドの基本的な使い方">メソッドの基本的な使い方&lt;/h2>
+&lt;p>まずは基本から押さえよう！&lt;code>getDisplayValue()&lt;/code>って、簡単に言うと、セルに表示されてる値を文字列として取得するメソッドじゃ。これ、計算結果や書式設定済みのデータをそのまま取り出せるんよ。&lt;/p></description></item><item><title>GASでスプレッドシートの開発者メタデータを取得して活用する方法徹底解説</title><link>https://arukayies.github.io/gas/getdevelopermetadata/</link><pubDate>Wed, 17 Jun 2020 16:49:27 +0000</pubDate><guid>https://arukayies.github.io/gas/getdevelopermetadata/</guid><description>&lt;p>Google Apps Script（GAS）での開発において、&lt;code>getDeveloperMetadata()&lt;/code>メソッドはスプレッドシートに紐づくメタデータを効果的に管理できる強力なツールじゃけ、この機能を使うことで、スプレッドシートの情報をもっと柔軟に、そして安全に扱えるようになるんよ。今回は、このメソッドを使いこなすためのポイントをしっかり解説していくけ、初心者でも分かりやすく使えるようにするけん、最後までチェックしてくれな！&lt;/p></description></item><item><title>GASでスプレッドシートの範囲内すべての入力規則を効率的に取得する方法</title><link>https://arukayies.github.io/gas/getdatavalidations/</link><pubDate>Tue, 16 Jun 2020 14:41:48 +0000</pubDate><guid>https://arukayies.github.io/gas/getdatavalidations/</guid><description>&lt;p>Google Apps Script（GAS）を使って、スプレッドシートのデータ入力規則を効率よく管理する方法を紹介するばい。この「&lt;code>getDataValidations()&lt;/code>」メソッドは、シート内の特定範囲に設定された入力規則を一括で取得・操作するための便利なツールだっちゃ。&lt;/p>
+&lt;p>今回は、その技術的な仕様から、実際の使い方まで、どんな場面で役立つかを分かりやすく解説するけ！もちろん、具体的なコードも紹介するから、すぐにでも試せるばい。&lt;/p></description></item><item><title>GASでスプレッドシートの指定セルから入力規則を取得する方法徹底解説</title><link>https://arukayies.github.io/gas/getdatavalidation/</link><pubDate>Mon, 15 Jun 2020 17:13:32 +0000</pubDate><guid>https://arukayies.github.io/gas/getdatavalidation/</guid><description>&lt;p>Google Apps Script（GAS）の&lt;code>getDataValidation()&lt;/code>メソッドは、スプレッドシートにおけるデータ入力規則を管理する際に非常に便利な機能なんよ。これを使えば、入力規則を簡単に取得して処理できるけど、どんな場面でどう活用するのか、今回はその基礎から応用例まで、しっかり説明していくけ。&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="1-getdatavalidationメソッドの基礎">1. getDataValidation()メソッドの基礎&lt;/h2>
+&lt;h3 id="メソッドの動作とは">メソッドの動作とは？&lt;/h3>
+&lt;p>&lt;code>getDataValidation()&lt;/code>は、スプレッドシートのセルに設定された入力規則を取得するメソッドさ。これを使うと、セルに設定されたバリデーション（入力規則）の内容を取得できるんよ。規則が設定されていない場合は&lt;code>null&lt;/code>が返ってくるけど、規則があればその情報をきちんと取り出すことができるんじゃ。&lt;/p></description></item><item><title>GASでスプレッドシートのデータ範囲を見出し付きで簡単取得する方法</title><link>https://arukayies.github.io/gas/getdatatable-firstrowisheader/</link><pubDate>Sun, 14 Jun 2020 16:19:48 +0000</pubDate><guid>https://arukayies.github.io/gas/getdatatable-firstrowisheader/</guid><description>&lt;p>Google Apps Script（GAS）って、スプレッドシートやその他のGoogleサービスを自動化するのに便利なツールやけど、今回はその中でも&lt;code>getDataTable(firstRowIsHeader)&lt;/code>メソッドの使い方に焦点を当てて、初心者でもわかりやすく解説していくけんね！このメソッド、ほんとうに便利で、データを整然と扱えるようになるばい。&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="まずはdatatableの基本からさ">まずはDataTableの基本からさ&lt;/h2>
+&lt;h3 id="datatableってなに">DataTableってなに？&lt;/h3>
+&lt;p>&lt;code>getDataTable&lt;/code>メソッドを使うと、スプレッドシートのデータを「DataTable」っていう形で取得できるんだけど、これはスプレッドシートのデータを「表形式」やけど、より扱いやすくするためのものなんじゃ。例えば、文字列や数値、日付が混在したデータも、ちゃんと型を認識して整理してくれるんよ。&lt;/p></description></item><item><title>GASでスプレッドシートのグラフデータを効率的に取得する方法</title><link>https://arukayies.github.io/gas/getdatatable/</link><pubDate>Sat, 13 Jun 2020 14:27:36 +0000</pubDate><guid>https://arukayies.github.io/gas/getdatatable/</guid><description>&lt;p>Google Apps Script（GAS）の&lt;code>getDataTable()&lt;/code>メソッドって、スプレッドシートのデータを簡単に扱えるとっても便利な機能なんだよね。このメソッドを活用すると、データ分析やグラフ作成が劇的に簡単になるばい。今回は、この&lt;code>getDataTable()&lt;/code>を基本から応用まで、わかりやすく解説していくけんね！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="まずは基本からgetdatatableの使い方">まずは基本から！getDataTable()の使い方&lt;/h2>
+&lt;h3 id="getdatatableメソッドの基本">getDataTable()メソッドの基本&lt;/h3>
+&lt;p>&lt;code>getDataTable()&lt;/code>は、スプレッドシートの特定の範囲からデータを取得し、構造化された形式で返してくれるメソッドなんだ。これにより、データをグラフやチャートに簡単に変換できるけんね。&lt;/p></description></item><item><title>GASでアイキャッチ画像を自動生成させるツールを作ってみた</title><link>https://arukayies.github.io/gas/wordpress-rest-api/create-eyecatchimage/</link><pubDate>Fri, 12 Jun 2020 17:03:37 +0000</pubDate><guid>https://arukayies.github.io/gas/wordpress-rest-api/create-eyecatchimage/</guid><description>&lt;p>ブロガーの皆さんはアイキャッチ画像をどのように作成しているでしょうか。&lt;/p>
+&lt;/p>
+&lt;p>
+私は&lt;strong>&lt;span class="bold-red">無料&lt;/span>&lt;/strong>でおしゃれに画像をデザインできる&lt;strong>Canva&lt;/strong>で作成しています。
+&lt;div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-check">
+ &lt;a rel="noopener" href="https://www.canva.com/" title="Just a moment..." class="blogcard-wrap external-blogcard-wrap a-wrap cf" target="_blank">
+ &lt;div class="blogcard external-blogcard eb-left cf">
+ &lt;div class="blogcard-label external-blogcard-label">
+ &lt;span class="fa">&lt;/span>
+ &lt;/div>&lt;figure class="blogcard-thumbnail external-blogcard-thumbnail">
+&lt;pre>&lt;code>&amp;lt;img data-src=&amp;quot;https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.canva.com%2F?w=160&amp;amp;#038;h=90&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+
+&amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.canva.com%2F?w=160&amp;amp;#038;h=90&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-thumb-image external-blogcard-thumb-image&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; /&amp;gt;
+&amp;lt;/noscript&amp;gt;&amp;lt;/figure&amp;gt;
+
+&amp;lt;div class=&amp;quot;blogcard-content external-blogcard-content&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-title external-blogcard-title&amp;quot;&amp;gt;
+ Just a moment...
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-snippet external-blogcard-snippet&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;blogcard-footer external-blogcard-footer cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-site external-blogcard-site&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-favicon external-blogcard-favicon&amp;quot;&amp;gt;
+ &amp;lt;img data-src=&amp;quot;https://www.google.com/s2/favicons?domain=https://www.canva.com/&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://www.google.com/s2/favicons?domain=https://www.canva.com/&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image external-blogcard-favicon-image&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-domain external-blogcard-domain&amp;quot;&amp;gt;
+ www.canva.com
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>&lt;/a>
+&lt;/div>
+&lt;p>&lt;strong>Canva&lt;/strong>は操作がとても簡単で素材もたくさんあり、不満はないのですが&lt;/p>
+&lt;/p>
+&lt;p>
+それでも&lt;span class="fz-22px">&lt;strong>毎回画像を作成するのは手間です。&lt;/strong>&lt;/span>
+&lt;/p>
+&lt;p>
+そこで今回はGASで作る
+&lt;/p>
+&lt;p>
+&lt;strong>&lt;span class="fz-32px">&lt;span class="bold-green">アイキャッチ画像自動生成ツール&lt;/span> &lt;/span>&lt;/strong>
+&lt;/p>
+&lt;p>
+の作り方を紹介します！
+&lt;/p>
+&lt;p>
+ブログで使用するので、&lt;strong>&lt;span class="bold-green">WordPress自動アップロード機能&lt;/span>&lt;/strong> もあります！
+&lt;div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-check-circle block-box has-border-color has-icon-color has-red-border-color has-red-icon-color">
+ &lt;div class="iconlist-title">
+ ツールで出来ること！
+ &lt;/div>
+ &lt;ul class="wp-block-list">
+ &lt;li>
+ 背景画像にメイン・サブタイトル文字を重ねて合成することできます！
+ &lt;/li>
+ &lt;li>
+ 重ねる位置は自由に設定できます！
+ &lt;/li>
+ &lt;li>
+ 画像をWordpressにアップロードすることができます！
+ &lt;/li>
+ &lt;li>
+ アップロードする画像の詳細情報も設定できます！
+ &lt;/li>
+ &lt;/ul>
+&lt;/div>
+&lt;p>ツールの全体像はこんな動きになります。&lt;figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter">&lt;/p></description></item><item><title>GASでスプレッドシートの外部連携用ソースURLを取得する方法</title><link>https://arukayies.github.io/gas/getdatasourceurl/</link><pubDate>Thu, 11 Jun 2020 14:50:07 +0000</pubDate><guid>https://arukayies.github.io/gas/getdatasourceurl/</guid><description>&lt;p>こんにちは！今日は、Google Apps Script（GAS）の&lt;code>getDataSourceUrl()&lt;/code>メソッドについて詳しく解説するばい。このメソッド、スプレッドシートのデータを外部からアクセスできるようにするために使える、めっちゃ便利な機能なんよ。もし、データを外部システムと連携させたいとか、リアルタイムでデータ可視化したいって考えているなら、ぜひ覚えておきたいところやけ。&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="基本的な使い方と仕様">基本的な使い方と仕様&lt;/h2>
+&lt;h3 id="getdatasourceurlメソッドって何">getDataSourceUrl()メソッドって何？&lt;/h3>
+&lt;p>まず、&lt;code>getDataSourceUrl()&lt;/code>は、Google スプレッドシート内の指定した範囲のデータを、外部からアクセス可能なURLに変換するためのメソッドなんよ。簡単に言うと、このURLを使えば、スプレッドシート内のデータにアクセスして、JSON形式でデータを取得できるんやけど、スプレッドシートの公開設定が必要な点に気をつけてね。&lt;/p></description></item><item><title>GASでスプレッドシートのBigQueryデータソースを効率的に取得する方法</title><link>https://arukayies.github.io/gas/getdatasourcetables/</link><pubDate>Tue, 09 Jun 2020 14:29:59 +0000</pubDate><guid>https://arukayies.github.io/gas/getdatasourcetables/</guid><description>&lt;p>こんにちは！今回はGoogle Apps Script（GAS）の&lt;code>getDataSourceTables()&lt;/code>メソッドを使いこなすための実践ガイドをお届けするけ。これを覚えておけば、スプレッドシート内のデータソースを自在に操作できるようになるけん、ぜひチェックしてみてな！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="基本的な仕組み">基本的な仕組み&lt;/h2>
+&lt;h3 id="データソーステーブルとは">データソーステーブルとは？&lt;/h3>
+&lt;p>まず最初に、&lt;code>getDataSourceTables()&lt;/code>が返す「データソーステーブル」って何かを理解しないといけんばい。これは、BigQueryなどの外部データとスプレッドシートをつなげる役割をしてるんじゃけど、普通のスプレッドシートとはちょっと違う構造になっとるんよね。主に以下の要素で構成されとるよ。&lt;/p></description></item><item><title>GASでスプレッドシートの指定セルからデータ範囲を列・行別に取得する方法</title><link>https://arukayies.github.io/gas/getdataregion-dimension/</link><pubDate>Mon, 08 Jun 2020 14:08:06 +0000</pubDate><guid>https://arukayies.github.io/gas/getdataregion-dimension/</guid><description>&lt;p>Google Apps Script（GAS）を使っていると、スプレッドシートの操作がスムーズにできるようになるけど、その中でも「getDataRegion(dimension)」メソッドって、ちょっとした秘密兵器みたいなものだと思わんか？このメソッドをうまく使うことで、データ範囲を動的に取得して、より効率的に処理できるようになるけど、今回はその使い方をじっくり解説していくばい。&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="getdataregiondimensionメソッドって何よ">getDataRegion(dimension)メソッドって何よ？&lt;/h2>
+&lt;p>このメソッドは、指定したセルから連続したデータ範囲を自動で取得できる機能なんだよね。例えば、セルB4を起点にそのまま横のデータがどこまで続いているか、あるいは縦のデータがどこまで続いているかを調べることができるんだ。&lt;/p></description></item><item><title>GASでスプレッドシートの指定セルから値が存在する範囲を簡単取得する方法</title><link>https://arukayies.github.io/gas/getdataregion/</link><pubDate>Mon, 08 Jun 2020 13:14:09 +0000</pubDate><guid>https://arukayies.github.io/gas/getdataregion/</guid><description>&lt;p>Google Apps Script（GAS）を使うと、Google スプレッドシートを簡単に操作できるばい。特に&lt;code>getDataRegion()&lt;/code>メソッドは、データ範囲を自動で見つけるための便利なツールで、業務効率がグンと上がるんじゃけ。今回は、この&lt;code>getDataRegion()&lt;/code>メソッドを初心者でもわかるように、使い方を説明していくけ。&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="まずは基本getdataregionとは">まずは基本！getDataRegion()とは？&lt;/h2>
+&lt;p>&lt;code>getDataRegion()&lt;/code>メソッドは、指定したセルを起点にして、その周りのデータが続く範囲を自動で探してくれるんじゃ。例えば、スプレッドシートで「データ範囲を全部選びたい！」ってとき、手動で範囲を選ばなくても、このメソッドを使えば自動で範囲を特定してくれるんだよ。ほんと便利ばい。&lt;/p></description></item><item><title>GASでスプレッドシートの範囲内の列番号を効率的に取得する方法</title><link>https://arukayies.github.io/gas/getcolumn/</link><pubDate>Sun, 07 Jun 2020 04:45:44 +0000</pubDate><guid>https://arukayies.github.io/gas/getcolumn/</guid><description>&lt;p>Google Apps Script（GAS）の&lt;code>getColumn()&lt;/code>メソッドって、スプレッドシートで列の位置を特定するためには欠かせない機能ばい。この記事では、初心者にもわかりやすく、&lt;code>getColumn()&lt;/code>メソッドの基本的な使い方から応用例まで紹介するけん、最後まで読んでいってけ！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="getcolumnメソッドの基本的な使い方">getColumn()メソッドの基本的な使い方&lt;/h2>
+&lt;p>まず、&lt;code>getColumn()&lt;/code>メソッドがどういうものかを簡単に説明するけ。これは、スプレッドシートの範囲を指定したとき、その範囲の「左端」の列番号を返してくれるんだよ。例えば、A列が1、B列が2といったように、列は番号がついてるけど、&lt;code>getColumn()&lt;/code>メソッドを使うと、その範囲の最初の列番号がわかるんだ。&lt;/p></description></item><item><title>GASだけで作れる買い物リストを管理するLINE BOTの作り方Ver2.0</title><link>https://arukayies.github.io/gas/line_bot/shopping-list-post-v2/</link><pubDate>Sat, 06 Jun 2020 14:19:51 +0000</pubDate><guid>https://arukayies.github.io/gas/line_bot/shopping-list-post-v2/</guid><description>&lt;p>前回作った買い物リストを管理するLINE BOTについてちょっとコードを変更したので、今回はそれを紹介します！&lt;/p>
+&lt;div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-caret-right block-box has-background has-border-color has-icon-color has-watery-blue-background-color has-key-color-border-color has-key-color-icon-color">
+ &lt;div class="iconlist-title">
+ 変更点
+ &lt;/div>
+ &lt;ul class="wp-block-list">
+ &lt;li>
+ 処理が1ファイルに長かったので、細分化しました。
+ &lt;/li>
+ &lt;li>
+ 買い物リストの削除方法を変更しました。
+ &lt;/li>
+ &lt;/ul>
+&lt;/div>
+&lt;p>コード部分のみ変えているのでそれ以外は前回の記事を参考にしてください！&lt;/p>
+&lt;div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-reference">
+ &lt;a href="https://arukayies.com/gas/line_bot/shopping-list-post" title="GASだけで作れる買い物リストを管理するLINE BOTの作り方" class="blogcard-wrap internal-blogcard-wrap a-wrap cf" target="_blank">
+ &lt;div class="blogcard internal-blogcard ib-left cf">
+ &lt;div class="blogcard-label internal-blogcard-label">
+ &lt;span class="fa">&lt;/span>
+ &lt;/div>&lt;figure class="blogcard-thumbnail internal-blogcard-thumbnail">
+&lt;pre>&lt;code>&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; width=&amp;quot;160&amp;quot; height=&amp;quot;90&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-160x90.png&amp;quot; class=&amp;quot;blogcard-thumb-image internal-blogcard-thumb-image wp-post-image&amp;quot; alt=&amp;quot;&amp;quot; srcset=&amp;quot;https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-160x90.png 160w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-120x68.png 120w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-320x180.png 320w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-376x212.png 376w&amp;quot; sizes=&amp;quot;(max-width: 160px) 100vw, 160px&amp;quot; /&amp;gt;&amp;lt;/figure&amp;gt;
+
+&amp;lt;div class=&amp;quot;blogcard-content internal-blogcard-content&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-title internal-blogcard-title&amp;quot;&amp;gt;
+ GASだけで作れる買い物リストを管理するLINE BOTの作り方
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-snippet internal-blogcard-snippet&amp;quot;&amp;gt;
+ GASだけで作れる買い物リストを管理できるLINE BOTの作り方を紹介します！コピペで作れるのでぜひ使ってみてください！
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;blogcard-footer internal-blogcard-footer cf&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-site internal-blogcard-site&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-favicon internal-blogcard-favicon&amp;quot;&amp;gt;
+ &amp;lt;img data-src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image internal-blogcard-favicon-image lozad lozad-img&amp;quot; loading=&amp;quot;lazy&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ 
+ &amp;lt;noscript&amp;gt;
+ &amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&amp;quot; alt=&amp;quot;&amp;quot; class=&amp;quot;blogcard-favicon-image internal-blogcard-favicon-image&amp;quot; width=&amp;quot;16&amp;quot; height=&amp;quot;16&amp;quot; /&amp;gt;
+ &amp;lt;/noscript&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-domain internal-blogcard-domain&amp;quot;&amp;gt;
+ arukayies.com
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;blogcard-date internal-blogcard-date&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;blogcard-post-date internal-blogcard-post-date&amp;quot;&amp;gt;
+ 2024.11.15
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>&lt;/a>
+&lt;/div>
+&lt;p>削除部分はこんな動きになります。&lt;figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter">&lt;/p></description></item><item><title>GASでスプレッドシートの特定セルを柔軟に操作する方法</title><link>https://arukayies.github.io/gas/getcell/</link><pubDate>Sat, 06 Jun 2020 05:52:57 +0000</pubDate><guid>https://arukayies.github.io/gas/getcell/</guid><description>&lt;p>Google Apps Script（GAS）を使ってスプレッドシートを操作する時、&lt;code>getCell(row, column)&lt;/code>メソッドはとても便利な機能なんだよ。この記事では、このメソッドを使いこなすための基本から応用まで、初心者にもわかりやすく説明するけん、ぜひ最後まで読んでみてね。&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="1-getcellメソッドの基本構造">1. getCellメソッドの基本構造&lt;/h2>
+&lt;p>まずは基本の使い方を見てみよう。&lt;/p></description></item><item><title>GASでスプレッドシートの交互背景色設定を効率的に取得する方法</title><link>https://arukayies.github.io/gas/getbandings/</link><pubDate>Sat, 06 Jun 2020 05:36:49 +0000</pubDate><guid>https://arukayies.github.io/gas/getbandings/</guid><description>&lt;p>どげんね、Googleスプレッドシートを使いこなしたかね？今回は、Google Apps Script（GAS）で使える &lt;code>getBandings()&lt;/code> メソッドについて詳しく話していくばい！バンディング（交互の色分け）をプログラムで操作できる強力な機能じゃけ、しっかり押さえておくと、スプレッドシートの見栄えやデータ整理が一気に楽になるっちゃ！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="getbandings-とは">getBandings() とは？&lt;/h2>
+&lt;p>&lt;code>getBandings()&lt;/code> メソッドは、スプレッドシートの「バンディング情報」を取得するための機能さ。スプレッドシートのセルを「縞模様」にする機能があるっちゃろ？それをプログラムで扱うためのメソッドじゃ。&lt;/p></description></item><item><title>GASでスプレッドシートの指定範囲の背景色を一括取得する方法</title><link>https://arukayies.github.io/gas/getbackgrounds/</link><pubDate>Fri, 05 Jun 2020 13:22:44 +0000</pubDate><guid>https://arukayies.github.io/gas/getbackgrounds/</guid><description>&lt;p>Google Apps Script（GAS）の&lt;code>getBackgrounds()&lt;/code>メソッド、知っとるかい？スプレッドシートのセル範囲から背景色を一括で取得できる便利な機能ばい。この記事では、このメソッドの基本から実践的な使い方まで、しっかり解説するけ！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="1-getbackgroundsの基本">1. getBackgrounds()の基本&lt;/h2>
+&lt;h3 id="メソッドの概要">メソッドの概要&lt;/h3>
+&lt;p>&lt;code>getBackgrounds()&lt;/code>は&lt;code>Range&lt;/code>オブジェクトのメソッドで、指定したセル範囲の背景色を16進数のカラーコード（例: &lt;code>#ffffff&lt;/code>）で取得するんじゃ。&lt;/p></description></item><item><title>GASでスプレッドシートの背景色を詳細情報付きで効率的に取得する方法</title><link>https://arukayies.github.io/gas/getbackgroundobjects/</link><pubDate>Thu, 04 Jun 2020 15:02:55 +0000</pubDate><guid>https://arukayies.github.io/gas/getbackgroundobjects/</guid><description>&lt;p>Googleスプレッドシートを使ってると、背景色を取得・変更したい場面ってあるばい？ 今回は、Google Apps Script（GAS）で背景色を扱うためのメソッド、特に**getBackgroundObjects()**について、分かりやすく解説していくけ！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="背景色を取得するメソッドの違い">背景色を取得するメソッドの違い&lt;/h2>
+&lt;p>まず、背景色を取得するための主要メソッドを整理してみたさ。&lt;figure class="wp-block-table">&lt;/p></description></item><item><title>GASでスプレッドシートのセル背景色情報を詳細に取得する方法</title><link>https://arukayies.github.io/gas/getbackgroundobject/</link><pubDate>Tue, 02 Jun 2020 16:30:31 +0000</pubDate><guid>https://arukayies.github.io/gas/getbackgroundobject/</guid><description>&lt;p>みんな、Google Apps Script（GAS）って聞いたことあるけど、どんなことができるか気になるよね？特にスプレッドシートを使ってる人には必見の機能、&lt;code>getBackgroundObject()&lt;/code>メソッドについて、わかりやすく解説していくけん！これを使うと、スプレッドシートのセルの背景色をもっと自由に制御できるようになるんだよ。&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="セル背景色って何に使えるの">セル背景色って何に使えるの？&lt;/h2>
+&lt;p>Google スプレッドシートのセルに色をつけるだけでなく、色に関する情報をプログラムで操作したいときに、&lt;code>getBackgroundObject()&lt;/code>メソッドが大活躍するんだ。色を計算したり、特定の条件に応じて色を変えたりできるから、作業の効率がぐんと上がるよ！&lt;/p></description></item><item><title>GASでスプレッドシートのセル背景色を効率的に取得・活用する方法</title><link>https://arukayies.github.io/gas/getbackground/</link><pubDate>Tue, 02 Jun 2020 12:30:15 +0000</pubDate><guid>https://arukayies.github.io/gas/getbackground/</guid><description>&lt;p>Googleスプレッドシートの色管理、ちゃんとやってる？「このセルの色を取得したい！」ってときに使うのが &lt;code>getBackground()&lt;/code> なんじゃ。GASを使ってスプレッドシートを自動化するなら、セルの色をプログラム的に扱うのは避けて通れんばい！&lt;/p>
+&lt;p>この記事では &lt;code>getBackground()&lt;/code> の基本から応用、効率的なデータ処理までをバッチリ解説するけ。知らんかった人も、これを読めばスムーズに使いこなせるようになるさ！&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="getbackgroundメソッドの基本">getBackground()メソッドの基本&lt;/h2>
+&lt;p>&lt;code>getBackground()&lt;/code> は &lt;code>Range&lt;/code> クラスのメソッドで、セルの背景色を16進数のカラーコード（例：&lt;code>#ffffff&lt;/code>）として取得する機能じゃ。&lt;/p></description></item><item><title>GASでスプレッドシートのセル範囲をA1形式で簡単取得する方法</title><link>https://arukayies.github.io/gas/geta1notation/</link><pubDate>Mon, 01 Jun 2020 12:51:59 +0000</pubDate><guid>https://arukayies.github.io/gas/geta1notation/</guid><description>&lt;p>Google Apps Script（GAS）を使ってスプレッドシートを操作するなら、&lt;code>getA1Notation()&lt;/code>メソッドは避けて通れんとばい！このメソッドは、セル範囲をA1記法の文字列で取得する便利な機能やけ、しっかり理解して活用せんと損ばい。&lt;/p>
+&lt;div class="cstmreba">
+ &lt;div class="kaerebalink-box">
+ &lt;div class="kaerebalink-image">
+ &lt;a rel="noopener" href="//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target="_blank" >&lt;img decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg" style="border: none;" />&lt;/a>&lt;img loading="lazy" decoding="async" src="https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif" width="1" height="1" style="border:none;" />
+ &lt;/div>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;kaerebalink-info&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;kaerebalink-name&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-powered-date&amp;quot;&amp;gt;
+ posted with &amp;lt;a rel=&amp;quot;nofollow noopener&amp;quot; href=&amp;quot;https://kaereba.com&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;カエレバ&amp;lt;/a&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-detail&amp;quot;&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;kaerebalink-link1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;shoplinkrakuten&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;amp;#038;p_id=54&amp;amp;#038;pc_id=54&amp;amp;#038;pl_id=616&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;楽天市場&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkamazon&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;amp;#038;p_id=170&amp;amp;#038;pc_id=185&amp;amp;#038;pl_id=4062&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Amazon&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ 
+ &amp;lt;div class=&amp;quot;shoplinkyahoo&amp;quot;&amp;gt;
+ &amp;lt;a rel=&amp;quot;noopener&amp;quot; href=&amp;quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;amp;#038;p_id=1225&amp;amp;#038;pc_id=1925&amp;amp;#038;pl_id=18502&amp;amp;#038;s_v=b5Rz2P0601xu&amp;amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&amp;quot; target=&amp;quot;_blank&amp;quot; &amp;gt;Yahooショッピング&amp;lt;/a&amp;gt;&amp;lt;img loading=&amp;quot;lazy&amp;quot; decoding=&amp;quot;async&amp;quot; src=&amp;quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&amp;quot; width=&amp;quot;1&amp;quot; height=&amp;quot;1&amp;quot; style=&amp;quot;border:none;&amp;quot; /&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div class=&amp;quot;booklink-footer&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>
+ &lt;/div>
+&lt;/div>
+&lt;h2 id="a1表記とは">A1表記とは？&lt;/h2>
+&lt;p>A1表記っちゅうのは、スプレッドシートでセルの位置を示すための標準的な書き方たい。&lt;/p></description></item></channel></rss>

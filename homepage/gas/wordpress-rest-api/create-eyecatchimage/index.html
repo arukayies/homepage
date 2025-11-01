@@ -1,0 +1,636 @@
+<!doctype html><html lang=ja><head><meta charset=UTF-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>GASでアイキャッチ画像を自動生成させるツールを作ってみた | くらぶろぐ</title><meta name=description content='ブロガーの皆さんはアイキャッチ画像をどのように作成しているでしょうか。
+
+
+私は無料でおしゃれに画像をデザインできるCanvaで作成しています。
+
+  
+  
+    
+      
+    
+<img data-src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.canva.com%2F?w=160&amp;#038;h=90" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
+
+<noscript>
+  <img loading="lazy" decoding="async" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.canva.com%2F?w=160&amp;#038;h=90" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
+</noscript></figure>
+
+<div class="blogcard-content external-blogcard-content">
+  <div class="blogcard-title external-blogcard-title">
+    Just a moment...
+  </div>
+  
+  <div class="blogcard-snippet external-blogcard-snippet">
+  </div>
+</div>
+
+<div class="blogcard-footer external-blogcard-footer cf">
+  <div class="blogcard-site external-blogcard-site">
+    <div class="blogcard-favicon external-blogcard-favicon">
+      <img data-src="https://www.google.com/s2/favicons?domain=https://www.canva.com/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
+      
+      <noscript>
+        <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://www.canva.com/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
+      </noscript>
+    </div>
+    
+    <div class="blogcard-domain external-blogcard-domain">
+      www.canva.com
+    </div>
+  </div>
+</div>
+
+  
+
+Canvaは操作がとても簡単で素材もたくさんあり、不満はないのですが
+
+
+それでも毎回画像を作成するのは手間です。
+
+
+そこで今回はGASで作る
+
+
+アイキャッチ画像自動生成ツール 
+
+
+の作り方を紹介します！
+
+
+ブログで使用するので、WordPress自動アップロード機能 もあります！
+
+  
+    ツールで出来ること！
+  
+  
+    
+      背景画像にメイン・サブタイトル文字を重ねて合成することできます！
+    
+    
+      重ねる位置は自由に設定できます！
+    
+    
+      画像をWordpressにアップロードすることができます！
+    
+    
+      アップロードする画像の詳細情報も設定できます！
+    
+  
+
+ツールの全体像はこんな動きになります。'><meta name=thumbnail content="https://arukayies.github.io/gas/wordpress-rest-api/create-eyecatchimage/thumbnail_hu_35e0090823022d5e.webp"><meta property="og:locale" content="ja_JP"><meta property='og:title' content='GASでアイキャッチ画像を自動生成させるツールを作ってみた | くらぶろぐ'><meta property='og:description' content='ブロガーの皆さんはアイキャッチ画像をどのように作成しているでしょうか。
+
+
+私は無料でおしゃれに画像をデザインできるCanvaで作成しています。
+
+  
+  
+    
+      
+    
+<img data-src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.canva.com%2F?w=160&amp;#038;h=90" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
+
+<noscript>
+  <img loading="lazy" decoding="async" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.canva.com%2F?w=160&amp;#038;h=90" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
+</noscript></figure>
+
+<div class="blogcard-content external-blogcard-content">
+  <div class="blogcard-title external-blogcard-title">
+    Just a moment...
+  </div>
+  
+  <div class="blogcard-snippet external-blogcard-snippet">
+  </div>
+</div>
+
+<div class="blogcard-footer external-blogcard-footer cf">
+  <div class="blogcard-site external-blogcard-site">
+    <div class="blogcard-favicon external-blogcard-favicon">
+      <img data-src="https://www.google.com/s2/favicons?domain=https://www.canva.com/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
+      
+      <noscript>
+        <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://www.canva.com/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
+      </noscript>
+    </div>
+    
+    <div class="blogcard-domain external-blogcard-domain">
+      www.canva.com
+    </div>
+  </div>
+</div>
+
+  
+
+Canvaは操作がとても簡単で素材もたくさんあり、不満はないのですが
+
+
+それでも毎回画像を作成するのは手間です。
+
+
+そこで今回はGASで作る
+
+
+アイキャッチ画像自動生成ツール 
+
+
+の作り方を紹介します！
+
+
+ブログで使用するので、WordPress自動アップロード機能 もあります！
+
+  
+    ツールで出来ること！
+  
+  
+    
+      背景画像にメイン・サブタイトル文字を重ねて合成することできます！
+    
+    
+      重ねる位置は自由に設定できます！
+    
+    
+      画像をWordpressにアップロードすることができます！
+    
+    
+      アップロードする画像の詳細情報も設定できます！
+    
+  
+
+ツールの全体像はこんな動きになります。'><meta property='og:image' content="https://arukayies.github.io/gas/wordpress-rest-api/create-eyecatchimage/thumbnail_hu_35e0090823022d5e.webp"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property='og:url' content='https://arukayies.github.io/gas/wordpress-rest-api/create-eyecatchimage/'><meta property='og:site_name' content='くらぶろぐ'><meta property='og:type' content='article'><meta property="article:published_time" content="2020-06-12T17:03:37+00:00"><meta property="article:modified_time" content="2020-06-12T17:03:37+00:00"><meta property="article:author" content="arukayies"><meta property="article:section" content="[WordpressAPI]"><meta property="article:tag" content="GAS"><meta property="article:tag" content="Google Apps Script"><meta property="article:tag" content="WordPress"><meta property="article:tag" content="WordpressAPI"><meta property="article:tag" content="スプレッドシート"><meta name=twitter:title content="GASでアイキャッチ画像を自動生成させるツールを作ってみた | くらぶろぐ"><meta name=twitter:description content='ブロガーの皆さんはアイキャッチ画像をどのように作成しているでしょうか。
+
+
+私は無料でおしゃれに画像をデザインできるCanvaで作成しています。
+
+  
+  
+    
+      
+    
+<img data-src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.canva.com%2F?w=160&amp;#038;h=90" alt="" class="blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img" loading="lazy" width="160" height="90" />
+
+<noscript>
+  <img loading="lazy" decoding="async" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.canva.com%2F?w=160&amp;#038;h=90" alt="" class="blogcard-thumb-image external-blogcard-thumb-image" width="160" height="90" />
+</noscript></figure>
+
+<div class="blogcard-content external-blogcard-content">
+  <div class="blogcard-title external-blogcard-title">
+    Just a moment...
+  </div>
+  
+  <div class="blogcard-snippet external-blogcard-snippet">
+  </div>
+</div>
+
+<div class="blogcard-footer external-blogcard-footer cf">
+  <div class="blogcard-site external-blogcard-site">
+    <div class="blogcard-favicon external-blogcard-favicon">
+      <img data-src="https://www.google.com/s2/favicons?domain=https://www.canva.com/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
+      
+      <noscript>
+        <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://www.canva.com/" alt="" class="blogcard-favicon-image external-blogcard-favicon-image" width="16" height="16" />
+      </noscript>
+    </div>
+    
+    <div class="blogcard-domain external-blogcard-domain">
+      www.canva.com
+    </div>
+  </div>
+</div>
+
+  
+
+Canvaは操作がとても簡単で素材もたくさんあり、不満はないのですが
+
+
+それでも毎回画像を作成するのは手間です。
+
+
+そこで今回はGASで作る
+
+
+アイキャッチ画像自動生成ツール 
+
+
+の作り方を紹介します！
+
+
+ブログで使用するので、WordPress自動アップロード機能 もあります！
+
+  
+    ツールで出来ること！
+  
+  
+    
+      背景画像にメイン・サブタイトル文字を重ねて合成することできます！
+    
+    
+      重ねる位置は自由に設定できます！
+    
+    
+      画像をWordpressにアップロードすることができます！
+    
+    
+      アップロードする画像の詳細情報も設定できます！
+    
+  
+
+ツールの全体像はこんな動きになります。'><meta name=twitter:image content="https://arukayies.github.io/gas/wordpress-rest-api/create-eyecatchimage/thumbnail_hu_35e0090823022d5e.webp"><meta name=twitter:card content="summary_large_image"><meta name=robots content="index,follow"><meta name=googlebot content="index,follow"><meta name=generator content="Hugo 0.147.5"><link rel=icon href=https://arukayies.github.io/favicon.ico><link rel=apple-touch-icon href=https://arukayies.github.io/image/icon.png><link rel=apple-touch-icon sizes=180x180 href=https://arukayies.github.io/image/icon_hu_bc3a3d10bb972f2d.png><meta name=msapplication-TileImage content="https://arukayies.github.io/image/icon_hu_89f2d4f9250944e3.png"><link rel=canonical href=https://arukayies.github.io/gas/wordpress-rest-api/create-eyecatchimage/><link rel=preload href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as=style><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" media=print onload='this.media="all"'><link rel=stylesheet href=https://arukayies.github.io/scss/style.min.f6e3827402c49df761979d470dc7e943a2cb144de4606f4b855708bf67c293ff.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css as=style><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css media=print onload='this.media="all"'><link rel=preload href=https://arukayies.github.io/css/vendor/github-markdown-css/github-markdown.css as=style><link rel=stylesheet href=https://arukayies.github.io/css/vendor/github-markdown-css/github-markdown.css media=print onload='this.media="all"'><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr/lunr.min.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/lunr.stemmer.support.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/tinyseg.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/lunr.ja.js></script><script type=text/javascript src=/js/search.min.js></script><script type=application/ld+json>{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://arukayies.github.io/#website","name":"くらぶろぐ","url":"https://arukayies.github.io/","potentialAction":{"@type":"SearchAction","target":"https://arukayies.github.io/search/?query={search_term_string}","query-input":"required name=search_term_string"},"publisher":{"@id":"https://arukayies.github.io/#publisher"}},{"@type":"Article","headline":"GASでアイキャッチ画像を自動生成させるツールを作ってみた","description":"ブロガーの皆さんはアイキャッチ画像をどのように作成しているでしょうか。\n私は無料でおしゃれに画像をデザインできるCanvaで作成しています。 \u0026lt;img data-src=\u0026quot;https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.canva.com%2F?w=160\u0026amp;#038;h=90\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img\u0026quot; loading=\u0026quot;lazy\u0026quot; width=\u0026quot;160\u0026quot; height=\u0026quot;90\u0026quot; /\u0026gt; \u0026lt;noscript\u0026gt; \u0026lt;img loading=\u0026quot;lazy\u0026quot; decoding=\u0026quot;async\u0026quot; src=\u0026quot;https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.canva.com%2F?w=160\u0026amp;#038;h=90\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-thumb-image external-blogcard-thumb-image\u0026quot; width=\u0026quot;160\u0026quot; height=\u0026quot;90\u0026quot; /\u0026gt; \u0026lt;/noscript\u0026gt;\u0026lt;/figure\u0026gt; \u0026lt;div class=\u0026quot;blogcard-content external-blogcard-content\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-title external-blogcard-title\u0026quot;\u0026gt; Just a moment... \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;blogcard-snippet external-blogcard-snippet\u0026quot;\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;blogcard-footer external-blogcard-footer cf\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-site external-blogcard-site\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-favicon external-blogcard-favicon\u0026quot;\u0026gt; \u0026lt;img data-src=\u0026quot;https://www.google.com/s2/favicons?domain=https://www.canva.com/\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img\u0026quot; loading=\u0026quot;lazy\u0026quot; width=\u0026quot;16\u0026quot; height=\u0026quot;16\u0026quot; /\u0026gt; \u0026lt;noscript\u0026gt; \u0026lt;img loading=\u0026quot;lazy\u0026quot; decoding=\u0026quot;async\u0026quot; src=\u0026quot;https://www.google.com/s2/favicons?domain=https://www.canva.com/\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-favicon-image external-blogcard-favicon-image\u0026quot; width=\u0026quot;16\u0026quot; height=\u0026quot;16\u0026quot; /\u0026gt; \u0026lt;/noscript\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;blogcard-domain external-blogcard-domain\u0026quot;\u0026gt; www.canva.com \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; Canvaは操作がとても簡単で素材もたくさんあり、不満はないのですが\nそれでも毎回画像を作成するのは手間です。 そこで今回はGASで作る アイキャッチ画像自動生成ツール の作り方を紹介します！ ブログで使用するので、WordPress自動アップロード機能 もあります！ ツールで出来ること！ 背景画像にメイン・サブタイトル文字を重ねて合成することできます！ 重ねる位置は自由に設定できます！ 画像をWordpressにアップロードすることができます！ アップロードする画像の詳細情報も設定できます！ ツールの全体像はこんな動きになります。\n","image":"https://arukayies.github.io/gas/wordpress-rest-api/create-eyecatchimage/thumbnail_hu_108a4b5176f739fe.webp","keywords":["GAS","Google Apps Script","WordPress","WordpressAPI","スプレッドシート"],"author":{"@type":"Person","url":"https://arukayies.github.io/homepage/","name":"arukayies"},"datePublished":"2020-06-12T17:03:37+00:00","dateModified":"2020-06-12T17:03:37+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://arukayies.github.io/gas/wordpress-rest-api/create-eyecatchimage/"},"isPartOf":{"@id":"https://arukayies.github.io/#website"},"breadcrumb":{"@id":"https://arukayies.github.io/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://arukayies.github.io/#breadcrumb","name":"パンくずリスト","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://arukayies.github.io/"},{"@type":"ListItem","position":2,"name":["WordpressAPI"],"item":"https://arukayies.github.io/categories/%5BWordpressAPI%5D"}]}]}</script></head><body class=body><div class=container><header class=header><div class=header__inner><div class=partials__header><div class=partials__header__title><a href=https://arukayies.github.io/>くらぶろぐ</a><div id=hamburger class="spShow close partials__header__hamburger"><div class=partials__header__hamburger__line></div></div></div><div id=hamburgerMenu class="close partials__header__menu"><nav class="spShow partials__header__menu__search"><form action=/search/ class=partials__header__menu__search__form><input type=text name=query id=search class=partials__header__menu__search__query>
+<button type=submit class=partials__header__menu__search__button>
+<i class="fas fa-search"></i></button></form></nav><nav class=partials__header__menu__topMenu><ul class=partials__header__menu__topMenu__items></ul></nav><nav class="spShow partials__header__menu__sideMenu"><h3 class=partials__header__menu__sideMenu__title>メニュー</h3><ul class=partials__header__menu__sideMenu__items></ul></nav></div></div></div></header><div id=headerBlock class=spShow></div><div class=content><main class=main><div class=main__inner><section class=single><article class=single__article><div class=single__article__header><ol class=partials__breadcrumb><li><a href=https://arukayies.github.io/><i class="fas fa-home"></i>Home</a></li><li>/</li><li><a href=/categories/[WordpressAPI]><i class="fas fa-folder"></i>[WordpressAPI]</a></li><li>/</li><li>GASでアイキャッチ画像を自動生成させるツールを作ってみた</li></ol><div class="pcShow single__article__date"><i class="far fa-clock"></i>2020-06-12
+ / <i class="fas fa-history"></i>2020-06-12</div></div><h1 class=single__article__title>GASでアイキャッチ画像を自動生成させるツールを作ってみた</h1><div class="spShow single__article__date"><i class="far fa-clock"></i>2020-06-12
+ / <i class="fas fa-history"></i>2020-06-12</div><section class=single__article__shareLinks><ul class=partials__shareLinks><li class=partials__shareLinks__item><a href="http://x.com/intent/tweet?url=https%3a%2f%2farukayies.github.io%2fgas%2fwordpress-rest-api%2fcreate-eyecatchimage%2f&text=GAS%e3%81%a7%e3%82%a2%e3%82%a4%e3%82%ad%e3%83%a3%e3%83%83%e3%83%81%e7%94%bb%e5%83%8f%e3%82%92%e8%87%aa%e5%8b%95%e7%94%9f%e6%88%90%e3%81%95%e3%81%9b%e3%82%8b%e3%83%84%e3%83%bc%e3%83%ab%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f" target=_blank title=Tweet class=partials__shareLinks__itemLink--twitter><i class="fab fa-x-twitter"></i>Twitter</a></li><li class=partials__shareLinks__item><a href="http://www.facebook.com/sharer.php?u=https%3a%2f%2farukayies.github.io%2fgas%2fwordpress-rest-api%2fcreate-eyecatchimage%2f&t=GAS%e3%81%a7%e3%82%a2%e3%82%a4%e3%82%ad%e3%83%a3%e3%83%83%e3%83%81%e7%94%bb%e5%83%8f%e3%82%92%e8%87%aa%e5%8b%95%e7%94%9f%e6%88%90%e3%81%95%e3%81%9b%e3%82%8b%e3%83%84%e3%83%bc%e3%83%ab%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f" target=_blank title=Facebook class=partials__shareLinks__itemLink--facebook><i class="fab fa-facebook"></i>Facebook</a></li><li class=partials__shareLinks__item><a href="http://b.hatena.ne.jp/add?mode=confirm&url=https%3a%2f%2farukayies.github.io%2fgas%2fwordpress-rest-api%2fcreate-eyecatchimage%2f&title=GAS%e3%81%a7%e3%82%a2%e3%82%a4%e3%82%ad%e3%83%a3%e3%83%83%e3%83%81%e7%94%bb%e5%83%8f%e3%82%92%e8%87%aa%e5%8b%95%e7%94%9f%e6%88%90%e3%81%95%e3%81%9b%e3%82%8b%e3%83%84%e3%83%bc%e3%83%ab%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f" target=_blank title=hatena class=partials__shareLinks__itemLink--hatena>はてブ</a></li><li class=partials__shareLinks__item><a href="http://getpocket.com/edit?url=https%3a%2f%2farukayies.github.io%2fgas%2fwordpress-rest-api%2fcreate-eyecatchimage%2f&title=GAS%e3%81%a7%e3%82%a2%e3%82%a4%e3%82%ad%e3%83%a3%e3%83%83%e3%83%81%e7%94%bb%e5%83%8f%e3%82%92%e8%87%aa%e5%8b%95%e7%94%9f%e6%88%90%e3%81%95%e3%81%9b%e3%82%8b%e3%83%84%e3%83%bc%e3%83%ab%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f" target=_blank title=pocket class=partials__shareLinks__itemLink--pocket><i class="fab fa-get-pocket"></i>Pocket</a></li><li class=partials__shareLinks__item><a href=https://line.me/R/msg/text/?GAS%e3%81%a7%e3%82%a2%e3%82%a4%e3%82%ad%e3%83%a3%e3%83%83%e3%83%81%e7%94%bb%e5%83%8f%e3%82%92%e8%87%aa%e5%8b%95%e7%94%9f%e6%88%90%e3%81%95%e3%81%9b%e3%82%8b%e3%83%84%e3%83%bc%e3%83%ab%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f%0D%0Ahttps%3a%2f%2farukayies.github.io%2fgas%2fwordpress-rest-api%2fcreate-eyecatchimage%2f target=_blank title=line class=partials__shareLinks__itemLink--line><i class="fab fa-line"></i>Line</a></li><li class=partials__shareLinks__item><a href=javascript:void(0) onclick='navigator.clipboard.writeText("https://arukayies.github.io/gas/wordpress-rest-api/create-eyecatchimage/"),alert("URLをコピーしました")' title=line class=partials__shareLinks__itemLink--copy><i class="far fa-copy"></i>URL</a></li></ul></section><img src=/gas/wordpress-rest-api/create-eyecatchimage/thumbnail_hu_86ed7c26f9f1ac3a.webp alt=GASでアイキャッチ画像を自動生成させるツールを作ってみた class=single__article__thumbnail><aside class=single__article__toc><h3 class=single__article__toc__title><i class="fas fa-list-ul"></i>目次</h3><nav id=TableOfContents><ul><li><a href=#作業の流れ>作業の流れ</a></li><li><a href=#googleドライブに画像合成用のスクリプトを作成>Googleドライブに画像合成用のスクリプトを作成</a><ul><li><a href=#新規でgoogle-apps-scriptを作成>新規でGoogle Apps Scriptを作成</a></li><li><a href=#dogetjs-のコードを貼り付ける>doGet.js のコードを貼り付ける</a></li><li><a href=#indexhtml-のコードを貼り付ける>index.html のコードを貼り付ける</a></li></ul></li><li><a href=#画像合成用のスクリプトを公開>画像合成用のスクリプトを公開</a></li><li><a href=#アイキャッチ画像の設定を入力するスプレッドシートを作成>アイキャッチ画像の設定を入力するスプレッドシートを作成</a></li><li><a href=#スプレッドシートにスクリプトを作成する>スプレッドシートにスクリプトを作成する</a><ul><li><a href=#createeyecatchimagejs-のコードを貼り付ける>createEyecatchImage.js のコードを貼り付ける</a></li><li><a href=#シートidとシート名を書き換える>シートIDとシート名を書き換える</a></li><li><a href=#gasの公開urlを書き換える>GASの公開URLを書き換える</a></li><li><a href=#width-と-heightを変更する-1>width と heightを変更する</a></li><li><a href=#phantomjscloudのapiキーを書き換える>PhantomJsCloudのAPIキーを書き換える</a></li><li><a href=#wordpressのユーザー名パスワードを書き換える>WordPressのユーザー名、パスワードを書き換える</a></li><li><a href=#wordpressのurlを書き換える>WordPressのURLを書き換える</a></li></ul></li><li><a href=#使い方>使い方</a><ul><li><a href=#画像生成ボタンにスクリプトを割り当てる>『画像生成』ボタンにスクリプトを割り当てる</a></li><li><a href=#アイキャッチ画像の設定を入力>アイキャッチ画像の設定を入力</a></li><li><a href=#画像生成ボタンを押下する>『画像生成』ボタンを押下する</a></li></ul></li><li><a href=#まとめ>まとめ</a></li></ul></nav></aside><div class="single__article__content markdown-body"><p>ブロガーの皆さんはアイキャッチ画像をどのように作成しているでしょうか。</p></p><p>私は<strong><span class=bold-red>無料</span></strong>でおしゃれに画像をデザインできる<strong>Canva</strong>で作成しています。<div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-check"><a rel=noopener href=https://www.canva.com/ title="Just a moment..." class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img data-src=&quot;https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.canva.com%2F?w=160&amp;#038;h=90&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+
+&lt;noscript&gt;
+  &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.canva.com%2F?w=160&amp;#038;h=90&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+&lt;/noscript&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    Just a moment...
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://www.canva.com/&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://www.canva.com/&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      www.canva.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a></div><p><strong>Canva</strong>は操作がとても簡単で素材もたくさんあり、不満はないのですが</p></p><p>それでも<span class=fz-22px><strong>毎回画像を作成するのは手間です。</strong></span></p><p>そこで今回はGASで作る</p><p><strong><span class=fz-32px><span class=bold-green>アイキャッチ画像自動生成ツール</span></span></strong></p><p>の作り方を紹介します！</p><p>ブログで使用するので、<strong><span class=bold-green>WordPress自動アップロード機能</span></strong> もあります！<div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-check-circle block-box has-border-color has-icon-color has-red-border-color has-red-icon-color"><div class=iconlist-title>ツールで出来ること！</div><ul class=wp-block-list><li>背景画像にメイン・サブタイトル文字を重ねて合成することできます！</li><li>重ねる位置は自由に設定できます！</li><li>画像をWordpressにアップロードすることができます！</li><li>アップロードする画像の詳細情報も設定できます！</li></ul></div><p>ツールの全体像はこんな動きになります。<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"></p><div class=wp-block-embed__wrapper><blockquote class=twitter-tweet data-width=550 data-dnt=true><p lang=ja dir=ltr>GASを使ってアイキャッチ画像を自動生成させるツールを作ってみた！<br><br>背景画像と文字入り画像を合成して、Wordpressにアップロードまで自動化しています。<br><br>①Canvasで画像合成<br>②PhantomJSで合成した画像をキャプチャ<br>③Wordpressにアップロード<br><br>こんな流れです！<a href="https://twitter.com/hashtag/%E8%87%AA%E5%8B%95%E5%8C%96?src=hash&ref_src=twsrc%5Etfw">#自動化</a> <a href="https://twitter.com/hashtag/GAS?src=hash&ref_src=twsrc%5Etfw">#GAS</a> <a href="https://twitter.com/hashtag/GoogleAppsScript?src=hash&ref_src=twsrc%5Etfw">#GoogleAppsScript</a> <a href=https://t.co/ytJnbMHxWr>pic.twitter.com/ytJnbMHxWr</a></p>&mdash; arukayies (@arukayies)<pre><code>&lt;a href=&quot;https://twitter.com/arukayies/status/1267800221796274177?ref_src=twsrc%5Etfw&quot;&gt;June 2, 2020&lt;/a&gt;
+</code></pre></blockquote></div></figure><p>コードだけ見れればいい！って方は<a href=https://github.com/arukayies/create-eyecatchImage>こちら</a>をどうぞ！</p><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div><h2 id=作業の流れ>作業の流れ</h2><div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-hand-o-right block-box has-border-color has-icon-color has-key-color-border-color has-key-color-icon-color"><div class=iconlist-title>作り方の流れ</div><ul class=wp-block-list><li>Googleドライブに画像合成用のスクリプトを作成</li><li>画像合成用のスクリプトを公開</li><li>アイキャッチ画像の設定を入力するスプレッドシートを作成</li><li>スプレッドシートにスクリプトを作成する</li></ul></div><h2 id=googleドライブに画像合成用のスクリプトを作成>Googleドライブに画像合成用のスクリプトを作成</h2><h3 id=新規でgoogle-apps-scriptを作成>新規でGoogle Apps Scriptを作成</h3><p>以前の記事で手順を紹介しているので、参考にしてください。</p><div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-reference"><a href=https://arukayies.com/gas/line_bot/line-bot-with-gas#toc2 title="GASで作る簡単なLINE BOTの作り方" class="blogcard-wrap internal-blogcard-wrap a-wrap cf" target=_blank><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><pre><code>&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; width=&quot;160&quot; height=&quot;90&quot; src=&quot;https://arukayies.com/wp-content/uploads/2019/07/line-bot-with-gas-160x90.png&quot; class=&quot;blogcard-thumb-image internal-blogcard-thumb-image wp-post-image&quot; alt=&quot;&quot; srcset=&quot;https://arukayies.com/wp-content/uploads/2019/07/line-bot-with-gas-160x90.png 160w, https://arukayies.com/wp-content/uploads/2019/07/line-bot-with-gas-120x68.png 120w, https://arukayies.com/wp-content/uploads/2019/07/line-bot-with-gas-320x180.png 320w, https://arukayies.com/wp-content/uploads/2019/07/line-bot-with-gas-376x212.png 376w&quot; sizes=&quot;(max-width: 160px) 100vw, 160px&quot; /&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content internal-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title internal-blogcard-title&quot;&gt;
+    GASで作る簡単なLINE BOTの作り方
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet internal-blogcard-snippet&quot;&gt;
+    GASで作るLINE BOTの簡単な作り方を紹介します！
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer internal-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site internal-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon internal-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image internal-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image internal-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain internal-blogcard-domain&quot;&gt;
+      arukayies.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-date internal-blogcard-date&quot;&gt;
+    &lt;div class=&quot;blogcard-post-date internal-blogcard-post-date&quot;&gt;
+      2024.11.19
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a></div><figure class="wp-block-image aligncenter size-large"><p><img loading=lazy decoding=async width=1024 height=368 src=https://arukayies.com/wp-content/uploads/2020/06/新規でGoogle-Apps-Scriptを作成-1024x368.png alt="新規でGoogle Apps Scriptを作成" class=wp-image-3722 srcset="https://arukayies.com/wp-content/uploads/2020/06/新規でGoogle-Apps-Scriptを作成-1024x368.png 1024w, https://arukayies.com/wp-content/uploads/2020/06/新規でGoogle-Apps-Scriptを作成-300x108.png 300w, https://arukayies.com/wp-content/uploads/2020/06/新規でGoogle-Apps-Scriptを作成-768x276.png 768w, https://arukayies.com/wp-content/uploads/2020/06/新規でGoogle-Apps-Scriptを作成.png 1129w" sizes="(max-width: 1024px) 100vw, 1024px"><figcaption class=wp-element-caption>作成直後</figcaption></figure></p><h3 id=dogetjs-のコードを貼り付ける>doGet.js のコードを貼り付ける</h3><p>コード.gs に以下を貼り付けます。<figure class="wp-block-image aligncenter size-large is-resized"></p><p><img loading=lazy decoding=async width=1024 height=659 src=https://arukayies.com/wp-content/uploads/2020/06/doGet.js-のコードを貼り付ける-1024x659.png alt="doGet.js のコードを貼り付ける" class=wp-image-3723 style=aspect-ratio:714/459 srcset="https://arukayies.com/wp-content/uploads/2020/06/doGet.js-のコードを貼り付ける-1024x659.png 1024w, https://arukayies.com/wp-content/uploads/2020/06/doGet.js-のコードを貼り付ける-300x193.png 300w, https://arukayies.com/wp-content/uploads/2020/06/doGet.js-のコードを貼り付ける-768x494.png 768w, https://arukayies.com/wp-content/uploads/2020/06/doGet.js-のコードを貼り付ける.png 1036w" sizes="(max-width: 1024px) 100vw, 1024px"><figcaption class=wp-element-caption><strong>doGet.js</strong>を貼り付ける</figcaption></figure></p><h3 id=indexhtml-のコードを貼り付ける>index.html のコードを貼り付ける</h3><p>『ファイル』→『New』→『HTMLファイル』を選択します。ファイル名は『index』にします。<figure class="wp-block-image aligncenter size-large is-resized"></p><p><img loading=lazy decoding=async width=524 height=357 src=https://arukayies.com/wp-content/uploads/2020/06/HTMLファイルを選択.png alt=HTMLファイルを選択 class=wp-image-3725 style=aspect-ratio:524/357 srcset="https://arukayies.com/wp-content/uploads/2020/06/HTMLファイルを選択.png 524w, https://arukayies.com/wp-content/uploads/2020/06/HTMLファイルを選択-300x204.png 300w" sizes="(max-width: 524px) 100vw, 524px"><figcaption class=wp-element-caption>HTMLファイルを作成</figcaption></figure></p><p>index.htmlに以下を貼り付けます<figure class="wp-block-image aligncenter size-large is-resized"></p><p><img loading=lazy decoding=async width=874 height=523 src=https://arukayies.com/wp-content/uploads/2020/06/index.html-のコードを貼り付ける.png alt="index.html のコードを貼り付ける" class=wp-image-3727 style=aspect-ratio:714/427 srcset="https://arukayies.com/wp-content/uploads/2020/06/index.html-のコードを貼り付ける.png 874w, https://arukayies.com/wp-content/uploads/2020/06/index.html-のコードを貼り付ける-300x180.png 300w, https://arukayies.com/wp-content/uploads/2020/06/index.html-のコードを貼り付ける-768x460.png 768w" sizes="(max-width: 874px) 100vw, 874px"><figcaption class=wp-element-caption>index.htmlを貼り付ける</figcaption></figure></p><h4 id=width-と-heightを変更する><strong>width と height</strong>を変更する</h4><p><span class=bold-red>背景画像のサイズによって、4行目のwidth と height は変更してください。</span></p><p>1200と630の数値を変更してください。</p><h2 id=画像合成用のスクリプトを公開>画像合成用のスクリプトを公開</h2><p>以前の記事で手順を紹介しているので、参考にしてください。</p><div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-reference"><a href=https://arukayies.com/gas/line_bot/line-bot-with-gas#toc7 title="GASで作る簡単なLINE BOTの作り方" class="blogcard-wrap internal-blogcard-wrap a-wrap cf" target=_blank><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><pre><code>&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; width=&quot;160&quot; height=&quot;90&quot; src=&quot;https://arukayies.com/wp-content/uploads/2019/07/line-bot-with-gas-160x90.png&quot; class=&quot;blogcard-thumb-image internal-blogcard-thumb-image wp-post-image&quot; alt=&quot;&quot; srcset=&quot;https://arukayies.com/wp-content/uploads/2019/07/line-bot-with-gas-160x90.png 160w, https://arukayies.com/wp-content/uploads/2019/07/line-bot-with-gas-120x68.png 120w, https://arukayies.com/wp-content/uploads/2019/07/line-bot-with-gas-320x180.png 320w, https://arukayies.com/wp-content/uploads/2019/07/line-bot-with-gas-376x212.png 376w&quot; sizes=&quot;(max-width: 160px) 100vw, 160px&quot; /&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content internal-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title internal-blogcard-title&quot;&gt;
+    GASで作る簡単なLINE BOTの作り方
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet internal-blogcard-snippet&quot;&gt;
+    GASで作るLINE BOTの簡単な作り方を紹介します！
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer internal-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site internal-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon internal-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image internal-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image internal-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain internal-blogcard-domain&quot;&gt;
+      arukayies.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-date internal-blogcard-date&quot;&gt;
+    &lt;div class=&quot;blogcard-post-date internal-blogcard-post-date&quot;&gt;
+      2024.11.19
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a></div><p>取得したURLは次の手順で使います！<figure class="wp-block-image aligncenter size-large is-resized"></p><p><img loading=lazy decoding=async width=513 height=310 src=https://arukayies.com/wp-content/uploads/2020/06/スクリプトを公開.png alt=スクリプトを公開 class=wp-image-3728 style=aspect-ratio:513/310 srcset="https://arukayies.com/wp-content/uploads/2020/06/スクリプトを公開.png 513w, https://arukayies.com/wp-content/uploads/2020/06/スクリプトを公開-300x181.png 300w" sizes="(max-width: 513px) 100vw, 513px"><figcaption class=wp-element-caption>スクリプトを公開</figcaption></figure></p><h2 id=アイキャッチ画像の設定を入力するスプレッドシートを作成>アイキャッチ画像の設定を入力するスプレッドシートを作成</h2><p>公開しているスプレッドシートにアクセスします。</p><div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-detail"><a rel=noopener href="https://docs.google.com/spreadsheets/d/1PukL2_BbWfTHvxlKHnap0LpAgv4jveFS_H7aJtv0Xpk/edit?usp=sharing" title=アイキャッチ画像生成ツール(外部公開用) class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img data-src=&quot;https://lh7-us.googleusercontent.com/docs/AHkbwyID8mZbojXMm3KggCBIqy3-Vk6QqwJm8VryX-NX1xmpOj_EHCX3a1KBx_6k93JuCaKNPwVapfa3P1o-5EZQ0yvoNakEzFih8PtoHvHn3KWQxDNsuOt6=w1200-h630-p&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+
+&lt;noscript&gt;
+  &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://lh7-us.googleusercontent.com/docs/AHkbwyID8mZbojXMm3KggCBIqy3-Vk6QqwJm8VryX-NX1xmpOj_EHCX3a1KBx_6k93JuCaKNPwVapfa3P1o-5EZQ0yvoNakEzFih8PtoHvHn3KWQxDNsuOt6=w1200-h630-p&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+&lt;/noscript&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    アイキャッチ画像生成ツール(外部公開用)
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://docs.google.com/spreadsheets/d/1PukL2_BbWfTHvxlKHnap0LpAgv4jveFS_H7aJtv0Xpk/edit?usp=sharing&amp;#038;usp=embed_facebook&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://docs.google.com/spreadsheets/d/1PukL2_BbWfTHvxlKHnap0LpAgv4jveFS_H7aJtv0Xpk/edit?usp=sharing&amp;#038;usp=embed_facebook&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      docs.google.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a></div><p>『ファイル』→『コピーを作成』からマイドライブにコピーします。<figure class="wp-block-image aligncenter size-large"></p><p><img loading=lazy decoding=async width=1024 height=620 src=https://arukayies.com/wp-content/uploads/2020/06/マイドライブにコピー-1024x620.png alt=マイドライブにコピー class=wp-image-3731 srcset="https://arukayies.com/wp-content/uploads/2020/06/マイドライブにコピー-1024x620.png 1024w, https://arukayies.com/wp-content/uploads/2020/06/マイドライブにコピー-300x182.png 300w, https://arukayies.com/wp-content/uploads/2020/06/マイドライブにコピー-768x465.png 768w, https://arukayies.com/wp-content/uploads/2020/06/マイドライブにコピー-1536x930.png 1536w, https://arukayies.com/wp-content/uploads/2020/06/マイドライブにコピー.png 1840w" sizes="(max-width: 1024px) 100vw, 1024px"><figcaption class=wp-element-caption>マイドライブにコピー</figcaption></figure></p><h2 id=スプレッドシートにスクリプトを作成する>スプレッドシートにスクリプトを作成する</h2><p>コピーしたスプレッドシートを開き、スクリプトエディタを開きます。<figure class="wp-block-image aligncenter size-large"></p><p><img loading=lazy decoding=async width=788 height=459 src=https://arukayies.com/wp-content/uploads/2020/06/スクリプトエディタを開く.png alt=スクリプトエディタを開く class=wp-image-3732 srcset="https://arukayies.com/wp-content/uploads/2020/06/スクリプトエディタを開く.png 788w, https://arukayies.com/wp-content/uploads/2020/06/スクリプトエディタを開く-300x175.png 300w, https://arukayies.com/wp-content/uploads/2020/06/スクリプトエディタを開く-768x447.png 768w" sizes="(max-width: 788px) 100vw, 788px"><figcaption class=wp-element-caption>スクリプトエディタを開く</figcaption></figure></p><h3 id=createeyecatchimagejs-のコードを貼り付ける>createEyecatchImage.js のコードを貼り付ける</h3><p>コード.gs に以下を貼り付けます<figure class="wp-block-image aligncenter size-large is-resized"></p><p><img loading=lazy decoding=async width=1024 height=458 src=https://arukayies.com/wp-content/uploads/2020/06/createEyecatchImage.js-のコードを貼り付ける-1024x458.png alt="createEyecatchImage.js のコードを貼り付ける" class=wp-image-3734 style=aspect-ratio:716/320 srcset="https://arukayies.com/wp-content/uploads/2020/06/createEyecatchImage.js-のコードを貼り付ける-1024x458.png 1024w, https://arukayies.com/wp-content/uploads/2020/06/createEyecatchImage.js-のコードを貼り付ける-300x134.png 300w, https://arukayies.com/wp-content/uploads/2020/06/createEyecatchImage.js-のコードを貼り付ける-768x344.png 768w, https://arukayies.com/wp-content/uploads/2020/06/createEyecatchImage.js-のコードを貼り付ける.png 1184w" sizes="(max-width: 1024px) 100vw, 1024px"><figcaption class=wp-element-caption>createEyecatchImage.jsを貼り付ける</figcaption></figure></p><h3 id=シートidとシート名を書き換える>シートIDとシート名を書き換える</h3><p>３行目「シートID」と４行目「シート名」をコピーしたスプレッドシートの情報に書き換えます。<figure class="wp-block-image size-large is-resized"></p><p><img loading=lazy decoding=async width=962 height=1024 src=https://arukayies.com/wp-content/uploads/2020/06/シートIDとシート名を書き換える-962x1024.png alt=シートIDとシート名を書き換える class=wp-image-3737 style=aspect-ratio:714/760 srcset="https://arukayies.com/wp-content/uploads/2020/06/シートIDとシート名を書き換える-962x1024.png 962w, https://arukayies.com/wp-content/uploads/2020/06/シートIDとシート名を書き換える-282x300.png 282w, https://arukayies.com/wp-content/uploads/2020/06/シートIDとシート名を書き換える-768x817.png 768w, https://arukayies.com/wp-content/uploads/2020/06/シートIDとシート名を書き換える-1444x1536.png 1444w, https://arukayies.com/wp-content/uploads/2020/06/シートIDとシート名を書き換える.png 1720w" sizes="(max-width: 962px) 100vw, 962px"><figcaption class=wp-element-caption>シートIDとシート名の例</figcaption></figure></p><h3 id=gasの公開urlを書き換える>GASの公開URLを書き換える</h3><p>30行目の部分を<a href=https://arukayies.com/gas/wordpress-rest-api/create-eyecatchImage#toc6>前の手順で取得したURL</a>に書き換えます。</p><h3 id=width-と-heightを変更する-1>width と heightを変更する</h3><p><span class=bold-red>PhantomJsCloudでキャプチャする位置を背景画像のサイズによって変えてください。</span></p><p>32行目から47行目の数字をキャプチャする位置によって調整します。</p><p>1200と630の数値の変更と59はGoogleで表示されるヘッダー部分です。</p><h3 id=phantomjscloudのapiキーを書き換える>PhantomJsCloudのAPIキーを書き換える</h3><p>50行目の部分を<a href=https://phantomjscloud.com/index.html>PhantomJsCloud</a>で取得したAPIキーに書き換えます。</p><p>APIキーの取得方法はこちらの記事が参考になりました！</p><div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-reference"><a rel=noopener href=https://tonari-it.com/scraping-javascript-gas-phantomjscloud/#toc1 title="GASでPhantomJS Cloudを利用してWebページをスクレイピング" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img data-src=&quot;https://tonari-it.com/wp-content/uploads/ad8592f68f50d130b9c6921206f01db4.jpg&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+
+&lt;noscript&gt;
+  &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://tonari-it.com/wp-content/uploads/ad8592f68f50d130b9c6921206f01db4.jpg&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+&lt;/noscript&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    GASでPhantomJS Cloudを利用してWebページをスクレイピング
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+    「JavaScriptで動作するWebページ（動的サイト)を色々な言語でスクレイピング」することをシリーズでお伝えしています。今回はGoogle Apps ScriptとPhantomJS Cloudでスクレイピングします！
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://tonari-it.com/scraping-javascript-gas-phantomjscloud/&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://tonari-it.com/scraping-javascript-gas-phantomjscloud/&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      tonari-it.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a></div><h3 id=wordpressのユーザー名パスワードを書き換える>WordPressのユーザー名、パスワードを書き換える</h3><p>57行目の部分をWordpressのユーザー名、パスワードに書き換えます。</p><p>WordPressAPIのユーザー名、パスワードは以前の記事を参考にしてください。</p><div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-reference"><a href=https://arukayies.com/gas/wordpress-rest-api/postreport#toc2 title=GASを使ってWordPressに自動投稿する方法 class="blogcard-wrap internal-blogcard-wrap a-wrap cf" target=_blank><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><pre><code>&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; width=&quot;160&quot; height=&quot;90&quot; src=&quot;https://arukayies.com/wp-content/uploads/2020/02/postreport-160x90.png&quot; class=&quot;blogcard-thumb-image internal-blogcard-thumb-image wp-post-image&quot; alt=&quot;&quot; srcset=&quot;https://arukayies.com/wp-content/uploads/2020/02/postreport-160x90.png 160w, https://arukayies.com/wp-content/uploads/2020/02/postreport-120x68.png 120w, https://arukayies.com/wp-content/uploads/2020/02/postreport-320x180.png 320w, https://arukayies.com/wp-content/uploads/2020/02/postreport-376x212.png 376w&quot; sizes=&quot;(max-width: 160px) 100vw, 160px&quot; /&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content internal-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title internal-blogcard-title&quot;&gt;
+    GASを使ってWordPressに自動投稿する方法
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet internal-blogcard-snippet&quot;&gt;
+    WordPress を使って広告収入を得たい！でもサラリーマンで毎日記事を書いてる時間はない！だったら、自動化だ！と思い立って、年末からいろいろ試していました「くら」です。まずはメインである。記事の自動投稿をGASを使って自動化します。プロ...
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer internal-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site internal-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon internal-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image internal-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image internal-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain internal-blogcard-domain&quot;&gt;
+      arukayies.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-date internal-blogcard-date&quot;&gt;
+    &lt;div class=&quot;blogcard-post-date internal-blogcard-post-date&quot;&gt;
+      2024.11.19
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a></div><h3 id=wordpressのurlを書き換える>WordPressのURLを書き換える</h3><p>67行目の部分をWordpressのURLに書き換えます。</p><p>このブログだったら『<strong><a href=https://arukayies.com>https://arukayies.com</a></strong>』に書き換えます。</p><h2 id=使い方>使い方</h2><h3 id=画像生成ボタンにスクリプトを割り当てる>『画像生成』ボタンにスクリプトを割り当てる</h3><p>ボタンにスクリプトを割り当てます。『<strong>main</strong>』と割り当ててください。</p><div class="wp-block-cocoon-blocks-column-2 column-wrap column-2 column-2-2-1-1 layout-box"><div class="wp-block-cocoon-blocks-column-left column-left"><figure class="wp-block-image aligncenter size-large"><img loading=lazy decoding=async width=706 height=437 src=https://arukayies.com/wp-content/uploads/2020/06/ボタンにスクリプトを割り当て.png alt=ボタンにスクリプトを割り当て class=wp-image-3741 srcset="https://arukayies.com/wp-content/uploads/2020/06/ボタンにスクリプトを割り当て.png 706w, https://arukayies.com/wp-content/uploads/2020/06/ボタンにスクリプトを割り当て-300x186.png 300w" sizes="(max-width: 706px) 100vw, 706px"><figcaption class=wp-element-caption>ボタンにスクリプトを割り当て</figcaption></figure></div><div class="wp-block-cocoon-blocks-column-right column-right"><p>　</p><figure class="wp-block-image size-large"><pre><code>&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; width=&quot;1024&quot; height=&quot;445&quot; src=&quot;https://arukayies.com/wp-content/uploads/2020/06/mainを割り当て-1024x445.png&quot; alt=&quot;mainを割り当て&quot; class=&quot;wp-image-3742&quot; srcset=&quot;https://arukayies.com/wp-content/uploads/2020/06/mainを割り当て-1024x445.png 1024w, https://arukayies.com/wp-content/uploads/2020/06/mainを割り当て-300x130.png 300w, https://arukayies.com/wp-content/uploads/2020/06/mainを割り当て-768x334.png 768w, https://arukayies.com/wp-content/uploads/2020/06/mainを割り当て.png 1091w&quot; sizes=&quot;(max-width: 1024px) 100vw, 1024px&quot; /&gt;&lt;figcaption class=&quot;wp-element-caption&quot;&gt;mainを割り当て&lt;/figcaption&gt;&lt;/figure&gt;
+</code></pre></div></div><h3 id=アイキャッチ画像の設定を入力>アイキャッチ画像の設定を入力</h3><h4 id=背景画像のurlを設定>背景画像のURLを設定</h4><p>シートのB2セルには<strong>背景画像のURL</strong>を設定します。</p><div class="wp-block-cocoon-blocks-column-2 column-wrap column-2 column-2-2-1-1 layout-box"><div class="wp-block-cocoon-blocks-column-left column-left"><p>背景画像のURLはこちらです。</p><figure class="wp-block-image size-large"><pre><code>&lt;img decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2020/06/gas-background.png&quot; alt=&quot;背景画像&quot; /&gt;&lt;figcaption class=&quot;wp-element-caption&quot;&gt;背景画像&lt;/figcaption&gt;&lt;/figure&gt;
+</code></pre></div><div class="wp-block-cocoon-blocks-column-right column-right"><p>生成された画像はこちらです。</p><figure class="wp-block-image size-large"><pre><code>&lt;img decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2020/06/create-eyecatchimage-sample.png&quot; alt=&quot;合成された画像&quot; /&gt;&lt;figcaption class=&quot;wp-element-caption&quot;&gt;合成された画像&lt;/figcaption&gt;&lt;/figure&gt;
+</code></pre></div></div><h4 id=メインタイトルサブタイトルの設定>メインタイトル・サブタイトルの設定</h4><p>シートのB3・B4セルには<strong>メインタイトル・サブタイトルの文字列</strong>を設定します。</p><p>ダミー画像生成、モックアップ用画像作成ツールの <a href=https://placehold.jp/>https://placehold.jp/</a> を使って、文字入りの画像を生成しています。</p><div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-official"><a rel=noopener href=https://placehold.jp/ title="placehold.jp | 簡単！ダミー画像作成" class="blogcard-wrap external-blogcard-wrap a-wrap cf" target=_blank><div class="blogcard external-blogcard eb-left cf"><div class="blogcard-label external-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail external-blogcard-thumbnail"><pre><code>&lt;img data-src=&quot;https://placehold.jp/eeeeee/666666/200x200.png?text=placehold.jp&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+
+&lt;noscript&gt;
+  &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://placehold.jp/eeeeee/666666/200x200.png?text=placehold.jp&quot; alt=&quot;&quot; class=&quot;blogcard-thumb-image external-blogcard-thumb-image&quot; width=&quot;160&quot; height=&quot;90&quot; /&gt;
+&lt;/noscript&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content external-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title external-blogcard-title&quot;&gt;
+    placehold.jp | 簡単！ダミー画像作成
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet external-blogcard-snippet&quot;&gt;
+    簡単！ダミー画像生成、モックアップ用画像作成ツール。文字やサイズ、メモを入れた仮の画像を簡単に作成できます。
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer external-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site external-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon external-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://placehold.jp/&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://placehold.jp/&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image external-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain external-blogcard-domain&quot;&gt;
+      placehold.jp
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a></div><p>以下のコード部分で文字入りの画像を生成しています。</p><p><span class=bold-red>画像サイズ・レイアウトはコードの21行目と22行目の数値を変えて使ってください。</span></p><p>生成された画像はこんな感じです。これを背景に合成しています。</p><div class="wp-block-cocoon-blocks-column-2 column-wrap column-2 column-2-2-1-1 layout-box"><div class="wp-block-cocoon-blocks-column-left column-left"><figure class="wp-block-image size-large"><img decoding=async src=https://arukayies.com/wp-content/uploads/2020/06/5_1200x250.png alt=メインタイトルの画像><figcaption class=wp-element-caption>メインタイトルの画像</figcaption></figure></div><div class="wp-block-cocoon-blocks-column-right column-right"><figure class="wp-block-image size-large"><img decoding=async src=https://arukayies.com/wp-content/uploads/2020/06/5_500x130.png alt=サブタイトルの画像><figcaption class=wp-element-caption>サブタイトルの画像</figcaption></figure><pre><code>&lt;p&gt;
+&lt;/p&gt;
+</code></pre></div></div><h4 id=画像の合成位置の設定>画像の合成位置の設定</h4><p>シートのB6〜B9はメインタイトル・サブタイトルの画像の合成位置の設定になります。</p><p>背景画像のサイズ・合成画像のサイズを意識した位置関係で設定してください。</p><p>何度か試してみて、納得いく合成位置を試してみてください。</p><h4 id=画像の詳細設定>画像の詳細設定</h4><p>WordPressのメディアライブラリに反映される情報を事前に設定できます。<figure class="wp-block-image aligncenter size-large"></p><p><img loading=lazy decoding=async width=706 height=316 src=https://arukayies.com/wp-content/uploads/2020/06/アイキャッチ画像の設定例.png alt=アイキャッチ画像の設定例 class=wp-image-3753 srcset="https://arukayies.com/wp-content/uploads/2020/06/アイキャッチ画像の設定例.png 706w, https://arukayies.com/wp-content/uploads/2020/06/アイキャッチ画像の設定例-300x134.png 300w" sizes="(max-width: 706px) 100vw, 706px"><figcaption class=wp-element-caption>アイキャッチ画像の設定例</figcaption></figure><figure class="wp-block-image aligncenter size-large"><img loading=lazy decoding=async width=1024 height=441 src=https://arukayies.com/wp-content/uploads/2020/06/画像情報の設定-1024x441.jpg alt=メディアライブラリ class=wp-image-3751 srcset="https://arukayies.com/wp-content/uploads/2020/06/画像情報の設定-1024x441.jpg 1024w, https://arukayies.com/wp-content/uploads/2020/06/画像情報の設定-300x129.jpg 300w, https://arukayies.com/wp-content/uploads/2020/06/画像情報の設定-768x331.jpg 768w, https://arukayies.com/wp-content/uploads/2020/06/画像情報の設定-1536x662.jpg 1536w, https://arukayies.com/wp-content/uploads/2020/06/画像情報の設定-2048x882.jpg 2048w" sizes="(max-width: 1024px) 100vw, 1024px"><figcaption class=wp-element-caption>メディアライブラリ</figcaption></figure></p><h3 id=画像生成ボタンを押下する>『画像生成』ボタンを押下する</h3><p>すべての設定が設定できたら、『画像生成』ボタンを押下します！</p><p><span class=fz-36px><strong><span class=fz-20px>これが生成される画像です！！！！！</span></strong></span><figure class="wp-block-image aligncenter size-large is-resized"></p><p><img decoding=async src=https://arukayies.com/wp-content/uploads/2020/06/create-eyecatchimage-sample.png alt=合成された画像 style=aspect-ratio:714/374><figcaption class=wp-element-caption>合成された画像</figcaption></figure></p><h2 id=まとめ>まとめ</h2><div class="wp-block-cocoon-blocks-balloon-ex-box-1 speech-wrap sb-id-1 sbs-stn sbp-l sbis-cb cf block-box cocoon-block-balloon"><div class=speech-person><figure class=speech-icon><img decoding=async src=https://arukayies.com/wp-content/uploads/2019/12/icon-1.png alt=くら class=speech-icon-image></figure></div><div class=speech-balloon><p>構想から完成まで4ヶ月ぐらいかかってしまいました。。。</p><figure class="wp-block-image size-large is-resized"><pre><code>&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; width=&quot;833&quot; height=&quot;315&quot; src=&quot;https://arukayies.com/wp-content/uploads/2020/06/フラグ.png&quot; alt=&quot;2月の記事内容&quot; class=&quot;wp-image-3760&quot; style=&quot;aspect-ratio:496/187&quot; srcset=&quot;https://arukayies.com/wp-content/uploads/2020/06/フラグ.png 833w, https://arukayies.com/wp-content/uploads/2020/06/フラグ-300x113.png 300w, https://arukayies.com/wp-content/uploads/2020/06/フラグ-768x290.png 768w&quot; sizes=&quot;(max-width: 833px) 100vw, 833px&quot; /&gt;&lt;figcaption class=&quot;wp-element-caption&quot;&gt;2月の記事・・・。&lt;/figcaption&gt;&lt;/figure&gt;
+</code></pre></div></div><div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-reference"><a href=https://arukayies.com/gas/wordpress-rest-api/postreport-thumbnail#toc8 title=GASを使ってアイキャッチ画像付でWordPressに自動投稿する方法 class="blogcard-wrap internal-blogcard-wrap a-wrap cf" target=_blank><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><pre><code>&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; width=&quot;160&quot; height=&quot;90&quot; src=&quot;https://arukayies.com/wp-content/uploads/2020/02/postreport-thumbnail-160x90.png&quot; class=&quot;blogcard-thumb-image internal-blogcard-thumb-image wp-post-image&quot; alt=&quot;&quot; srcset=&quot;https://arukayies.com/wp-content/uploads/2020/02/postreport-thumbnail-160x90.png 160w, https://arukayies.com/wp-content/uploads/2020/02/postreport-thumbnail-120x68.png 120w, https://arukayies.com/wp-content/uploads/2020/02/postreport-thumbnail-320x180.png 320w, https://arukayies.com/wp-content/uploads/2020/02/postreport-thumbnail-376x212.png 376w&quot; sizes=&quot;(max-width: 160px) 100vw, 160px&quot; /&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content internal-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title internal-blogcard-title&quot;&gt;
+    GASを使ってアイキャッチ画像付でWordPressに自動投稿する方法
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet internal-blogcard-snippet&quot;&gt;
+    以前の記事でこんなことを紹介しました。この記事ではタイトルと内容を自動投稿させるのみでしたが、今回はアイキャッチ画像付きで自動投稿させます！前回同様にプログラム未経験者でもコピペで実現できるように手順を紹介します。詳解！Ｇｏｏｇｌｅ　Ａｐｐ...
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer internal-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site internal-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon internal-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image internal-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image internal-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain internal-blogcard-domain&quot;&gt;
+      arukayies.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-date internal-blogcard-date&quot;&gt;
+    &lt;div class=&quot;blogcard-post-date internal-blogcard-post-date&quot;&gt;
+      2024.11.19
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a></div><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div></div><div class=single__article__comment></div></article><div class=single__relatedArticleList><h3 class=single__relatedArticleList__title>関連記事</h3><article class=partials__relatedArticle><div class=partials__relatedArticle__inner><a href=https://arukayies.github.io/gas/getwraps/ class=partials__relatedArticle__link></a><img src=https://arukayies.github.io/gas/getwraps/thumbnail_hu_d073a708842806bd.webp alt=GASでスプレッドシートの折り返し設定を一括取得！制御する方法 loading=lazy class=partials__relatedArticle__thumbnail><div class=partials__relatedArticle__content><h4 class=partials__relatedArticle__title>GASでスプレッドシートの折り返し設定を一括取得！制御する方法</h4><div class=partials__relatedArticle__description><p>Google Apps Script（GAS）を使ってスプレッドシートを操作する際、<code>getWraps()</code>メソッドはテキストの折り返し設定を取得するために非常に便利なツールばい。このメソッドは、特に大量のデータを扱うときに、折り返し設定の状態を一括で取得できるので、効率的な作業ができるんだよね。今回は、この<code>getWraps()</code>メソッドの使い方を、初心者向けに解説するけん、最後まで読んでみてね。</p><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div><h2 id=getwrapsとは基本の使い方>getWraps()とは？基本の使い方</h2><p>まずは、<code>getWraps()</code>メソッドがどういうものかを簡単に説明するよ。スプレッドシートでセル内のテキストが自動的に折り返されるかどうかは、データの可読性に大きく影響するんだ。<code>getWraps()</code>は、その折り返しの状態を確認するために使うメソッドばい。</p></div></div></div></article><article class=partials__relatedArticle><div class=partials__relatedArticle__inner><a href=https://arukayies.github.io/gas/getwrap/ class=partials__relatedArticle__link></a><img src=https://arukayies.github.io/gas/getwrap/thumbnail_hu_eff97127e3ea148b.webp alt=GASでスプレッドシートのセルの折り返し設定状態を取得・判定する方法 loading=lazy class=partials__relatedArticle__thumbnail><div class=partials__relatedArticle__content><h4 class=partials__relatedArticle__title>GASでスプレッドシートのセルの折り返し設定状態を取得・判定する方法</h4><div class=partials__relatedArticle__description><p>Google Apps Script（GAS）を使うと、スプレッドシートのテキスト折り返し設定をプログラムで簡単に管理できるんよ。今回はその中でも、<code>getWrap()</code>メソッドに焦点を当てて、具体的な使い方を紹介するけね。これを覚えると、大量のデータを扱うシートでも効率よく作業できるようになるばい！</p><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div><h2 id=まずはテキスト折り返しって何>まずはテキスト折り返しって何？</h2><p>スプレッドシートにおける「テキスト折り返し」とは、セル内に収まりきらないテキストが自動的に複数行に分かれる機能のことじゃ。これを設定することで、セル内のテキストが見やすくなったり、セルを越えてテキストが表示されるのを防いだりできるんよ。スプレッドシートでよく使われるテキスト表示のモードは次の3つやけ。</p></div></div></div></article></div><div class=single__navigation><a href=https://arukayies.github.io/gas/getdatasourceurl/ class=single__navigation__prev>GASでスプレッドシートの外部連携用ソースURLを取得する方法</a><div class=single__navigation__center></div><a href=https://arukayies.github.io/gas/getdatatable/ class=single__navigation__next>GASでスプレッドシートのグラフデータを効率的に取得する方法</a></div></section></div></main><aside class=sidebar><div class=sidebar__inner><div class=partials__sidebar><div class="pcShow partials__sidebar__card"><h4 class=partials__sidebar__title>検索</h4><nav class=partials__sidebar__search><form action=/search/ method=get class=partials__sidebar__search__form><input type=text name=query id=search class=partials__sidebar__search__query>
+<button type=submit class=partials__sidebar__search__button>
+<i class="fas fa-search"></i></button></form></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>プロフィール</h3><nav class=partials__sidebar__profile><img src=https://arukayies.github.io/image/profile_icon_hu_b863bd11c300fc2a.webp alt=icon class=partials__sidebar__profile__icon><div class=partials__sidebar__profile__name>arukayies</div><div class=partials__sidebar__profile__description></div><div class=partials__snsLinks><a href=https://x.com/arukayies target=_blank class=partials__snsLinks__link--twitter><i class="fa-lg fab fa-x-twitter"></i>
+</a><a href=https://www.instagram.com/arukayies target=_blank class=partials__snsLinks__link--instagram><i class="fa-lg fab fa-instagram"></i>
+</a><a href=https://www.youtube.com/channel/UCoO5ZwX9e7jToe7eo-h62HQ target=_blank class=partials__snsLinks__link--youtube><i class="fa-lg fab fa-youtube"></i>
+</a><a href=https://github.com/arukayies target=_blank class=partials__snsLinks__link--github><i class="fa-lg fab fa-github"></i>
+</a><a href=https://arukayies.github.io/homepage/ target=_blank class=partials__snsLinks__link--other><i class="fa-lg fas fa-link"></i></a></div></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>新着記事</h3><nav class=partials__sidebar__article><ul class=partials__sidebar__article__items><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-summary/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-summary/thumbnail_hu_76cb231a0b93d187.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3カ国を巡った様子のまとめ loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3カ国を巡った様子のまとめ</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-travel-expenses/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-travel-expenses/thumbnail_hu_5145d4451775f13.webp alt=ヨーロッパ3カ国を巡る新婚旅行にかかった費用は100万円！10日間過ごした内訳！ loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>ヨーロッパ3カ国を巡る新婚旅行にかかった費用は100万円！10日間過ごした内訳！</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-transit-suvarnabhumi-airport/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-transit-suvarnabhumi-airport/thumbnail_hu_ab6b01167f81c539.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】スワンナプーム空港内でトランジット8時間の過ごし方 loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】スワンナプーム空港内でトランジット8時間の過ごし方</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-pari-tourism/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-pari-tourism/thumbnail_hu_6adf033c7ac7507.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】2泊3日のパリ観光 loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】2泊3日のパリ観光</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-budapest-tourism-part2/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-budapest-tourism-part2/thumbnail_hu_d55c9f8cbc269741.webp alt="【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3泊4日のブダベスト観光 後編" loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3泊4日のブダベスト観光 後編</div></div></a></li></ul></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>カテゴリー</h3><nav class=partials__sidebar__category><ul class=partials__sidebar__category__items><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/GAS/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+gas</div><div class=partials__sidebar__category__itemCount>101</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/LINE-BOT/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+line bot</div><div class=partials__sidebar__category__itemCount>28</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%83%9F%E3%82%BA%E3%83%8A%E5%8F%8E%E7%A9%AB%E6%B8%88/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ミズナ(収穫済)</div><div class=partials__sidebar__category__itemCount>14</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%AA%E3%82%AF%E3%83%A9/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+オクラ</div><div class=partials__sidebar__category__itemCount>12</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/DIY/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+diy</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%B4%E3%83%BC%E3%83%A4/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ゴーヤ</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E6%97%85/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+旅</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%83%AB%E3%83%83%E3%82%B3%E3%83%A9%E5%8F%8E%E7%A9%AB%E6%B8%88/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ルッコラ(収穫済)</div><div class=partials__sidebar__category__itemCount>8</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%B3%E3%83%9E%E3%83%84%E3%83%8A/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+コマツナ</div><div class=partials__sidebar__category__itemCount>5</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%A2%E3%83%AB%E3%83%86%E3%82%A3%E3%82%B7%E3%83%9E/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+アルティシマ</div><div class=partials__sidebar__category__itemCount>4</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%AC%E3%82%B8%E3%83%A5%E3%83%9E%E3%83%AB/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ガジュマル</div><div class=partials__sidebar__category__itemCount>4</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/WordpressAPI/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+wordpressapi</div><div class=partials__sidebar__category__itemCount>3</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/Raspberry-Pi/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+raspberry pi</div><div class=partials__sidebar__category__itemCount>1</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E7%94%9F%E6%B4%BB/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+生活</div><div class=partials__sidebar__category__itemCount>1</div></a></li></ul></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>アーカイブ</h3><nav class=partials__sidebar__archive><ul class=partials__sidebar__archive__yearList><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2024年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2024%e5%b9%b410%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2024年10月（6）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2024%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2024年9月（3）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2021年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2021%e5%b9%b43%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2021年3月（1）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2020年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年9月（15）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b48%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年8月（5）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b47%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年7月（21）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b46%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年6月（34）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b45%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年5月（9）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b44%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年4月（6）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b43%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年3月（17）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b42%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年2月（2）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2019年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b412%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年12月（2）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b411%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年11月（22）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b410%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年10月（3）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年9月（22）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b48%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年8月（13）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b47%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年7月（14）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b46%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年6月（9）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b45%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年5月（3）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b44%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年4月（1）</a></li></ul></div></li></ul></nav></div><script>document.querySelectorAll(".archive-accordion").forEach(function(e){e.addEventListener("click",function(e){if(e.target.tagName==="A")return;e.currentTarget.classList.toggle("open"),e.currentTarget.classList.toggle("close"),e.currentTarget.classList.contains("open")?e.currentTarget.querySelector(".archive-accordion-child-wrapper").style.height=e.currentTarget.querySelector(".archive-accordion-child").offsetHeight+"px":e.currentTarget.querySelector(".archive-accordion-child-wrapper").style.height="0"})})</script></div></div></aside></div><footer class=footer><div class=footer__inner><div class=partials__footer><div class=partials__footer__menu><ul class=partials__footer__menu__list><li><a href=/privacy-policy>プライバシーポリシー</a></li></ul><ul class=partials__footer__menu__list><li><a href=https://x.com/arukayies>お問い合わせ</a></li></ul></div><p class=partials__footer__copyright>© 2019-2025 @arukayies<br>Powered by <a href=https://gohugo.io/ target=_blank>Hugo</a> | Hugo Theme Salt</p></div></div></footer></div><div id=overlay class="close overlay"></div><script>window.addEventListener("DOMContentLoaded",e=>{document.querySelector("#headerBlock").style.height=document.querySelector(".header").offsetHeight+"px"})</script><script>document.querySelectorAll("#hamburger, #overlay").forEach(e=>{e.addEventListener("click",function(){document.querySelector("#hamburger").classList.toggle("open"),document.querySelector("#hamburger").classList.toggle("close"),document.querySelector("#hamburgerMenu").classList.toggle("open"),document.querySelector("#hamburgerMenu").classList.toggle("close"),document.querySelector("#overlay").classList.toggle("open"),document.querySelector("#overlay").classList.toggle("close")})})</script></body></html>

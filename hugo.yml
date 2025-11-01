@@ -1,6 +1,7 @@
-baseURL: https://arukayies.github.io/homepage/
+baseURL: https://arukayies.github.io/
 languageCode: ja
 title: くらぶろぐ
+publishDir: homepage
 copyright: © 2019-2025 @arukayies
 googleAnalytics:
 disqusShortname:

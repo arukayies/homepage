@@ -1,0 +1,381 @@
+<!doctype html><html lang=ja><head><meta charset=UTF-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>GASだけで作れる買い物リストを管理するLINE BOTの作り方Ver2.0 | くらぶろぐ</title><meta name=description content='前回作った買い物リストを管理するLINE BOTについてちょっとコードを変更したので、今回はそれを紹介します！
+
+  
+    変更点
+  
+  
+    
+      処理が1ファイルに長かったので、細分化しました。
+    
+    
+      買い物リストの削除方法を変更しました。
+    
+  
+
+コード部分のみ変えているのでそれ以外は前回の記事を参考にしてください！
+
+  
+  
+    
+      
+    
+<img loading="lazy" decoding="async" width="160" height="90" src="https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-160x90.png" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" alt="" srcset="https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-160x90.png 160w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-120x68.png 120w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-320x180.png 320w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-376x212.png 376w" sizes="(max-width: 160px) 100vw, 160px" /></figure>
+
+<div class="blogcard-content internal-blogcard-content">
+  <div class="blogcard-title internal-blogcard-title">
+    GASだけで作れる買い物リストを管理するLINE BOTの作り方
+  </div>
+  
+  <div class="blogcard-snippet internal-blogcard-snippet">
+    GASだけで作れる買い物リストを管理できるLINE BOTの作り方を紹介します！コピペで作れるのでぜひ使ってみてください！
+  </div>
+</div>
+
+<div class="blogcard-footer internal-blogcard-footer cf">
+  <div class="blogcard-site internal-blogcard-site">
+    <div class="blogcard-favicon internal-blogcard-favicon">
+      <img data-src="https://www.google.com/s2/favicons?domain=https://arukayies.com" alt="" class="blogcard-favicon-image internal-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
+      
+      <noscript>
+        <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://arukayies.com" alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" width="16" height="16" />
+      </noscript>
+    </div>
+    
+    <div class="blogcard-domain internal-blogcard-domain">
+      arukayies.com
+    </div>
+  </div>
+  
+  <div class="blogcard-date internal-blogcard-date">
+    <div class="blogcard-post-date internal-blogcard-post-date">
+      2024.11.15
+    </div>
+  </div>
+</div>
+
+  
+
+削除部分はこんな動きになります。'><meta name=thumbnail content="https://arukayies.github.io/gas/line_bot/shopping-list-post-v2/thumbnail_hu_5c638e2ff1f8ced5.webp"><meta property="og:locale" content="ja_JP"><meta property='og:title' content='GASだけで作れる買い物リストを管理するLINE BOTの作り方Ver2.0 | くらぶろぐ'><meta property='og:description' content='前回作った買い物リストを管理するLINE BOTについてちょっとコードを変更したので、今回はそれを紹介します！
+
+  
+    変更点
+  
+  
+    
+      処理が1ファイルに長かったので、細分化しました。
+    
+    
+      買い物リストの削除方法を変更しました。
+    
+  
+
+コード部分のみ変えているのでそれ以外は前回の記事を参考にしてください！
+
+  
+  
+    
+      
+    
+<img loading="lazy" decoding="async" width="160" height="90" src="https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-160x90.png" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" alt="" srcset="https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-160x90.png 160w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-120x68.png 120w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-320x180.png 320w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-376x212.png 376w" sizes="(max-width: 160px) 100vw, 160px" /></figure>
+
+<div class="blogcard-content internal-blogcard-content">
+  <div class="blogcard-title internal-blogcard-title">
+    GASだけで作れる買い物リストを管理するLINE BOTの作り方
+  </div>
+  
+  <div class="blogcard-snippet internal-blogcard-snippet">
+    GASだけで作れる買い物リストを管理できるLINE BOTの作り方を紹介します！コピペで作れるのでぜひ使ってみてください！
+  </div>
+</div>
+
+<div class="blogcard-footer internal-blogcard-footer cf">
+  <div class="blogcard-site internal-blogcard-site">
+    <div class="blogcard-favicon internal-blogcard-favicon">
+      <img data-src="https://www.google.com/s2/favicons?domain=https://arukayies.com" alt="" class="blogcard-favicon-image internal-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
+      
+      <noscript>
+        <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://arukayies.com" alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" width="16" height="16" />
+      </noscript>
+    </div>
+    
+    <div class="blogcard-domain internal-blogcard-domain">
+      arukayies.com
+    </div>
+  </div>
+  
+  <div class="blogcard-date internal-blogcard-date">
+    <div class="blogcard-post-date internal-blogcard-post-date">
+      2024.11.15
+    </div>
+  </div>
+</div>
+
+  
+
+削除部分はこんな動きになります。'><meta property='og:image' content="https://arukayies.github.io/gas/line_bot/shopping-list-post-v2/thumbnail_hu_5c638e2ff1f8ced5.webp"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property='og:url' content='https://arukayies.github.io/gas/line_bot/shopping-list-post-v2/'><meta property='og:site_name' content='くらぶろぐ'><meta property='og:type' content='article'><meta property="article:published_time" content="2020-06-06T14:19:51+00:00"><meta property="article:modified_time" content="2020-06-06T14:19:51+00:00"><meta property="article:author" content="arukayies"><meta property="article:section" content="[LINE BOT]"><meta property="article:tag" content="GAS"><meta property="article:tag" content="Google Apps Script"><meta property="article:tag" content="LINE BOT"><meta name=twitter:title content="GASだけで作れる買い物リストを管理するLINE BOTの作り方Ver2.0 | くらぶろぐ"><meta name=twitter:description content='前回作った買い物リストを管理するLINE BOTについてちょっとコードを変更したので、今回はそれを紹介します！
+
+  
+    変更点
+  
+  
+    
+      処理が1ファイルに長かったので、細分化しました。
+    
+    
+      買い物リストの削除方法を変更しました。
+    
+  
+
+コード部分のみ変えているのでそれ以外は前回の記事を参考にしてください！
+
+  
+  
+    
+      
+    
+<img loading="lazy" decoding="async" width="160" height="90" src="https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-160x90.png" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" alt="" srcset="https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-160x90.png 160w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-120x68.png 120w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-320x180.png 320w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-376x212.png 376w" sizes="(max-width: 160px) 100vw, 160px" /></figure>
+
+<div class="blogcard-content internal-blogcard-content">
+  <div class="blogcard-title internal-blogcard-title">
+    GASだけで作れる買い物リストを管理するLINE BOTの作り方
+  </div>
+  
+  <div class="blogcard-snippet internal-blogcard-snippet">
+    GASだけで作れる買い物リストを管理できるLINE BOTの作り方を紹介します！コピペで作れるのでぜひ使ってみてください！
+  </div>
+</div>
+
+<div class="blogcard-footer internal-blogcard-footer cf">
+  <div class="blogcard-site internal-blogcard-site">
+    <div class="blogcard-favicon internal-blogcard-favicon">
+      <img data-src="https://www.google.com/s2/favicons?domain=https://arukayies.com" alt="" class="blogcard-favicon-image internal-blogcard-favicon-image lozad lozad-img" loading="lazy" width="16" height="16" />
+      
+      <noscript>
+        <img loading="lazy" decoding="async" src="https://www.google.com/s2/favicons?domain=https://arukayies.com" alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" width="16" height="16" />
+      </noscript>
+    </div>
+    
+    <div class="blogcard-domain internal-blogcard-domain">
+      arukayies.com
+    </div>
+  </div>
+  
+  <div class="blogcard-date internal-blogcard-date">
+    <div class="blogcard-post-date internal-blogcard-post-date">
+      2024.11.15
+    </div>
+  </div>
+</div>
+
+  
+
+削除部分はこんな動きになります。'><meta name=twitter:image content="https://arukayies.github.io/gas/line_bot/shopping-list-post-v2/thumbnail_hu_5c638e2ff1f8ced5.webp"><meta name=twitter:card content="summary_large_image"><meta name=robots content="index,follow"><meta name=googlebot content="index,follow"><meta name=generator content="Hugo 0.147.5"><link rel=icon href=https://arukayies.github.io/favicon.ico><link rel=apple-touch-icon href=https://arukayies.github.io/image/icon.png><link rel=apple-touch-icon sizes=180x180 href=https://arukayies.github.io/image/icon_hu_bc3a3d10bb972f2d.png><meta name=msapplication-TileImage content="https://arukayies.github.io/image/icon_hu_89f2d4f9250944e3.png"><link rel=canonical href=https://arukayies.github.io/gas/line_bot/shopping-list-post-v2/><link rel=preload href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as=style><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" media=print onload='this.media="all"'><link rel=stylesheet href=https://arukayies.github.io/scss/style.min.f6e3827402c49df761979d470dc7e943a2cb144de4606f4b855708bf67c293ff.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css as=style><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css media=print onload='this.media="all"'><link rel=preload href=https://arukayies.github.io/css/vendor/github-markdown-css/github-markdown.css as=style><link rel=stylesheet href=https://arukayies.github.io/css/vendor/github-markdown-css/github-markdown.css media=print onload='this.media="all"'><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr/lunr.min.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/lunr.stemmer.support.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/tinyseg.js></script><script type=text/javascript src=https://arukayies.github.io/js/vendor/lunr-languages/lunr.ja.js></script><script type=text/javascript src=/js/search.min.js></script><script type=application/ld+json>{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://arukayies.github.io/#website","name":"くらぶろぐ","url":"https://arukayies.github.io/","potentialAction":{"@type":"SearchAction","target":"https://arukayies.github.io/search/?query={search_term_string}","query-input":"required name=search_term_string"},"publisher":{"@id":"https://arukayies.github.io/#publisher"}},{"@type":"Article","headline":"GASだけで作れる買い物リストを管理するLINE BOTの作り方Ver2.0","description":"前回作った買い物リストを管理するLINE BOTについてちょっとコードを変更したので、今回はそれを紹介します！\n変更点 処理が1ファイルに長かったので、細分化しました。 買い物リストの削除方法を変更しました。 コード部分のみ変えているのでそれ以外は前回の記事を参考にしてください！\n\u0026lt;img loading=\u0026quot;lazy\u0026quot; decoding=\u0026quot;async\u0026quot; width=\u0026quot;160\u0026quot; height=\u0026quot;90\u0026quot; src=\u0026quot;https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-160x90.png\u0026quot; class=\u0026quot;blogcard-thumb-image internal-blogcard-thumb-image wp-post-image\u0026quot; alt=\u0026quot;\u0026quot; srcset=\u0026quot;https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-160x90.png 160w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-120x68.png 120w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-320x180.png 320w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-376x212.png 376w\u0026quot; sizes=\u0026quot;(max-width: 160px) 100vw, 160px\u0026quot; /\u0026gt;\u0026lt;/figure\u0026gt; \u0026lt;div class=\u0026quot;blogcard-content internal-blogcard-content\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-title internal-blogcard-title\u0026quot;\u0026gt; GASだけで作れる買い物リストを管理するLINE BOTの作り方 \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;blogcard-snippet internal-blogcard-snippet\u0026quot;\u0026gt; GASだけで作れる買い物リストを管理できるLINE BOTの作り方を紹介します！コピペで作れるのでぜひ使ってみてください！ \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;blogcard-footer internal-blogcard-footer cf\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-site internal-blogcard-site\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-favicon internal-blogcard-favicon\u0026quot;\u0026gt; \u0026lt;img data-src=\u0026quot;https://www.google.com/s2/favicons?domain=https://arukayies.com\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-favicon-image internal-blogcard-favicon-image lozad lozad-img\u0026quot; loading=\u0026quot;lazy\u0026quot; width=\u0026quot;16\u0026quot; height=\u0026quot;16\u0026quot; /\u0026gt; \u0026lt;noscript\u0026gt; \u0026lt;img loading=\u0026quot;lazy\u0026quot; decoding=\u0026quot;async\u0026quot; src=\u0026quot;https://www.google.com/s2/favicons?domain=https://arukayies.com\u0026quot; alt=\u0026quot;\u0026quot; class=\u0026quot;blogcard-favicon-image internal-blogcard-favicon-image\u0026quot; width=\u0026quot;16\u0026quot; height=\u0026quot;16\u0026quot; /\u0026gt; \u0026lt;/noscript\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;blogcard-domain internal-blogcard-domain\u0026quot;\u0026gt; arukayies.com \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;div class=\u0026quot;blogcard-date internal-blogcard-date\u0026quot;\u0026gt; \u0026lt;div class=\u0026quot;blogcard-post-date internal-blogcard-post-date\u0026quot;\u0026gt; 2024.11.15 \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; \u0026lt;/div\u0026gt; 削除部分はこんな動きになります。\n","image":"https://arukayies.github.io/gas/line_bot/shopping-list-post-v2/thumbnail_hu_834c8c5d99410953.webp","keywords":["GAS","Google Apps Script","LINE BOT"],"author":{"@type":"Person","url":"https://arukayies.github.io/homepage/","name":"arukayies"},"datePublished":"2020-06-06T14:19:51+00:00","dateModified":"2020-06-06T14:19:51+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://arukayies.github.io/gas/line_bot/shopping-list-post-v2/"},"isPartOf":{"@id":"https://arukayies.github.io/#website"},"breadcrumb":{"@id":"https://arukayies.github.io/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://arukayies.github.io/#breadcrumb","name":"パンくずリスト","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://arukayies.github.io/"},{"@type":"ListItem","position":2,"name":["LINE BOT"],"item":"https://arukayies.github.io/categories/%5BLINE%20BOT%5D"}]}]}</script></head><body class=body><div class=container><header class=header><div class=header__inner><div class=partials__header><div class=partials__header__title><a href=https://arukayies.github.io/>くらぶろぐ</a><div id=hamburger class="spShow close partials__header__hamburger"><div class=partials__header__hamburger__line></div></div></div><div id=hamburgerMenu class="close partials__header__menu"><nav class="spShow partials__header__menu__search"><form action=/search/ class=partials__header__menu__search__form><input type=text name=query id=search class=partials__header__menu__search__query>
+<button type=submit class=partials__header__menu__search__button>
+<i class="fas fa-search"></i></button></form></nav><nav class=partials__header__menu__topMenu><ul class=partials__header__menu__topMenu__items></ul></nav><nav class="spShow partials__header__menu__sideMenu"><h3 class=partials__header__menu__sideMenu__title>メニュー</h3><ul class=partials__header__menu__sideMenu__items></ul></nav></div></div></div></header><div id=headerBlock class=spShow></div><div class=content><main class=main><div class=main__inner><section class=single><article class=single__article><div class=single__article__header><ol class=partials__breadcrumb><li><a href=https://arukayies.github.io/><i class="fas fa-home"></i>Home</a></li><li>/</li><li><a href=/categories/[LINE%20BOT]><i class="fas fa-folder"></i>[LINE BOT]</a></li><li>/</li><li>GASだけで作れる買い物リストを管理するLINE BOTの作り方Ver2.0</li></ol><div class="pcShow single__article__date"><i class="far fa-clock"></i>2020-06-06
+ / <i class="fas fa-history"></i>2020-06-06</div></div><h1 class=single__article__title>GASだけで作れる買い物リストを管理するLINE BOTの作り方Ver2.0</h1><div class="spShow single__article__date"><i class="far fa-clock"></i>2020-06-06
+ / <i class="fas fa-history"></i>2020-06-06</div><section class=single__article__shareLinks><ul class=partials__shareLinks><li class=partials__shareLinks__item><a href="http://x.com/intent/tweet?url=https%3a%2f%2farukayies.github.io%2fgas%2fline_bot%2fshopping-list-post-v2%2f&text=GAS%e3%81%a0%e3%81%91%e3%81%a7%e4%bd%9c%e3%82%8c%e3%82%8b%e8%b2%b7%e3%81%84%e7%89%a9%e3%83%aa%e3%82%b9%e3%83%88%e3%82%92%e7%ae%a1%e7%90%86%e3%81%99%e3%82%8bLINE%20BOT%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9Ver2.0" target=_blank title=Tweet class=partials__shareLinks__itemLink--twitter><i class="fab fa-x-twitter"></i>Twitter</a></li><li class=partials__shareLinks__item><a href="http://www.facebook.com/sharer.php?u=https%3a%2f%2farukayies.github.io%2fgas%2fline_bot%2fshopping-list-post-v2%2f&t=GAS%e3%81%a0%e3%81%91%e3%81%a7%e4%bd%9c%e3%82%8c%e3%82%8b%e8%b2%b7%e3%81%84%e7%89%a9%e3%83%aa%e3%82%b9%e3%83%88%e3%82%92%e7%ae%a1%e7%90%86%e3%81%99%e3%82%8bLINE%20BOT%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9Ver2.0" target=_blank title=Facebook class=partials__shareLinks__itemLink--facebook><i class="fab fa-facebook"></i>Facebook</a></li><li class=partials__shareLinks__item><a href="http://b.hatena.ne.jp/add?mode=confirm&url=https%3a%2f%2farukayies.github.io%2fgas%2fline_bot%2fshopping-list-post-v2%2f&title=GAS%e3%81%a0%e3%81%91%e3%81%a7%e4%bd%9c%e3%82%8c%e3%82%8b%e8%b2%b7%e3%81%84%e7%89%a9%e3%83%aa%e3%82%b9%e3%83%88%e3%82%92%e7%ae%a1%e7%90%86%e3%81%99%e3%82%8bLINE%20BOT%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9Ver2.0" target=_blank title=hatena class=partials__shareLinks__itemLink--hatena>はてブ</a></li><li class=partials__shareLinks__item><a href="http://getpocket.com/edit?url=https%3a%2f%2farukayies.github.io%2fgas%2fline_bot%2fshopping-list-post-v2%2f&title=GAS%e3%81%a0%e3%81%91%e3%81%a7%e4%bd%9c%e3%82%8c%e3%82%8b%e8%b2%b7%e3%81%84%e7%89%a9%e3%83%aa%e3%82%b9%e3%83%88%e3%82%92%e7%ae%a1%e7%90%86%e3%81%99%e3%82%8bLINE%20BOT%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9Ver2.0" target=_blank title=pocket class=partials__shareLinks__itemLink--pocket><i class="fab fa-get-pocket"></i>Pocket</a></li><li class=partials__shareLinks__item><a href=https://line.me/R/msg/text/?GAS%e3%81%a0%e3%81%91%e3%81%a7%e4%bd%9c%e3%82%8c%e3%82%8b%e8%b2%b7%e3%81%84%e7%89%a9%e3%83%aa%e3%82%b9%e3%83%88%e3%82%92%e7%ae%a1%e7%90%86%e3%81%99%e3%82%8bLINE%20BOT%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9Ver2.0%0D%0Ahttps%3a%2f%2farukayies.github.io%2fgas%2fline_bot%2fshopping-list-post-v2%2f target=_blank title=line class=partials__shareLinks__itemLink--line><i class="fab fa-line"></i>Line</a></li><li class=partials__shareLinks__item><a href=javascript:void(0) onclick='navigator.clipboard.writeText("https://arukayies.github.io/gas/line_bot/shopping-list-post-v2/"),alert("URLをコピーしました")' title=line class=partials__shareLinks__itemLink--copy><i class="far fa-copy"></i>URL</a></li></ul></section><img src=/gas/line_bot/shopping-list-post-v2/thumbnail_hu_107bb4c5125a88cd.webp alt="GASだけで作れる買い物リストを管理するLINE BOTの作り方Ver2.0" class=single__article__thumbnail><aside class=single__article__toc><h3 class=single__article__toc__title><i class="fas fa-list-ul"></i>目次</h3><nav id=TableOfContents><ul><li><a href=#コードの説明>コードの説明</a><ul><li><a href=#メイン処理>メイン処理</a></li><li><a href=#ポストバックイベント処理>ポストバックイベント処理</a></li><li><a href=#lineに送信する処理>LINEに送信する処理</a></li><li><a href=#失敗時のログを記録する処理>失敗時のログを記録する処理</a></li></ul></li><li><a href=#まとめ>まとめ</a></li></ul></nav></aside><div class="single__article__content markdown-body"><p>前回作った買い物リストを管理するLINE BOTについてちょっとコードを変更したので、今回はそれを紹介します！</p><div class="wp-block-cocoon-blocks-iconlist-box iconlist-box blank-box list-caret-right block-box has-background has-border-color has-icon-color has-watery-blue-background-color has-key-color-border-color has-key-color-icon-color"><div class=iconlist-title>変更点</div><ul class=wp-block-list><li>処理が1ファイルに長かったので、細分化しました。</li><li>買い物リストの削除方法を変更しました。</li></ul></div><p>コード部分のみ変えているのでそれ以外は前回の記事を参考にしてください！</p><div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-reference"><a href=https://arukayies.com/gas/line_bot/shopping-list-post title="GASだけで作れる買い物リストを管理するLINE BOTの作り方" class="blogcard-wrap internal-blogcard-wrap a-wrap cf" target=_blank><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><pre><code>&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; width=&quot;160&quot; height=&quot;90&quot; src=&quot;https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-160x90.png&quot; class=&quot;blogcard-thumb-image internal-blogcard-thumb-image wp-post-image&quot; alt=&quot;&quot; srcset=&quot;https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-160x90.png 160w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-120x68.png 120w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-320x180.png 320w, https://arukayies.com/wp-content/uploads/2020/05/shopping-list-post-376x212.png 376w&quot; sizes=&quot;(max-width: 160px) 100vw, 160px&quot; /&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content internal-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title internal-blogcard-title&quot;&gt;
+    GASだけで作れる買い物リストを管理するLINE BOTの作り方
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet internal-blogcard-snippet&quot;&gt;
+    GASだけで作れる買い物リストを管理できるLINE BOTの作り方を紹介します！コピペで作れるのでぜひ使ってみてください！
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer internal-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site internal-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon internal-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image internal-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image internal-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain internal-blogcard-domain&quot;&gt;
+      arukayies.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-date internal-blogcard-date&quot;&gt;
+    &lt;div class=&quot;blogcard-post-date internal-blogcard-post-date&quot;&gt;
+      2024.11.15
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a></div><p>削除部分はこんな動きになります。<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"></p><div class=wp-block-embed__wrapper><blockquote class=twitter-tweet data-width=550 data-dnt=true><p lang=ja dir=ltr>以前作った買い物リストを管理してくれるLINE BOT を少し改良しました！<br><br>・削除時にカルーセルテンプレートを使うようにして、入力する手間を減らしてます！<br>・GASのV8意識して、リファクタしました！<br>・clasp&GitHub環境を整えた！<a href=https://t.co/lSRrD8BVak>https://t.co/lSRrD8BVak</a><a href="https://twitter.com/hashtag/GAS?src=hash&ref_src=twsrc%5Etfw">#GAS</a> <a href="https://twitter.com/hashtag/LINEBOT?src=hash&ref_src=twsrc%5Etfw">#LINEBOT</a> <a href=https://t.co/F2pv7DmZkz>pic.twitter.com/F2pv7DmZkz</a></p>&mdash; arukayies (@arukayies)<pre><code>&lt;a href=&quot;https://twitter.com/arukayies/status/1265646924654194690?ref_src=twsrc%5Etfw&quot;&gt;May 27, 2020&lt;/a&gt;
+</code></pre></blockquote></div></figure><p>コードだけ見れればいい！って方は<a href=https://github.com/arukayies/linebot-shopping-list-post-v2 title=https://github.com/arukayies/linebot-shopping-list-post-v2>こちら</a>をどうぞ！</p><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2Fe4320d2f4429571200cf25919da31353%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798150734_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2Fe4320d2f4429571200cf25919da31353%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;ＬＩＮＥ　ＢＯＴを作ろう！ Ｍｅｓｓａｇｉｎｇ　ＡＰＩを使ったチャットボットの/翔泳社/立花翔&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2Fe4320d2f4429571200cf25919da31353%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3DLINE%2520bot%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3DLINE%2520bot&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div><h2 id=コードの説明>コードの説明</h2><h3 id=メイン処理>メイン処理</h3><p>LINEから受け取った情報が <strong>メッセージイベント</strong> か <strong>ポストバックイベント</strong> かを判別する処理になります。</p><p>2行目のトークンはLINEのチャンネルアクセストークンを入力してください。</p><div class="wp-block-cocoon-blocks-blogcard blogcard-type bct-related"><a href=https://arukayies.com/gas/line_bot/gettoken title="LINE Messaging APIアクセストークンの取得方法" class="blogcard-wrap internal-blogcard-wrap a-wrap cf" target=_blank><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class=fa></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><pre><code>&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; width=&quot;160&quot; height=&quot;90&quot; src=&quot;https://arukayies.com/wp-content/uploads/2019/07/gettoken-1-160x90.png&quot; class=&quot;blogcard-thumb-image internal-blogcard-thumb-image wp-post-image&quot; alt=&quot;&quot; srcset=&quot;https://arukayies.com/wp-content/uploads/2019/07/gettoken-1-160x90.png 160w, https://arukayies.com/wp-content/uploads/2019/07/gettoken-1-120x68.png 120w, https://arukayies.com/wp-content/uploads/2019/07/gettoken-1-320x180.png 320w, https://arukayies.com/wp-content/uploads/2019/07/gettoken-1-376x212.png 376w&quot; sizes=&quot;(max-width: 160px) 100vw, 160px&quot; /&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;blogcard-content internal-blogcard-content&quot;&gt;
+  &lt;div class=&quot;blogcard-title internal-blogcard-title&quot;&gt;
+    LINE Messaging APIアクセストークンの取得方法
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-snippet internal-blogcard-snippet&quot;&gt;
+    LINEBOTに必要なトークンの取得方法を画像付きで解説します。
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;blogcard-footer internal-blogcard-footer cf&quot;&gt;
+  &lt;div class=&quot;blogcard-site internal-blogcard-site&quot;&gt;
+    &lt;div class=&quot;blogcard-favicon internal-blogcard-favicon&quot;&gt;
+      &lt;img data-src=&quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image internal-blogcard-favicon-image lozad lozad-img&quot; loading=&quot;lazy&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      
+      &lt;noscript&gt;
+        &lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://www.google.com/s2/favicons?domain=https://arukayies.com&quot; alt=&quot;&quot; class=&quot;blogcard-favicon-image internal-blogcard-favicon-image&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+      &lt;/noscript&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;blogcard-domain internal-blogcard-domain&quot;&gt;
+      arukayies.com
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;blogcard-date internal-blogcard-date&quot;&gt;
+    &lt;div class=&quot;blogcard-post-date internal-blogcard-post-date&quot;&gt;
+      2024.11.19
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></a></div><h4 id=メッセージイベント処理>メッセージイベント処理</h4><p>LINEから受け取った <strong>テキスト内容</strong> によって判別する処理になります。</p><h5 id=買い物リストを表示する処理>買い物リストを表示する処理</h5><p>スクリプトエディタの <strong>文字列を配列</strong> に変換し、買い物リストの文字列を生成します。</p><h5 id=買い物リストに追加状態にする処理>買い物リストに追加状態にする処理</h5><p>スクリプトエディタの <strong>CONFを1</strong> に変え、次のメッセージを買い物リストに追加する状態にする処理です。</p><h5 id=買い物リストから削除する一覧を送る処理>買い物リストから削除する一覧を送る処理</h5><p>買い物リストの内容を <strong>カルーセルテンプレート</strong> でLINEに送ります。</p><p>カルーセルテンプレートの仕様で一度に送れるのは10個までのため、</p><p>リストを10で割って、余りまで表示したりと、、、ちょっと処理が複雑です。</p><div class="wp-block-cocoon-blocks-tab-caption-box-1 tab-caption-box block-box has-border-color has-red-border-color cocoon-block-tab-caption-box"><div class="tab-caption-box-label block-box-label box-label fab-check"><span class="tab-caption-box-label-text block-box-label-text box-label-text">ポイント</span></div><div class="tab-caption-box-content block-box-content box-content"><ul class=wp-block-list><li>買い物リストが10件以上ある場合は複数回のカルーセルテンプレートメッセージが送られます。</li></ul></div></div><h6 id=カルーセルテンプレートを組み立てる処理>カルーセルテンプレートを組み立てる処理</h6><p>買い物リストを元にカルーセルテンプレートの <strong>配列を組み立てる</strong> 処理です。</p><h5 id=使い方を送る処理>使い方を送る処理</h5><p>LINEにBOTの <strong>使い方</strong> を送ります。</p><h3 id=ポストバックイベント処理>ポストバックイベント処理</h3><p>指定されたアイテムを買い物リストから <strong>削除</strong> します。</p><h3 id=lineに送信する処理>LINEに送信する処理</h3><p>受け取ったLINEの <strong>メッセージオブジェクト</strong> を指定宛先に送ります。</p><h3 id=失敗時のログを記録する処理>失敗時のログを記録する処理</h3><p>メイン処理の <strong>console.log</strong> 部分を <strong>addLog</strong> か <strong>postLog</strong> に書き換えることで、ログをスプレッドシートかSlackへ記録することができます！</p><p>スプレッドシートに記録する場合はこちらです。</p><p>Slackにログを送信する場合はこちらです！</p><h2 id=まとめ>まとめ</h2><p>砂糖がなくなったら、LINEに追加しておく。</p></p><p>テレビ見ていてこれ作りたい！ってなったら材料をLINEに追加しておく。</p><p>など、<strong><span class=fz-20px><span class=fz-32px><span class=fz-28px><span class=fz-24px>すぐにメモが出来るので便利です！！！</span></span></span></span></strong><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2Fe4320d2f4429571200cf25919da31353%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798150734_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2Fe4320d2f4429571200cf25919da31353%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;ＬＩＮＥ　ＢＯＴを作ろう！ Ｍｅｓｓａｇｉｎｇ　ＡＰＩを使ったチャットボットの/翔泳社/立花翔&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2Fe4320d2f4429571200cf25919da31353%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3DLINE%2520bot%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3DLINE%2520bot&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div><div class=cstmreba><div class=kaerebalink-box><div class=kaerebalink-image><a rel=noopener href="//af.moshimo.com/af/c/click?a_id=1612575&#038;p_id=54&#038;pc_id=54&#038;pl_id=616&#038;s_v=b5Rz2P0601xu&#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742" target=_blank><img decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/20010009784798064741_1.jpg style=border:none></a><img loading=lazy decoding=async src=https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif width=1 height=1 style=border:none></div><pre><code>&lt;div class=&quot;kaerebalink-info&quot;&gt;
+  &lt;div class=&quot;kaerebalink-name&quot;&gt;
+    &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;詳解！Ｇｏｏｇｌｅ　Ａｐｐｓ　Ｓｃｒｉｐｔ完全入門 ＧｏｏｇｌｅアプリケーションとＧｏｏｇｌｅ　Ｗｏｒ 第３版/秀和システム/高橋宣成&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    
+    &lt;div class=&quot;kaerebalink-powered-date&quot;&gt;
+      posted with &lt;a rel=&quot;nofollow noopener&quot; href=&quot;https://kaereba.com&quot; target=&quot;_blank&quot;&gt;カエレバ&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-detail&quot;&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;kaerebalink-link1&quot;&gt;
+    &lt;div class=&quot;shoplinkrakuten&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612575&amp;#038;p_id=54&amp;#038;pc_id=54&amp;#038;pl_id=616&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2F2735ffa9683d4fe24bd8643fa95fab2a%2F%3Frafcid%3Dwsc_i_ps_1087413314923222742&quot; target=&quot;_blank&quot; &gt;楽天市場&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612575p_id54pc_id54pl_id616.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkamazon&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1612578&amp;#038;p_id=170&amp;#038;pc_id=185&amp;#038;pl_id=4062&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=https%3A%2F%2Fwww.amazon.co.jp%2Fgp%2Fsearch%3Fkeywords%3Dgoogle%2520apps%2520script%26__mk_ja_JP%3D%25E3%2582%25AB%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%258A&quot; target=&quot;_blank&quot; &gt;Amazon&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1612578p_id170pc_id185pl_id4062.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;shoplinkyahoo&quot;&gt;
+      &lt;a rel=&quot;noopener&quot; href=&quot;//af.moshimo.com/af/c/click?a_id=1615240&amp;#038;p_id=1225&amp;#038;pc_id=1925&amp;#038;pl_id=18502&amp;#038;s_v=b5Rz2P0601xu&amp;#038;url=http%3A%2F%2Fsearch.shopping.yahoo.co.jp%2Fsearch%3Fp%3Dgoogle%2520apps%2520script&quot; target=&quot;_blank&quot; &gt;Yahooショッピング&lt;/a&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://arukayies.com/wp-content/uploads/2024/11/impressiona_id1615240p_id1225pc_id1925pl_id18502.gif&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;booklink-footer&quot;&gt;
+&lt;/div&gt;
+</code></pre></div></div></div><div class=single__article__comment></div></article><div class=single__relatedArticleList><h3 class=single__relatedArticleList__title>関連記事</h3><article class=partials__relatedArticle><div class=partials__relatedArticle__inner><a href=https://arukayies.github.io/gas/line_bot/shopping-list-post/ class=partials__relatedArticle__link></a><img src=https://arukayies.github.io/gas/line_bot/shopping-list-post/thumbnail_hu_443ec147aca39b26.webp alt="GASだけで作れる買い物リストを管理するLINE BOTの作り方" loading=lazy class=partials__relatedArticle__thumbnail><div class=partials__relatedArticle__content><h4 class=partials__relatedArticle__title>GASだけで作れる買い物リストを管理するLINE BOTの作り方</h4><div class=partials__relatedArticle__description><p><span class=fz-22px><strong>さっそくですが、こんなことができます！！！</strong></span><figure class="wp-block-embed aligncenter is-type-rich is-provider-twitter wp-block-embed-twitter"></p><div class=wp-block-embed__wrapper><blockquote class=twitter-tweet data-width=550 data-dnt=true><p lang=ja dir=ltr>有志の社内活動によるもくもく会の中で、<br>買い物リストを管理してくれるLINE BOTを作ってみた。<br><br>リストをスプレッドシートで管理する方法なら、検索すれば見つかるけど、スプレッドシートは使わずに作ったのがこだわりです。<br><br>スクリプトのプロパティに買い物リスト保存してます。<a href="https://twitter.com/hashtag/GAS?src=hash&ref_src=twsrc%5Etfw">#GAS</a> <a href="https://twitter.com/hashtag/LINE?src=hash&ref_src=twsrc%5Etfw">#LINE</a> <a href=https://t.co/jSGijS1dWk>pic.twitter.com/jSGijS1dWk</a></p>&mdash; arukayies (@arukayies)<pre><code>&lt;a href=&quot;https://twitter.com/arukayies/status/1256587001244995585?ref_src=twsrc%5Etfw&quot;&gt;May 2, 2020&lt;/a&gt;
+</code></pre></blockquote></div></figure><div class="wp-block-cocoon-blocks-tab-caption-box-1 tab-caption-box block-box has-border-color has-red-border-color cocoon-block-tab-caption-box"><div class="tab-caption-box-label block-box-label box-label fab-check"><span class="tab-caption-box-label-text block-box-label-text box-label-text">機能一覧</span></div><div class="tab-caption-box-content block-box-content box-content"><ul class=wp-block-list><li>『<strong>買い物リスト表示</strong>』ボタンで買い物リストを表示できます。</li><li>『<strong>買い物リスト追加</strong>』ボタンで買い物リストに品目を追加できます。</li><li>『<strong>買い物リスト削除</strong>』ボタンで買い物リストから品目を削除できます。</li><li>『<strong>使い方</strong>』ボタンで使い方を表示します。<ul class=wp-block-list><li>『<strong>表示・追加・削除・使い方</strong>』のテキストに反応します。</li></ul></li></ul></div></div><p>それでは作り方を紹介します！</p></div></div></div></article><article class=partials__relatedArticle><div class=partials__relatedArticle__inner><a href=https://arukayies.github.io/gas/line_bot/gmail-rich-style-post-line/ class=partials__relatedArticle__link></a><img src=https://arukayies.github.io/gas/line_bot/gmail-rich-style-post-line/thumbnail_hu_232d2e0bfa1957c.webp alt=GASを使って特定メールがきたらLINEにリッチに通知させる方法 loading=lazy class=partials__relatedArticle__thumbnail><div class=partials__relatedArticle__content><h4 class=partials__relatedArticle__title>GASを使って特定メールがきたらLINEにリッチに通知させる方法</h4><div class=partials__relatedArticle__description><figure class="wp-block-embed aligncenter is-type-rich is-provider-twitter wp-block-embed-twitter"><div class=wp-block-embed__wrapper><blockquote class=twitter-tweet data-width=550 data-dnt=true><p lang=ja dir=ltr>仕事でGASを使ってよく使っている処理4つ！<br>・入力したら勝手に日付入る＆名前入る<br>・スプレッドシートの指定された情報をSlackへ通知<br>・特定メールが来たら、Slackへ通知<br>・定期的に送るメール内容の自動生成<br>結構ネタがあるから、GASで作れるツールについても記事書いていく</p>&mdash; arukayies (@arukayies)<pre><code>&lt;a href=&quot;https://twitter.com/arukayies/status/1248928918297407491?ref_src=twsrc%5Etfw&quot;&gt;April 11, 2020&lt;/a&gt;
+</code></pre></blockquote></div></figure><p>以前こんなツイートしたので、今回は3個目を紹介します！</p></div></div></div></article></div><div class=single__navigation><a href=https://arukayies.github.io/gas/getcell/ class=single__navigation__prev>GASでスプレッドシートの特定セルを柔軟に操作する方法</a><div class=single__navigation__center></div><a href=https://arukayies.github.io/gas/getcolumn/ class=single__navigation__next>GASでスプレッドシートの範囲内の列番号を効率的に取得する方法</a></div></section></div></main><aside class=sidebar><div class=sidebar__inner><div class=partials__sidebar><div class="pcShow partials__sidebar__card"><h4 class=partials__sidebar__title>検索</h4><nav class=partials__sidebar__search><form action=/search/ method=get class=partials__sidebar__search__form><input type=text name=query id=search class=partials__sidebar__search__query>
+<button type=submit class=partials__sidebar__search__button>
+<i class="fas fa-search"></i></button></form></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>プロフィール</h3><nav class=partials__sidebar__profile><img src=https://arukayies.github.io/image/profile_icon_hu_b863bd11c300fc2a.webp alt=icon class=partials__sidebar__profile__icon><div class=partials__sidebar__profile__name>arukayies</div><div class=partials__sidebar__profile__description></div><div class=partials__snsLinks><a href=https://x.com/arukayies target=_blank class=partials__snsLinks__link--twitter><i class="fa-lg fab fa-x-twitter"></i>
+</a><a href=https://www.instagram.com/arukayies target=_blank class=partials__snsLinks__link--instagram><i class="fa-lg fab fa-instagram"></i>
+</a><a href=https://www.youtube.com/channel/UCoO5ZwX9e7jToe7eo-h62HQ target=_blank class=partials__snsLinks__link--youtube><i class="fa-lg fab fa-youtube"></i>
+</a><a href=https://github.com/arukayies target=_blank class=partials__snsLinks__link--github><i class="fa-lg fab fa-github"></i>
+</a><a href=https://arukayies.github.io/homepage/ target=_blank class=partials__snsLinks__link--other><i class="fa-lg fas fa-link"></i></a></div></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>新着記事</h3><nav class=partials__sidebar__article><ul class=partials__sidebar__article__items><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-summary/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-summary/thumbnail_hu_76cb231a0b93d187.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3カ国を巡った様子のまとめ loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3カ国を巡った様子のまとめ</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-travel-expenses/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-travel-expenses/thumbnail_hu_5145d4451775f13.webp alt=ヨーロッパ3カ国を巡る新婚旅行にかかった費用は100万円！10日間過ごした内訳！ loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>ヨーロッパ3カ国を巡る新婚旅行にかかった費用は100万円！10日間過ごした内訳！</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-transit-suvarnabhumi-airport/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-transit-suvarnabhumi-airport/thumbnail_hu_ab6b01167f81c539.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】スワンナプーム空港内でトランジット8時間の過ごし方 loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】スワンナプーム空港内でトランジット8時間の過ごし方</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-pari-tourism/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-pari-tourism/thumbnail_hu_6adf033c7ac7507.webp alt=【予算は100万円！個人手配で行くヨーロッパ新婚旅行】2泊3日のパリ観光 loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】2泊3日のパリ観光</div></div></a></li><li class=partials__sidebar__article__item><a href=https://arukayies.github.io/diy/travel/europe-honeymoon-budapest-tourism-part2/ class=partials__sidebar__article__itemLink><img src=https://arukayies.github.io/diy/travel/europe-honeymoon-budapest-tourism-part2/thumbnail_hu_d55c9f8cbc269741.webp alt="【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3泊4日のブダベスト観光 後編" loading=lazy class=partials__sidebar__article__itemThumbnail><div class=partials__sidebar__article__itemDetail><div class=partials__sidebar__article__itemTitle--line3>【予算は100万円！個人手配で行くヨーロッパ新婚旅行】3泊4日のブダベスト観光 後編</div></div></a></li></ul></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>カテゴリー</h3><nav class=partials__sidebar__category><ul class=partials__sidebar__category__items><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/GAS/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+gas</div><div class=partials__sidebar__category__itemCount>101</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/LINE-BOT/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+line bot</div><div class=partials__sidebar__category__itemCount>28</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%83%9F%E3%82%BA%E3%83%8A%E5%8F%8E%E7%A9%AB%E6%B8%88/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ミズナ(収穫済)</div><div class=partials__sidebar__category__itemCount>14</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%AA%E3%82%AF%E3%83%A9/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+オクラ</div><div class=partials__sidebar__category__itemCount>12</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/DIY/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+diy</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%B4%E3%83%BC%E3%83%A4/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ゴーヤ</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E6%97%85/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+旅</div><div class=partials__sidebar__category__itemCount>9</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%83%AB%E3%83%83%E3%82%B3%E3%83%A9%E5%8F%8E%E7%A9%AB%E6%B8%88/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ルッコラ(収穫済)</div><div class=partials__sidebar__category__itemCount>8</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%B3%E3%83%9E%E3%83%84%E3%83%8A/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+コマツナ</div><div class=partials__sidebar__category__itemCount>5</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%A2%E3%83%AB%E3%83%86%E3%82%A3%E3%82%B7%E3%83%9E/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+アルティシマ</div><div class=partials__sidebar__category__itemCount>4</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E3%82%AC%E3%82%B8%E3%83%A5%E3%83%9E%E3%83%AB/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+ガジュマル</div><div class=partials__sidebar__category__itemCount>4</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/WordpressAPI/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+wordpressapi</div><div class=partials__sidebar__category__itemCount>3</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/Raspberry-Pi/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+raspberry pi</div><div class=partials__sidebar__category__itemCount>1</div></a></li><li class=partials__sidebar__category__item><a href=https://arukayies.github.io/categories/%E7%94%9F%E6%B4%BB/ class=partials__sidebar__category__itemLink><div><i class="fas fa-arrow-circle-right partials__sidebar__category__itemIcon"></i>
+生活</div><div class=partials__sidebar__category__itemCount>1</div></a></li></ul></nav></div><div class=partials__sidebar__card><h3 class=partials__sidebar__title>アーカイブ</h3><nav class=partials__sidebar__archive><ul class=partials__sidebar__archive__yearList><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2024年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2024%e5%b9%b410%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2024年10月（6）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2024%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2024年9月（3）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2021年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2021%e5%b9%b43%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2021年3月（1）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2020年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年9月（15）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b48%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年8月（5）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b47%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年7月（21）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b46%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年6月（34）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b45%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年5月（9）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b44%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年4月（6）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b43%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年3月（17）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2020%e5%b9%b42%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2020年2月（2）</a></li></ul></div></li><li class="close archive-accordion partials__sidebar__archive__yearItem"><div class=partials__sidebar__archive__yearItemTitle>2019年</div><div class="archive-accordion-child-wrapper partials__sidebar__archive__monthListWrapper"><ul class="archive-accordion-child partials__sidebar__archive__monthList"><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b412%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年12月（2）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b411%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年11月（22）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b410%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年10月（3）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b49%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年9月（22）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b48%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年8月（13）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b47%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年7月（14）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b46%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年6月（9）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b45%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年5月（3）</a></li><li class="archive-accordion-child partials__sidebar__archive__monthItem"><a href=/archives/2019%e5%b9%b44%e6%9c%88 class=partials__sidebar__archive__monthItemLink>2019年4月（1）</a></li></ul></div></li></ul></nav></div><script>document.querySelectorAll(".archive-accordion").forEach(function(e){e.addEventListener("click",function(e){if(e.target.tagName==="A")return;e.currentTarget.classList.toggle("open"),e.currentTarget.classList.toggle("close"),e.currentTarget.classList.contains("open")?e.currentTarget.querySelector(".archive-accordion-child-wrapper").style.height=e.currentTarget.querySelector(".archive-accordion-child").offsetHeight+"px":e.currentTarget.querySelector(".archive-accordion-child-wrapper").style.height="0"})})</script></div></div></aside></div><footer class=footer><div class=footer__inner><div class=partials__footer><div class=partials__footer__menu><ul class=partials__footer__menu__list><li><a href=/privacy-policy>プライバシーポリシー</a></li></ul><ul class=partials__footer__menu__list><li><a href=https://x.com/arukayies>お問い合わせ</a></li></ul></div><p class=partials__footer__copyright>© 2019-2025 @arukayies<br>Powered by <a href=https://gohugo.io/ target=_blank>Hugo</a> | Hugo Theme Salt</p></div></div></footer></div><div id=overlay class="close overlay"></div><script>window.addEventListener("DOMContentLoaded",e=>{document.querySelector("#headerBlock").style.height=document.querySelector(".header").offsetHeight+"px"})</script><script>document.querySelectorAll("#hamburger, #overlay").forEach(e=>{e.addEventListener("click",function(){document.querySelector("#hamburger").classList.toggle("open"),document.querySelector("#hamburger").classList.toggle("close"),document.querySelector("#hamburgerMenu").classList.toggle("open"),document.querySelector("#hamburgerMenu").classList.toggle("close"),document.querySelector("#overlay").classList.toggle("open"),document.querySelector("#overlay").classList.toggle("close")})})</script></body></html>
