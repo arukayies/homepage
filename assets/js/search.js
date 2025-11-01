@@ -8,7 +8,7 @@ function initLunr() {
 
     return new Promise((resolve, reject) => {
     var request = new XMLHttpRequest();
-    request.open("GET", "/index.json", true);
+    request.open("GET", "/homepage/index.json", true);
 
         request.onload = function () {
             if (request.status >= 200 && request.status < 400) {
@@ -34,10 +34,18 @@ function initLunr() {
                     resolve();
                 });
             } else {
-                var err = textStatus + ", " + error;
-                console.error("Error getting Hugo index flie:", err);
+                // Handle HTTP errors
+                var err = `HTTP error ${request.status}: ${request.statusText}`;
+                console.error("Error getting Hugo index file:", err);
                 reject(err);
             }
+        };
+
+        request.onerror = function () {
+            // Handle network errors
+            var err = "Network error";
+            console.error("Error getting Hugo index file:", err);
+            reject(err);
         };
 
         request.send();
