@@ -107,10 +107,10 @@
         <link rel="preload" href="{{ "css/vendor/github-markdown-css/github-markdown.css" | absURL }}" as="style">
         <link rel="stylesheet" href="{{ "css/vendor/github-markdown-css/github-markdown.css" | absURL }}" media="print" onload="this.media='all'">
     {{ end }}
-    <script type="text/javascript" src="{{ "js/vendor/lunr/lunr.min.js" | relURL }}"></script>
-    <script type="text/javascript" src="{{ "js/vendor/lunr-languages/lunr.stemmer.support.js" | relURL }}"></script>
-    <script type="text/javascript" src="{{ "js/vendor/lunr-languages/tinyseg.js" | relURL }}"></script>
-    <script type="text/javascript" src="{{ "js/vendor/lunr-languages/lunr.ja.js" | relURL  }}"></script>
+    <script type="text/javascript" src="{{ "js/vendor/lunr/lunr.min.js" | absURL }}"></script>
+    <script type="text/javascript" src="{{ "js/vendor/lunr-languages/lunr.stemmer.support.js" | absURL }}"></script>
+    <script type="text/javascript" src="{{ "js/vendor/lunr-languages/tinyseg.js" | absURL }}"></script>
+    <script type="text/javascript" src="{{ "js/vendor/lunr-languages/lunr.ja.js" | absURL  }}"></script>
     <script type="text/javascript" src="{{ with  resources.Get "js/search.js" | minify }}{{ .RelPermalink }}{{ end }}"></script>
     {{ partial "jsonld.html" . }}
     {{ template "_internal/google_analytics.html" . }}
